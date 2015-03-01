@@ -1,3 +1,10 @@
+app:
+  name: ${project.name}
+  description: ${project.description}
+  version: ${project.version}
+  contact: http://www.github.com/jntakpe/mformonitoring
+  license: MIT
+  licenseUrl: http://opensource.org/licenses/MIT
 management:
   context-path: /manage
 spring:
@@ -12,7 +19,7 @@ spring:
       hibernate.cache.use_query_cache: false
       hibernate.generate_statistics: true
       hibernate.format_sql: true
-      hibernate.cache.region.factory_class: com.github.jntakpe.qpq.config.HibernateRegionCacheConfig
+      hibernate.cache.region.factory_class: com.github.jntakpe.mfm.config.HibernateRegionCacheConfig
       hibernate.cache.use_minimal_puts: false
       hibernate.cache.hazelcast.use_lite_member: true
 cache:
@@ -25,7 +32,7 @@ cache:
 spring:
   profiles: dev
 datasource:
-  url: jdbc:postgresql://localhost:5432/qpq
+  url: jdbc:postgresql://localhost:5432/mfm
   username: postgres
   password: sopra*
   dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
