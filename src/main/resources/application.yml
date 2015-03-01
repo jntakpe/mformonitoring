@@ -1,0 +1,31 @@
+management:
+  context-path: /manage
+spring:
+  jpa:
+    openInView: false
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.format_sql: true
+      hibernate.cache.region.factory_class: com.github.jntakpe.qpq.config.HibernateRegionCacheConfig
+      hibernate.cache.use_minimal_puts: false
+      hibernate.cache.hazelcast.use_lite_member: true
+cache:
+  port: 5701
+  backupCount: 0
+  evictionPolicy: LRU
+  evictionPercentage: 25
+  timeToLive: 3600
+---
+spring:
+  profiles: dev
+datasource:
+  url: jdbc:postgresql://localhost:5432/qpq
+  username: postgres
+  password: sopra*
+  dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
