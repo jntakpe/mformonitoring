@@ -44,15 +44,18 @@ module.exports = function (grunt) {
                     '<%= dirs.bowerRes %>/angular-messages/angular-messages.min.js',
                     '<%= dirs.bowerRes %>/angular-resource/angular-resource.min.js',
                     '<%= dirs.bowerRes %>/angular-ui-router/release/angular-ui-router.min.js',
-                    '<%= dirs.bowerRes %>/angular-bootstrap/ui-bootstrap-tpls.min.js',
-                    '<%= dirs.bowerRes %>/angular-local-storage/dist/angular-local-storage.min.js'
+                    '<%= dirs.bowerRes %>/angular-bootstrap/ui-bootstrap-tpls.min.js'
                 ],
                 dest: '<%= dirs.target %>/js/third-party.min.js'
             },
             coreJs: {
                 src: [
                     '<%= dirs.source %>/js/mfm.js',
-                    '<%= dirs.source %>/js/mfm.directive.js'
+                    '<%= dirs.source %>/js/mfm.directive.js',
+                    '<%= dirs.source %>/js/header/header.js',
+                    '<%= dirs.source %>/js/header/header.controller.js',
+                    '<%= dirs.source %>/js/home/home.js',
+                    '<%= dirs.source %>/js/home/home.controller.js'
                 ],
                 dest: '<%= dirs.target %>/js/core.js'
             },
