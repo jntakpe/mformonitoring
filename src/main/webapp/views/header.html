@@ -22,11 +22,22 @@
             </div>
             <div class="collapse navbar-collapse navbar-responsive-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="envs">Environnements</a></li>
-                    <li><a ui-sref="projects">Projets</a></li>
+                    <li class="dropdown">
+                        <a ui-sref="envs" class="dropdown-toggle"><i class="fa fa-cloud"></i> Environnements</a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="envs.development"> Développement</a></li>
+                            <li><a ui-sref="envs.assemblage"> Assemblage</a></li>
+                            <li><a ui-sref="envs.integration"> Intégration</a></li>
+                            <li><a ui-sref="envs.qualification"> Qualification</a></li>
+                            <li><a ui-sref="envs.recette"> Recette</a></li>
+                            <li><a ui-sref="envs.preprod"> Pré-production</a></li>
+                            <li><a ui-sref="envs.production"> Production</a></li>
+                        </ul>
+                    </li>
+                    <li><a ui-sref="projects"><i class="fa fa-bank"></i> Projets</a></li>
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            Administration
+                            <i class="fa fa-heartbeat"></i> Administration
                         </a>
                         <ul class="dropdown-menu">
                             <li>
