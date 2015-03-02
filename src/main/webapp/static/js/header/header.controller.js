@@ -1,6 +1,6 @@
 mfmApp.controller('HeaderController', HeaderController);
 
-function HeaderController(Auth, Principal, $state) {
+function HeaderController($state) {
     "use strict";
 
 }
