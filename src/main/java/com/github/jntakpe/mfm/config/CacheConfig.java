@@ -42,13 +42,12 @@ public class CacheConfig {
 
     @Bean
     public CacheManager cacheManager() {
-        LOG.debug("Starting Hazelcast cache manager");
         return new HazelcastCacheManager(hazelcastInstance);
     }
 
     @PostConstruct
     public void hazelcastInstance() {
-        LOG.debug("Configuring Hazelcast instance");
+        LOG.debug("Configuration de l'instance Hazelcast");
         Config config = new Config();
         config.setInstanceName("mfm-cache");
         NetworkConfig networkConfig = config.getNetworkConfig();
@@ -66,7 +65,7 @@ public class CacheConfig {
 
     @PreDestroy
     public void close() {
-        LOG.info("Closing Hazelcast instance");
+        LOG.info("Arrêt de l'instance d'Hazelcast");
         Hazelcast.shutdownAll();
     }
 

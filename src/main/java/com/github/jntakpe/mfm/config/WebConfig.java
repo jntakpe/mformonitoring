@@ -31,20 +31,20 @@ public class WebConfig implements ServletContextInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        LOG.debug("Configuring Web context");
+        LOG.debug("Configuration du context WEB");
         EnumSet<DispatcherType> disps = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.ASYNC);
         initMetrics(servletContext, disps);
     }
 
     private void initMetrics(ServletContext servletContext, EnumSet<DispatcherType> disps) {
-        LOG.debug("Initializing Metrics registries");
+        LOG.debug("Initialisation des registres Metrics");
         servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE, metricRegistry);
         servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
-        LOG.debug("Registering Metrics Filter");
+        LOG.debug("Ajout du filtre Metrics");
         Dynamic metricsFilter = servletContext.addFilter("webappMetricsFilter", new InstrumentedFilter());
         metricsFilter.addMappingForUrlPatterns(disps, true, "/*");
         metricsFilter.setAsyncSupported(true);
-        LOG.debug("Registering Metrics Servlet");
+        LOG.debug("Ajout de la servlet Metrics");
         ServletRegistration.Dynamic metricsAdminServlet = servletContext.addServlet("metricsServlet", new MetricsServlet());
         metricsAdminServlet.addMapping("/manage/metrics/*");
         metricsAdminServlet.setAsyncSupported(true);

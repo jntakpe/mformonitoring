@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties
-@ComponentScan("com.github.jntakpe.mfm")
+@ComponentScan(Constants.BASE_PACKAGE)
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
 public class MfmApp extends SpringBootServletInitializer {
 
@@ -33,7 +33,7 @@ public class MfmApp extends SpringBootServletInitializer {
      * @param args arguments passés par le goal maven
      */
     public static void main(String[] args) {
-        LOG.info("Starting app with embedded Tomcat");
+        LOG.info("Démarrage de l'application sur un Tomcat embedded");
         new SpringApplication(MfmApp.class).run(args);
     }
 
@@ -45,7 +45,7 @@ public class MfmApp extends SpringBootServletInitializer {
      */
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        LOG.info("Starting app on external Tomcat");
+        LOG.info("Démarrage de l'application sur un Tomcat externe");
         String profile = SystemUtils.IS_OS_LINUX ? Constants.PROD_PROFILE : Constants.DEV_PROFILE;
         LOG.info("Profile {} selected", profile);
         application.profiles(profile);

@@ -17,6 +17,6 @@ public class HibernateRegionCacheConfig extends HazelcastCacheRegionFactory {
 
     public HibernateRegionCacheConfig(Properties properties) {
         super(CacheConfig.getHazelcastInstance());
-        LOG.debug("Starting Hazelcast region cache factory");
+        LOG.debug("Démarrage du cache Hazelcast region factory");
     }
 }

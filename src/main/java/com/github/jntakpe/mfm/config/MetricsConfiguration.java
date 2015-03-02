@@ -52,7 +52,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
 
     @PostConstruct
     public void init() {
-        LOG.debug("Registering JVM gauges");
+        LOG.debug("Ajout des jauges JVM Metrics");
         metricRegistry.register(PROP_METRIC_REG_JVM_MEMORY, new MemoryUsageGaugeSet());
         metricRegistry.register(PROP_METRIC_REG_JVM_GARBAGE, new GarbageCollectorMetricSet());
         metricRegistry.register(PROP_METRIC_REG_JVM_THREADS, new ThreadStatesGaugeSet());
