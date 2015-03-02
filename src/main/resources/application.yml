@@ -28,6 +28,8 @@ cache:
   evictionPolicy: LRU
   evictionPercentage: 25
   timeToLive: 3600
+web:
+  timeout: 2000
 ---
 spring:
   profiles: dev

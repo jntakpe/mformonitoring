@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author jntakpe
  */
 @Configuration
-@ConfigurationProperties(prefix = "datasource")
+@ConfigurationProperties("datasource")
 public class DatasourceProperties {
 
     @NotNull

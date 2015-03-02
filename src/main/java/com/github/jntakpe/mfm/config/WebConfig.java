@@ -3,11 +3,15 @@ package com.github.jntakpe.mfm.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
+import com.github.jntakpe.mfm.config.properties.WebProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration.Dynamic;
@@ -28,6 +32,22 @@ public class WebConfig implements ServletContextInitializer {
 
     @Autowired
     private MetricRegistry metricRegistry;
+
+    @Autowired
+    private WebProperties webProperties;
+
+    /**
+     * Template permettant d'accéder aux ressources REST
+     *
+     * @return le template configuré
+     */
+    @Bean
+    public RestTemplate restTemplate() {
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+        factory.setConnectTimeout(webProperties.getTimeout());
+        factory.setReadTimeout(webProperties.getTimeout());
+        return new RestTemplate(factory);
+    }
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
