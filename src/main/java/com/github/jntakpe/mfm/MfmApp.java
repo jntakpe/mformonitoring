@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties
-@ComponentScan(Constants.BASE_PACKAGE)
+@ComponentScan("com.github.jntakpe.mfm")
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
 public class MfmApp extends SpringBootServletInitializer {
 

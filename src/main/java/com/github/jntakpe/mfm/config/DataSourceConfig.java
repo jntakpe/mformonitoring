@@ -20,8 +20,8 @@ import javax.sql.DataSource;
  * @author jntakpe
  */
 @Configuration
-@EntityScan(Constants.BASE_PACKAGE + ".domain")
-@EnableJpaRepositories("com.github.jntakpe.mfm" + ".repository")
+@EntityScan("com.github.jntakpe.mfm.domain")
+@EnableJpaRepositories("com.github.jntakpe.mfm.repository")
 public class DataSourceConfig {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataSourceConfig.class);

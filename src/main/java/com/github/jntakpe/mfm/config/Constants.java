@@ -13,5 +13,4 @@ public class Constants {
 
     public static final String API_URI = "/api";
 
-    public static final String BASE_PACKAGE = "com.github.jntakpe.mfm";
 }

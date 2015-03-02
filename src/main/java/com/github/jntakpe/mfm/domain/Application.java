@@ -3,6 +3,8 @@ package com.github.jntakpe.mfm.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Objects;
 
 /**
@@ -21,6 +23,7 @@ public class Application extends GenericDomain {
 
     private String version;
 
+    @Enumerated(EnumType.STRING)
     private Environnement environnement;
 
     private boolean active;
@@ -55,6 +58,14 @@ public class Application extends GenericDomain {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public Environnement getEnvironnement() {
+        return environnement;
+    }
+
+    public void setEnvironnement(Environnement environnement) {
+        this.environnement = environnement;
     }
 
     public boolean isActive() {
