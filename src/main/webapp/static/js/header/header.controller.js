@@ -1,6 +1,4 @@
-mfmApp.controller('HeaderController', HeaderController);
-
-function HeaderController($state) {
+mfmApp.controller('HeaderController', function () {
     "use strict";
 
-}
+});

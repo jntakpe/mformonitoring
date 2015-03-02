@@ -59,8 +59,6 @@
         </div>
         <div class="col-md-4">
             <b>Threads</b> (Total: {{metrics.data.gauges['jvm.threads.count'].value}})
-            <a class="hand" data-toggle="modal" data-target="#threadDump"><i
-                    class="glyphicon glyphicon-eye-open"></i></a>
 
             <p>Runnable {{metrics.data.gauges['jvm.threads.runnable.count'].value}}</p>
 
@@ -332,80 +330,5 @@
             </tr>
             </tbody>
         </table>
-    </div>
-
-</div>
-<!-- Modal used to display the threads dump -->
-<div id="threadDump" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Threads dump</h4>
-            </div>
-            <div class="modal-body well">
-                <span class="label label-primary" ng-click="threadDumpFilter = {}">ALL<span class="badge">{{threadDumpAll}}</span></span>
-                &nbsp;
-                <span class="label label-success" ng-click="threadDumpFilter = {threadState: 'RUNNABLE'}">Runable&nbsp;
-                    <span class="badge">{{threadDumpRunnable}}</span></span>&nbsp;
-                <span class="label label-info" ng-click="threadDumpFilter = {threadState: 'WAITING'}">Waiting&nbsp;<span
-                        class="badge">{{threadDumpWaiting}}</span></span>&nbsp;
-                <span class="label label-warning" ng-click="threadDumpFilter = {threadState: 'TIMED_WAITING'}">Timed waiting&nbsp;<span
-                        class="badge">{{threadDumpTimedWaiting}}</span></span>&nbsp;
-                <span class="label label-danger"
-                      ng-click="threadDumpFilter = {threadState: 'BLOCKED'}">Blocked&nbsp;<span
-                        class="badge">{{threadDumpBlocked}}</span></span>&nbsp;
-                <div class="voffset2">&nbsp;</div>
-                <div class="row" ng-repeat="(k, v) in threadDump | filter:threadDumpFilter">
-                    <h5><span class="label" ng-class="getLabelClass(v.threadState)">&nbsp;</span>&nbsp;{{v.threadName}}
-                        {{v.threadId}})</h5>
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th class="text-right">Blocked Time</th>
-                            <th class="text-right">Blocked Count</th>
-                            <th class="text-right">Waited Time</th>
-                            <th class="text-right">Waited Count</th>
-                            <th>Lock Name</th>
-                            <th>StackTrace</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{v.blockedTime}}</td>
-                            <td>{{v.blockedCount}}</td>
-                            <td>{{v.waitedTime}}</td>
-                            <td>{{v.waitedCount}}</td>
-                            <td>{{v.lockName}}</td>
-                            <td>
-                                <a ng-click="show = !show" data-placement="left">
-                                    <span ng-show="!show">show</span>
-                                    <span ng-show="show">hide</span>
-                                </a>
-
-                                <div class="popover left" ng-show="show">
-                                    <div class="popover-title">
-                                        <h4>Stacktrace
-                                            <button type="button" class="close" ng-click="show = !show">&times;</button>
-                                        </h4>
-                                    </div>
-                                    <div class="popover-content">
-                                        <div ng-repeat="(stK, stV) in v.stackTrace">
-                                            {{stV.className}}.{{stV.methodName}}({{stV.fileName}}:{{stV.lineNumber}})
-                                            <span class="voffset1"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
     </div>
 </div>

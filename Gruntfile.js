@@ -60,7 +60,10 @@ module.exports = function (grunt) {
                     '<%= dirs.source %>/js/admin/docs/docs.js',
                     '<%= dirs.source %>/js/admin/metrics/metrics.js',
                     '<%= dirs.source %>/js/admin/metrics/metrics.controller.js',
-                    '<%= dirs.source %>/js/admin/metrics/metrics.service.js'
+                    '<%= dirs.source %>/js/admin/metrics/metrics.service.js',
+                    '<%= dirs.source %>/js/applications/application.js',
+                    '<%= dirs.source %>/js/applications/application.controller.js',
+                    '<%= dirs.source %>/js/applications/application.service.js'
                 ],
                 dest: '<%= dirs.target %>/js/core.js'
             },

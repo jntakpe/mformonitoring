@@ -1,4 +1,6 @@
 mfmApp.config(function ($stateProvider) {
+    "use strict";
+
     $stateProvider.state('metrics', {
         parent: 'admin',
         url: '/metrics',
