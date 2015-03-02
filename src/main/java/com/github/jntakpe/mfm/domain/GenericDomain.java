@@ -18,7 +18,7 @@ public abstract class GenericDomain implements Serializable {
     private Long id;
 
     @Version
-    private Integer version;
+    private Integer lock;
 
     @LastModifiedBy
     @Column(name = "last_modified_by")
@@ -32,12 +32,12 @@ public abstract class GenericDomain implements Serializable {
         this.id = id;
     }
 
-    public Integer getVersion() {
-        return version;
+    public Integer getLock() {
+        return lock;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setLock(Integer lock) {
+        this.lock = lock;
     }
 
     public String getLastModifiedBy() {
