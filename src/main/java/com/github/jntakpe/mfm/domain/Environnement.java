@@ -5,7 +5,7 @@ package com.github.jntakpe.mfm.domain;
  *
  * @author jntakpe
  */
-public enum Environnements {
+public enum Environnement {
 
     DEVELOPPEMENT,
     ASSEMBLAGE,
