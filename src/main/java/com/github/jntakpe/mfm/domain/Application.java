@@ -28,6 +28,8 @@ public class Application extends GenericDomain {
 
     private boolean active;
 
+    private String url;
+
     public String getNom() {
         return nom;
     }
@@ -76,6 +78,14 @@ public class Application extends GenericDomain {
         this.active = active;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,6 +109,7 @@ public class Application extends GenericDomain {
                 .append("version", version)
                 .append("environnement", environnement)
                 .append("active", active)
+                .append("url", url)
                 .toString();
     }
 }
