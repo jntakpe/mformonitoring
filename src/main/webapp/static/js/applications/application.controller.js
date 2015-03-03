@@ -17,5 +17,11 @@ function ApplicationController(ApplicationService, $modal) {
 }
 
 function EditApplicationModalController($modalInstance) {
-    console.log($modalInstance);
+    "use strict";
+
+    var vm = this;
+    vm.close = function () {
+        $modalInstance.dismiss();
+    };
+
 }
