@@ -54,3 +54,7 @@
 .profile .profile-bio section {
     margin-bottom: 0;
 }
+
+.modal-body .sky-form {
+    border: 0;
+}
