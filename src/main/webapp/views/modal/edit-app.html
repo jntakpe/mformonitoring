@@ -44,8 +44,8 @@
             </div>
         </div>
     </form>
-    <hr ng-if="application.tested"/>
-    <div class="row" ng-if="application.tested">
+    <hr ng-if="application.urlValid"/>
+    <div class="row" ng-if="application.urlValid">
         <div class="col-md-10 col-md-offset-1">
             <table class="table">
                 <thead>
@@ -83,7 +83,7 @@
     <button ng-switch-when="true" type="button" class="btn-u btn-u-primary" ng-click="editAppModal.save()">
         <i class="fa fa-plus"></i> Ajouter
     </button>
-    <button ng-switch-default type="button" class="btn-u btn-u-blue" ng-click="editAppModal.test()">
+    <button ng-switch-default type="button" class="btn-u btn-u-blue" ng-click="editAppModal.check(form)">
         <i class="fa fa-spinner"></i> Vérifier l'URL
     </button>
 </div>

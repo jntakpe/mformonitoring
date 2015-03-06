@@ -18,17 +18,23 @@ function ApplicationController(ApplicationService, $modal) {
     };
 }
 
-function EditApplicationModalController($modalInstance) {
+function EditApplicationModalController(ApplicationService, $modalInstance) {
     "use strict";
 
     var vm = this;
     vm.application = {};
-    vm.tested = false;
+    vm.urlValid = false;
     vm.close = function () {
         $modalInstance.dismiss();
     };
-    vm.test = function () {
-        console.log(vm.application);
+    vm.check = function (form) {
+        if (form.$valid) {
+            ApplicationService.check(vm.application.url).success(function (response) {
+                console.log(response);
+            }).error(function () {
+                console.log('ERROR');
+            });
+        }
     };
     vm.save = function () {
         console.log(vm.application);
