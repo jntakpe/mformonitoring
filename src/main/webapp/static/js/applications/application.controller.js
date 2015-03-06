@@ -10,9 +10,8 @@ function ApplicationController(ApplicationService, $modal) {
         var modalInstance = $modal.open({
             templateUrl: 'views/modal/edit-app.html',
             controller: 'EditApplicationModalController as editAppModal',
-            size: 'lg'
+            size: 'md'
         });
-
         modalInstance.result.then(function (application) {
             console.log(application);
         });
@@ -24,8 +23,12 @@ function EditApplicationModalController($modalInstance) {
 
     var vm = this;
     vm.application = {};
+    vm.tested = false;
     vm.close = function () {
         $modalInstance.dismiss();
+    };
+    vm.test = function () {
+        console.log(vm.application);
     };
     vm.save = function () {
         console.log(vm.application);

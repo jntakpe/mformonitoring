@@ -4,28 +4,86 @@
 </div>
 <div class="modal-body">
     <form class="sky-form" name="form" role="form">
-        <label class="input"
-               ng-class="{'state-error': (form.$submitted || form.nom.$touched) && form.nom.$invalid}">
-            <i class="icon-prepend fa fa-sign-in"></i>
-            <i class="icon-append fa fa-asterisk"></i>
-            <input id="nom" name="nom" class="form-control" type="text" placeholder="Nom de l'application"
-                   ng-model="editAppModal.application.nom" maxlength="50" required ng-pattern="/^[a-zA-Z0-9]+$/"/>
+        <div class="row">
+            <label class="label col col-4">Nom de l'application</label>
 
-            <div ng-messages="(form.$submitted || form.nom.$touched) && form.nom.$error"
-                 class="note note-error">
-                <div ng-message="required">Veuillez saisir un nom d'application.</div>
-                <div ng-message="pattern">Le nom de l'application ne doit pas contenir d'accents ou de caractères
-                    spéciaux.
-                </div>
+            <div class="col col-8">
+                <label class="input"
+                       ng-class="{'state-error': (form.$submitted || form.nom.$touched) && form.nom.$invalid}">
+                    <i class="icon-append fa fa-asterisk"></i>
+                    <input id="nom" name="nom" class="form-control" type="text" placeholder="Nom de l'application"
+                           ng-model="editAppModal.application.nom" maxlength="50" required
+                           ng-pattern="/^[a-zA-Z0-9]+$/"/>
+
+                    <div ng-messages="(form.$submitted || form.nom.$touched) && form.nom.$error"
+                         class="note note-error">
+                        <div ng-message="required">Veuillez saisir un nom d'application.</div>
+                        <div ng-message="pattern">Le nom de l'application ne doit pas contenir d'accents ou de
+                            caractères
+                            spéciaux.
+                        </div>
+                    </div>
+                </label>
             </div>
-        </label>
+        </div>
+        <div class="row">
+            <label class="label col col-4">Url de monitoring</label>
+
+            <div class="col col-8">
+                <label class="input"
+                       ng-class="{'state-error': (form.$submitted || form.url.$touched) && form.url.$invalid}">
+                    <i class="icon-append fa fa-asterisk"></i>
+                    <input id="url" name="url" class="form-control" type="text" placeholder="Url de monitoring"
+                           ng-model="editAppModal.application.url" required/>
+
+                    <div ng-messages="(form.$submitted || form.url.$touched) && form.url.$error"
+                         class="note note-error">
+                        <div ng-message="required">Veuillez saisir une url de monitoring</div>
+                    </div>
+                </label>
+            </div>
+        </div>
     </form>
+    <hr ng-if="application.tested"/>
+    <div class="row" ng-if="application.tested">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Informations sur l'application</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Nom</td>
+                    <td>{{application.application.nom}}</td>
+                </tr>
+                <tr>
+                    <td>ArtifactId</td>
+                    <td>{{application.application.artifactId}}</td>
+                </tr>
+                <tr>
+                    <td>GroupId</td>
+                    <td>{{application.application.groupId}}</td>
+                </tr>
+                <tr>
+                    <td>Version</td>
+                    <td>{{application.application.version}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" ng-switch="application.tested">
     <button type="button" class="btn-u btn-u-default" ng-click="editAppModal.close()">
         <i class="fa fa-remove"></i> Fermer
     </button>
-    <button type="button" class="btn-u btn-u-primary" ng-click="editAppModal.save()">
+    <button ng-switch-when="true" type="button" class="btn-u btn-u-primary" ng-click="editAppModal.save()">
         <i class="fa fa-plus"></i> Ajouter
+    </button>
+    <button ng-switch-default type="button" class="btn-u btn-u-blue" ng-click="editAppModal.test()">
+        <i class="fa fa-spinner"></i> Vérifier l'URL
     </button>
 </div>
