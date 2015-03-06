@@ -22,17 +22,21 @@ function EditApplicationModalController(ApplicationService, $modalInstance) {
     "use strict";
 
     var vm = this;
-    vm.application = {};
-    vm.urlValid = false;
+    vm.urlChecked = false;
+    vm.application = {
+        environnement: 'DEVELOPPEMENT'
+    };
     vm.close = function () {
         $modalInstance.dismiss();
     };
     vm.check = function (form) {
         if (form.$valid) {
             ApplicationService.check(vm.application.url).success(function (response) {
-                console.log(response);
-            }).error(function () {
-                console.log('ERROR');
+                vm.application.nom = response.nom;
+                vm.application.groupId = response.groupId;
+                vm.application.artifactId = response.artifactId;
+                vm.application.version = response.version;
+                vm.urlChecked = true;
             });
         }
     };

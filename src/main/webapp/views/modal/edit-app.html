@@ -5,24 +5,20 @@
 <div class="modal-body">
     <form class="sky-form" name="form" role="form">
         <div class="row">
-            <label class="label col col-4">Nom de l'application</label>
+            <label class="label col col-4">Environnement</label>
 
             <div class="col col-8">
-                <label class="input"
-                       ng-class="{'state-error': (form.$submitted || form.nom.$touched) && form.nom.$invalid}">
-                    <i class="icon-append fa fa-asterisk"></i>
-                    <input id="nom" name="nom" class="form-control" type="text" placeholder="Nom de l'application"
-                           ng-model="editAppModal.application.nom" maxlength="50" required
-                           ng-pattern="/^[a-zA-Z0-9]+$/"/>
-
-                    <div ng-messages="(form.$submitted || form.nom.$touched) && form.nom.$error"
-                         class="note note-error">
-                        <div ng-message="required">Veuillez saisir un nom d'application.</div>
-                        <div ng-message="pattern">Le nom de l'application ne doit pas contenir d'accents ou de
-                            caractères
-                            spéciaux.
-                        </div>
-                    </div>
+                <label class="select">
+                    <select id="environnement" name="environnement" ng-model="editAppModal.application.environnement"
+                            required>
+                        <option value="DEVELOPPEMENT" selected>Développement</option>
+                        <option value="ASSEMBLAGE">Assemblage</option>
+                        <option value="INTEGRATION">Intégration</option>
+                        <option value="RECETTE">Recette</option>
+                        <option value="PRE_PRODUCTION">Pré-production</option>
+                        <option value="PRODUCTION">Production</option>
+                    </select>
+                    <i></i>
                 </label>
             </div>
         </div>
@@ -38,14 +34,14 @@
 
                     <div ng-messages="(form.$submitted || form.url.$touched) && form.url.$error"
                          class="note note-error">
-                        <div ng-message="required">Veuillez saisir une url de monitoring</div>
+                        <div ng-message="required">Veuillez renseigner une url de monitoring</div>
                     </div>
                 </label>
             </div>
         </div>
     </form>
-    <hr ng-if="application.urlValid"/>
-    <div class="row" ng-if="application.urlValid">
+    <hr ng-if="editAppModal.urlChecked"/>
+    <div class="row" ng-if="editAppModal.urlChecked">
         <div class="col-md-10 col-md-offset-1">
             <table class="table">
                 <thead>
@@ -57,26 +53,26 @@
                 <tbody>
                 <tr>
                     <td>Nom</td>
-                    <td>{{application.application.nom}}</td>
+                    <td>{{editAppModal.application.nom}}</td>
                 </tr>
                 <tr>
                     <td>ArtifactId</td>
-                    <td>{{application.application.artifactId}}</td>
+                    <td>{{editAppModal.application.artifactId}}</td>
                 </tr>
                 <tr>
                     <td>GroupId</td>
-                    <td>{{application.application.groupId}}</td>
+                    <td>{{editAppModal.application.groupId}}</td>
                 </tr>
                 <tr>
                     <td>Version</td>
-                    <td>{{application.application.version}}</td>
+                    <td>{{editAppModal.application.version}}</td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<div class="modal-footer" ng-switch="application.tested">
+<div class="modal-footer" ng-switch="editAppModal.urlChecked">
     <button type="button" class="btn-u btn-u-default" ng-click="editAppModal.close()">
         <i class="fa fa-remove"></i> Fermer
     </button>

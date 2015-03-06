@@ -5,12 +5,10 @@ import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -36,12 +34,14 @@ public class ApplicationService {
     /**
      * Récupère les informations d'une application à l'aide de l'url de monitoring
      *
-     * @param uri url de monitoring du projet
-     * @return renvoie une {@link org.springframework.http.ResponseEntity} contenant les infos du projet
+     * @param url url de monitoring du projet
+     * @return renvoie les informations du projet
      */
-    public ResponseEntity<Application> findAppInfos(URI uri) {
-        LOG.debug("Tentative de récupération des informations pour à l'uri {}", uri);
-        return restTemplate.getForEntity(uri, Application.class);
+    public Application findAppInfos(String url) {
+        LOG.debug("Tentative de récupération des informations pour à l'uri {}", url);
+        Application application = restTemplate.getForObject(url, Application.class);
+        application.setUrl(url);
+        return application;
     }
 
     /**
