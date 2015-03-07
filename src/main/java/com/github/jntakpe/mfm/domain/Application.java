@@ -2,6 +2,7 @@ package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,6 +29,7 @@ public class Application extends GenericDomain {
 
     private boolean active;
 
+    @Column(unique = true)
     private String url;
 
     public String getNom() {
@@ -91,13 +93,12 @@ public class Application extends GenericDomain {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Application that = (Application) o;
-        return Objects.equals(nom, that.nom) &&
-                Objects.equals(environnement, that.environnement);
+        return Objects.equals(url, that.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nom, environnement);
+        return Objects.hash(url);
     }
 
     @Override

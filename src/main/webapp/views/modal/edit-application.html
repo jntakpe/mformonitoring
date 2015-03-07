@@ -10,7 +10,7 @@
             <div class="col col-8">
                 <label class="select">
                     <select id="environnement" name="environnement" ng-model="editAppModal.application.environnement"
-                            required>
+                            required ng-disabled="editAppModal.urlChecked">
                         <option value="DEVELOPPEMENT" selected>Développement</option>
                         <option value="ASSEMBLAGE">Assemblage</option>
                         <option value="INTEGRATION">Intégration</option>
@@ -30,11 +30,15 @@
                        ng-class="{'state-error': (form.$submitted || form.url.$touched) && form.url.$invalid}">
                     <i class="icon-append fa fa-asterisk"></i>
                     <input id="url" name="url" class="form-control" type="text" placeholder="Url de monitoring"
-                           ng-model="editAppModal.application.url" required/>
+                           ng-model="editAppModal.application.url" required ng-disabled="editAppModal.urlChecked"/>
 
                     <div ng-messages="(form.$submitted || form.url.$touched) && form.url.$error"
                          class="note note-error">
-                        <div ng-message="required">Veuillez renseigner une url de monitoring</div>
+                        <div ng-message="required">Veuillez renseigner une url de monitoring.</div>
+                        <div ng-message="conflict">Cette URL est déjà utilisée.</div>
+                        <div ng-message="check">Impossible de récupérer les informations à l'URL renseignée. L'URL doit
+                            être de la forme : http://www.MON_SERVEUR.com/manage/info.
+                        </div>
                     </div>
                 </label>
             </div>
@@ -73,8 +77,11 @@
     </div>
 </div>
 <div class="modal-footer" ng-switch="editAppModal.urlChecked">
-    <button type="button" class="btn-u btn-u-default" ng-click="editAppModal.close()">
+    <button ng-switch-default type="button" class="btn-u btn-u-default" ng-click="editAppModal.close()">
         <i class="fa fa-remove"></i> Fermer
+    </button>
+    <button ng-switch-when="true" type="button" class="btn-u btn-u-default" ng-click="editAppModal.cancel()">
+        <i class="fa fa-undo"></i> Annuler
     </button>
     <button ng-switch-when="true" type="button" class="btn-u btn-u-primary" ng-click="editAppModal.save()">
         <i class="fa fa-plus"></i> Ajouter

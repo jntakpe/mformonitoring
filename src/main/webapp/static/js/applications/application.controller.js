@@ -8,7 +8,7 @@ function ApplicationController(ApplicationService, $modal) {
     vm.application = ApplicationService.application.query();
     vm.modal = function () {
         var modalInstance = $modal.open({
-            templateUrl: 'views/modal/edit-app.html',
+            templateUrl: 'views/modal/edit-application.html',
             controller: 'EditApplicationModalController as editAppModal',
             size: 'md'
         });
@@ -29,6 +29,9 @@ function EditApplicationModalController(ApplicationService, $modalInstance) {
     vm.close = function () {
         $modalInstance.dismiss();
     };
+    vm.cancel = function () {
+        vm.urlChecked = false;
+    };
     vm.check = function (form) {
         if (form.$valid) {
             ApplicationService.check(vm.application.url).success(function (response) {
@@ -37,11 +40,15 @@ function EditApplicationModalController(ApplicationService, $modalInstance) {
                 vm.application.artifactId = response.artifactId;
                 vm.application.version = response.version;
                 vm.urlChecked = true;
+            }).error(function (data, status) {
+                form.url.$setValidity(status === 409 ? 'conflict' : 'check', false);
             });
         }
     };
     vm.save = function () {
-        console.log(vm.application);
+        ApplicationService.application.save(vm.application, function (application) {
+            $modalInstance.close(application);
+        });
     };
 
 }
