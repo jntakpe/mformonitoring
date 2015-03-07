@@ -6,7 +6,7 @@ mfmApp.config(function ($stateProvider) {
         url: 'applications',
         views: {
             'content@': {
-                templateUrl: 'views/application.html',
+                templateUrl: 'views/applications.html',
                 controller: 'ApplicationController as application'
             }
         }
