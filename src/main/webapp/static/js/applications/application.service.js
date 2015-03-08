@@ -2,9 +2,13 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
     "use strict";
 
     return {
-        application: $resource('api/application/:id', {id: '@id'}),
-        check: function (url) {
-            return $http.get('api/application/check', {params: {url: url}});
+        application: $resource('api/application/:id', {id: '@id'}, {update: {method: 'PUT'}}),
+        check: function (app) {
+            var params = {url: app.url};
+            if (app.id) {
+                params.id = app.id;
+            }
+            return $http.get('api/application/check', {params: params});
         },
         remove: function (elem, list) {
             var idx;

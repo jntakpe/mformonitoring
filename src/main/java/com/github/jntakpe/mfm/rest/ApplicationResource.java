@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Ressouce REST associé à une application
@@ -40,11 +41,13 @@ public class ApplicationResource {
      * Si la récupération des informations échoue à l'url donnée renvoie un code d'erreur 500.
      *
      * @param url url de monitoring à tester
+     * @param id  identifiant de l'application dans le cas d'une application déjà existante
      * @return la récupération des informations du projet sinon un code erreur
      */
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public ResponseEntity<Application> check(@RequestParam String url) {
-        if (applicationService.findByUrl(url).isPresent()) {
+    public ResponseEntity<Application> check(@RequestParam String url, @RequestParam(required = false) Long id) {
+        Optional<Application> app = applicationService.findByUrl(url);
+        if (app.isPresent() && !app.get().getId().equals(id)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(applicationService.findAppInfos(url), HttpStatus.OK);
@@ -58,6 +61,18 @@ public class ApplicationResource {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Application> create(@RequestBody Application application) {
+        return new ResponseEntity<>(applicationService.save(application), HttpStatus.OK);
+    }
+
+    /**
+     * Modification d'une application
+     *
+     * @param id          identifiant de l'application
+     * @param application application à modifier
+     * @return application modifiée
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Application> update(@PathVariable Long id, @RequestBody Application application) {
         return new ResponseEntity<>(applicationService.save(application), HttpStatus.OK);
     }
 

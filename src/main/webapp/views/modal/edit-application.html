@@ -83,8 +83,10 @@
     <button ng-switch-when="true" type="button" class="btn" ng-click="editAppModal.cancel()">
         <i class="fa fa-undo"></i> Annuler
     </button>
-    <button ng-switch-when="true" type="button" class="btn-u btn-u-primary" ng-click="editAppModal.save()">
-        <i class="fa fa-plus"></i> Ajouter
+    <button ng-switch-when="true" type="button" class="btn"
+            ng-class="editAppModal.application.id ? 'btn-warning' : 'btn-success'" ng-click="editAppModal.save()">
+        <i class="fa" ng-class="editAppModal.application.id ? 'fa-edit':'fa-plus'"></i>
+        {{editAppModal.application.id ? 'Modifier':'Ajouter'}}
     </button>
     <button ng-switch-default type="button" class="btn btn-info" ng-click="editAppModal.check(form)">
         <i class="fa fa-spinner"></i> Vérifier l'URL

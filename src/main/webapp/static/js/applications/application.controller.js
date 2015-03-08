@@ -2,7 +2,7 @@ mfmApp.controller('ApplicationController', ApplicationController);
 mfmApp.controller('EditApplicationModalController', EditApplicationModalController);
 mfmApp.controller('RemoveApplicationModalController', RemoveApplicationModalController);
 
-function ApplicationController(ApplicationService, PagingService, $modal, $filter) {
+function ApplicationController(ApplicationService, PagingService, AlertService, $modal, $filter) {
     "use strict";
 
     var vm = this, applications;
@@ -24,17 +24,21 @@ function ApplicationController(ApplicationService, PagingService, $modal, $filte
         class: []
     };
     applications = ApplicationService.application.query();
-    vm.editModal = function () {
+    vm.editModal = function (application) {
         var modalInstance = $modal.open({
             templateUrl: 'views/modal/edit-application.html',
             controller: 'EditApplicationModalController as editAppModal',
-            size: 'md'
+            size: 'md',
+            resolve: {
+                application: function () {
+                    return application;
+                }
+            }
         });
-        modalInstance.result.then(function (application) {
-            applications.push(application);
+        modalInstance.result.then(function (result) {
+            applications.push(result.data);
             refresh();
-            vm.alert.type = 'success';
-            vm.alert.msg = 'Création de l\'application effectuée avec succès.';
+            vm.alert = AlertService.success(result.action + ' de l\'application effectuée avec succès.');
         });
     };
     vm.removeModal = function (application) {
@@ -51,8 +55,7 @@ function ApplicationController(ApplicationService, PagingService, $modal, $filte
         modalInstance.result.then(function (application) {
             ApplicationService.remove(application, applications);
             refresh();
-            vm.alert.type = 'success';
-            vm.alert.msg = 'Suppression de l\'application effectuée avec succès.';
+            vm.alert = AlertService.success('Suppression de l\'application effectuée avec succès.');
         });
     };
     applications.$promise.then(function () {
@@ -75,14 +78,18 @@ function ApplicationController(ApplicationService, PagingService, $modal, $filte
     };
 }
 
-function EditApplicationModalController(ApplicationService, $modalInstance) {
+function EditApplicationModalController(ApplicationService, $modalInstance, application) {
     "use strict";
 
     var vm = this;
     vm.urlChecked = false;
-    vm.application = {
-        environnement: 'DEVELOPPEMENT'
-    };
+    if (application) {
+        vm.application = application;
+    } else {
+        vm.application = {
+            environnement: 'DEVELOPPEMENT'
+        };
+    }
     vm.close = function () {
         $modalInstance.dismiss();
     };
@@ -90,7 +97,7 @@ function EditApplicationModalController(ApplicationService, $modalInstance) {
         vm.urlChecked = false;
     };
     vm.check = function (form) {
-        ApplicationService.check(vm.application.url).success(function (response) {
+        ApplicationService.check(vm.application).success(function (response) {
             vm.application.nom = response.nom;
             vm.application.groupId = response.groupId;
             vm.application.artifactId = response.artifactId;
@@ -101,9 +108,15 @@ function EditApplicationModalController(ApplicationService, $modalInstance) {
         });
     };
     vm.save = function () {
-        ApplicationService.application.save(vm.application, function (application) {
-            $modalInstance.close(application);
-        });
+        if (vm.application.id) {
+            ApplicationService.application.update(vm.application, function () {
+                $modalInstance.close({data: application, action: 'Modication'});
+            });
+        } else {
+            ApplicationService.application.save(vm.application, function (application) {
+                $modalInstance.close({data: application, action: 'Création'});
+            });
+        }
     };
 }
 

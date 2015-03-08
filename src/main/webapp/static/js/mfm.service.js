@@ -1,4 +1,7 @@
-mfmApp.factory('PagingService', function () {
+mfmApp.factory('PagingService', PagingService);
+mfmApp.factory('AlertService', AlertService);
+
+function PagingService() {
     "use strict";
 
     function paginate(currentPage, numberPerPage, data) {
@@ -51,4 +54,23 @@ mfmApp.factory('PagingService', function () {
         toListParams: toListParams,
         sort: sortColumn
     };
-});
+}
+
+function AlertService() {
+    "use strict";
+
+    function Alert(type, msg) {
+        this.type = type;
+        this.msg = msg;
+        this.active = true;
+    }
+
+    return {
+        success: function (msg) {
+            return new Alert('success', msg);
+        },
+        error: function (msg) {
+            return new Alert('error', msg);
+        }
+    };
+}

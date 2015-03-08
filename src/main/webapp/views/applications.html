@@ -77,7 +77,8 @@
             <td class="col-md-2">{{app.artifactId}}</td>
             <td class="col-md-2">{{app.version}}</td>
             <td class="col-md-1">
-                <button type="button" class="btn btn-warning btn-xs margin-right-10" ng-click="application.edit(app)">
+                <button type="button" class="btn btn-warning btn-xs margin-right-10"
+                        ng-click="application.editModal(app)">
                     <i class="fa fa-edit"></i>
                 </button>
                 <button type="button" class="btn btn-danger btn-xs" ng-click="application.removeModal(app)">
@@ -90,5 +91,7 @@
     <pagination total-items="application.props.total" ng-model="application.props.current" boundary-links="true"
                 ng-change="application.pageChange()" max-size="5" items-per-page="application.props.numberPerPage"
                 class="pull-right"></pagination>
-    <button class="btn-u" ng-click="application.editModal()"><i class="fa fa-plus"></i> Ajouter une application</button>
+    <button class="btn btn-success" ng-click="application.editModal()"><i class="fa fa-plus"></i> Ajouter une
+        application
+    </button>
 </div>
