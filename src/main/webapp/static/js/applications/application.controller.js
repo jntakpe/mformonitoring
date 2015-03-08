@@ -1,5 +1,6 @@
 mfmApp.controller('ApplicationController', ApplicationController);
 mfmApp.controller('EditApplicationModalController', EditApplicationModalController);
+mfmApp.controller('RemoveApplicationModalController', RemoveApplicationModalController);
 
 function ApplicationController(ApplicationService, PagingService, $modal, $filter) {
     "use strict";
@@ -23,16 +24,35 @@ function ApplicationController(ApplicationService, PagingService, $modal, $filte
         class: []
     };
     applications = ApplicationService.application.query();
-    vm.modal = function () {
+    vm.editModal = function () {
         var modalInstance = $modal.open({
             templateUrl: 'views/modal/edit-application.html',
             controller: 'EditApplicationModalController as editAppModal',
             size: 'md'
         });
         modalInstance.result.then(function (application) {
-            vm.applications.push(application);
+            applications.push(application);
+            refresh();
             vm.alert.type = 'success';
             vm.alert.msg = 'Création de l\'application effectuée avec succès.';
+        });
+    };
+    vm.removeModal = function (application) {
+        var modalInstance = $modal.open({
+            templateUrl: 'views/modal/remove-application.html',
+            controller: 'RemoveApplicationModalController as removeAppModal',
+            size: 'md',
+            resolve: {
+                application: function () {
+                    return application;
+                }
+            }
+        });
+        modalInstance.result.then(function (application) {
+            applications.splice(applications.indexOf(application), 1);
+            refresh();
+            vm.alert.type = 'success';
+            vm.alert.msg = 'Suppression de l\'application effectuée avec succès.';
         });
     };
     applications.$promise.then(function () {
@@ -85,5 +105,19 @@ function EditApplicationModalController(ApplicationService, $modalInstance) {
             $modalInstance.close(application);
         });
     };
+}
 
+function RemoveApplicationModalController(ApplicationService, $modalInstance, application) {
+    "use strict";
+
+    var vm = this;
+    vm.application = application;
+    vm.cancel = function () {
+        $modalInstance.dismiss();
+    };
+    vm.delete = function () {
+        ApplicationService.application.delete(vm.application, function (application) {
+            $modalInstance.close(application);
+        });
+    };
 }

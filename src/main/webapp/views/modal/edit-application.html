@@ -77,16 +77,16 @@
     </div>
 </div>
 <div class="modal-footer" ng-switch="editAppModal.urlChecked">
-    <button ng-switch-default type="button" class="btn-u btn-u-default" ng-click="editAppModal.close()">
+    <button ng-switch-default type="button" class="btn" ng-click="editAppModal.close()">
         <i class="fa fa-remove"></i> Fermer
     </button>
-    <button ng-switch-when="true" type="button" class="btn-u btn-u-default" ng-click="editAppModal.cancel()">
+    <button ng-switch-when="true" type="button" class="btn" ng-click="editAppModal.cancel()">
         <i class="fa fa-undo"></i> Annuler
     </button>
     <button ng-switch-when="true" type="button" class="btn-u btn-u-primary" ng-click="editAppModal.save()">
         <i class="fa fa-plus"></i> Ajouter
     </button>
-    <button ng-switch-default type="button" class="btn-u btn-u-blue" ng-click="editAppModal.check(form)">
+    <button ng-switch-default type="button" class="btn btn-info" ng-click="editAppModal.check(form)">
         <i class="fa fa-spinner"></i> Vérifier l'URL
     </button>
 </div>

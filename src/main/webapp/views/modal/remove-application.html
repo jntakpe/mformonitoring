@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h2 class="modal-title">Confirmation de la suppression de l'application</h2>
+</div>
+<div class="modal-body">
+    Confirmez-vous la suppression de l'application <strong><em>{{removeAppModal.application.nom}}</em></strong> pour
+    l'environnement
+    : <strong><em>{{removeAppModal.application.environnement}}</em></strong> ?
+</div>
+<div class="modal-footer">
+    <button class="btn" ng-click="removeAppModal.cancel()">
+        <i class="fa fa-undo"></i> Annuler
+    </button>
+    <button class="btn btn-danger" ng-click="removeAppModal.delete()">
+        <i class="fa fa-trash"></i> Supprimer
+    </button>
+</div>

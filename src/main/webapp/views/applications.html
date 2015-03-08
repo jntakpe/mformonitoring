@@ -80,7 +80,7 @@
                 <button type="button" class="btn btn-warning btn-xs margin-right-10" ng-click="application.edit(app)">
                     <i class="fa fa-edit"></i>
                 </button>
-                <button type="button" class="btn btn-danger btn-xs" ng-click="application.delete(app)">
+                <button type="button" class="btn btn-danger btn-xs" ng-click="application.removeModal(app)">
                     <i class="fa fa-trash"></i>
                 </button>
             </td>
@@ -90,5 +90,5 @@
     <pagination total-items="application.props.total" ng-model="application.props.current" boundary-links="true"
                 ng-change="application.pageChange()" max-size="5" items-per-page="application.props.numberPerPage"
                 class="pull-right"></pagination>
-    <button class="btn-u" ng-click="application.modal()"><i class="fa fa-plus"></i> Ajouter une application</button>
+    <button class="btn-u" ng-click="application.editModal()"><i class="fa fa-plus"></i> Ajouter une application</button>
 </div>
