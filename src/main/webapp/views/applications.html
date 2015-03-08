@@ -25,6 +25,7 @@
                 <i class="pull-right fa" ng-class="application.sort.class.artifactId || 'fa-sort'"></i></th>
             <th ng-click="application.sortColumn('version')">Version
                 <i class="pull-right fa" ng-class="application.sort.class.version || 'fa-sort'"></i></th>
+            <th class="col-md-1">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +35,14 @@
             <td>{{app.groupId}}</td>
             <td>{{app.artifactId}}</td>
             <td>{{app.version}}</td>
+            <td>
+                <button type="button" class="btn btn-warning btn-xs margin-right-10" ng-click="application.edit(app)">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" ng-click="application.delete(app)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>
