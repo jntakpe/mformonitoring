@@ -30,7 +30,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="app in application.applications">
-            <td>{{app.nom}}</td>
+            <td><a href="{{app.url}}">{{app.nom}}</a></td>
             <td>{{app.environnement}}</td>
             <td>{{app.groupId}}</td>
             <td>{{app.artifactId}}</td>
