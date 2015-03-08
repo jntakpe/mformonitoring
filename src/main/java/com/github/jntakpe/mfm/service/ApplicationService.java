@@ -5,6 +5,8 @@ import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +23,8 @@ import java.util.Optional;
 public class ApplicationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationService.class);
+
+    public static final String APPS_CACHE = "apps";
 
     private RestTemplate restTemplate;
 
@@ -50,6 +54,7 @@ public class ApplicationService {
      *
      * @return liste des applications
      */
+    @Cacheable(value = APPS_CACHE)
     @Transactional(readOnly = true)
     public List<Application> findAll() {
         LOG.debug("Récupération de la liste des applications");
@@ -75,6 +80,7 @@ public class ApplicationService {
      * @return application enregistrée
      */
     @Transactional
+    @CacheEvict(value = APPS_CACHE, allEntries = true)
     public Application save(Application application) {
         LOG.info("Enregistrement de l'application {}", application);
         return applicationRepository.save(application);
