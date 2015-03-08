@@ -58,3 +58,10 @@
 .modal-body .sky-form {
     border: 0;
 }
+
+.form-inline .input-block-level {
+    display: block;
+    width: 100%;
+    min-height: 28px;
+    box-sizing: border-box;
+}
