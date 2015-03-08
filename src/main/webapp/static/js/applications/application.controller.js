@@ -49,7 +49,7 @@ function ApplicationController(ApplicationService, PagingService, $modal, $filte
             }
         });
         modalInstance.result.then(function (application) {
-            applications.splice(applications.indexOf(application), 1);
+            ApplicationService.remove(application, applications);
             refresh();
             vm.alert.type = 'success';
             vm.alert.msg = 'Suppression de l\'application effectuée avec succès.';
@@ -116,7 +116,7 @@ function RemoveApplicationModalController(ApplicationService, $modalInstance, ap
         $modalInstance.dismiss();
     };
     vm.delete = function () {
-        ApplicationService.application.delete(vm.application, function (application) {
+        ApplicationService.application.delete({}, {id: vm.application.id}, function (application) {
             $modalInstance.close(application);
         });
     };

@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringApplicationConfiguration(classes = MfmApp.class)
 public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
 
-    public static final String URL = "http://localhost:8080/manage/info";
+    public static final String URL = "http://localhost:8080/eers/manage/info";
 
     @Autowired
     private DataSource dataSource;
@@ -97,6 +97,14 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         Application application = new Application();
         application.setUrl(URL);
         applicationService.save(application);
+    }
+
+    @Test
+    public void testDelete_shoudDelete() {
+        long id = 10L;
+        applicationService.delete(id);
+        assertThat(count()).isEqualTo(initCount - 1);
+        assertThat(applicationRepository.findOne(id)).isNull();
     }
 
 }

@@ -22,9 +22,9 @@ import java.util.Optional;
 @Service
 public class ApplicationService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ApplicationService.class);
-
     public static final String APPS_CACHE = "apps";
+
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationService.class);
 
     private RestTemplate restTemplate;
 
@@ -84,5 +84,17 @@ public class ApplicationService {
     public Application save(Application application) {
         LOG.info("Enregistrement de l'application {}", application);
         return applicationRepository.save(application);
+    }
+
+    /**
+     * Suppression de l'application possédant cet identifiant
+     *
+     * @param id identifiant de l'application à supprimer
+     */
+    @Transactional
+    @CacheEvict(value = APPS_CACHE, allEntries = true)
+    public void delete(Long id) {
+        LOG.info("Suppression de l'application id {}", id);
+        applicationRepository.delete(id);
     }
 }

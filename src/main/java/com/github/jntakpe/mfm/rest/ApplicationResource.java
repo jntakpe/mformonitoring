@@ -60,4 +60,16 @@ public class ApplicationResource {
     public ResponseEntity<Application> create(@RequestBody Application application) {
         return new ResponseEntity<>(applicationService.save(application), HttpStatus.OK);
     }
+
+    /**
+     * Suppression de l'application possédant l'id
+     *
+     * @param id identifiant de l'application à supprimer
+     * @return code HTTP 200 si la suppression est effectuée
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity delete(@PathVariable Long id) {
+        applicationService.delete(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
