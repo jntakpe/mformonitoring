@@ -1,20 +1,21 @@
 mfmApp.controller('ApplicationController', ApplicationController);
 mfmApp.controller('EditApplicationModalController', EditApplicationModalController);
 
-function ApplicationController(ApplicationService, PagingService, $modal, $scope, $filter) {
+function ApplicationController(ApplicationService, PagingService, $modal, $filter) {
     "use strict";
 
     var vm = this, applications;
 
     function refresh() {
         var filtered, sorted, paginated;
-        //filtered = $filter('filter')(vm.applications, vm.search);
-        sorted = $filter('orderBy')(applications, vm.sort.column, vm.sort.reverse);
+        filtered = $filter('filter')(applications, vm.search);
+        sorted = $filter('orderBy')(filtered, vm.sort.column, vm.sort.reverse);
         paginated = PagingService.paginate(vm.props.current, vm.props.numberPerPage, sorted);
         vm.applications = paginated.data;
         vm.props.total = paginated.total;
     }
 
+    vm.search = {};
     vm.alert = {
         active: false
     };
@@ -45,7 +46,13 @@ function ApplicationController(ApplicationService, PagingService, $modal, $scope
     vm.pageChange = function () {
         refresh();
     };
-
+    vm.filter = function () {
+        refresh();
+    };
+    vm.resetFilter = function () {
+        vm.search = {};
+        refresh();
+    };
 }
 
 function EditApplicationModalController(ApplicationService, $modalInstance) {

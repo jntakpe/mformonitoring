@@ -12,6 +12,47 @@
         <i class="fa" ng-class="application.alert.type === 'success' ? 'fa-check': 'fa-warning'"></i>
         <strong ng-if="application.alert.type === 'danger'">Erreur ! </strong>{{application.alert.msg}}
     </alert>
+    <form class="form-inline" role="form">
+        <div class="form-group col-md-3">
+            <label class="sr-only" for="search-nom">Recherche par nom</label>
+
+            <input type="text" class="form-control" id="search-nom" placeholder="Nom"
+                   ng-change="application.filter()" ng-model="application.search.nom">
+        </div>
+        <div class="form-group col-md-2">
+            <label class="sr-only" for="search-env">Recherche par environnement</label>
+
+            <select type="text" class="form-control " id="search-env" ng-change="application.filter()"
+                    ng-model="application.search.environnement">
+                <option value="" selected>Environnement</option>
+                <option value="DEVELOPPEMENT">Développement</option>
+                <option value="ASSEMBLAGE">Assemblage</option>
+                <option value="INTEGRATION">Intégration</option>
+                <option value="RECETTE">Recette</option>
+                <option value="PRE_PRODUCTION">Pré-production</option>
+                <option value="PRODUCTION">Production</option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label class="sr-only" for="search-group-id">Recherche par groupId</label>
+
+            <input type="text" class="form-control" id="search-group-id" placeholder="groupId"
+                   ng-change="application.filter()" ng-model="application.search.groupId">
+        </div>
+        <div class="form-group col-md-2">
+            <label class="sr-only" for="search-artifact-id">Recherche par artifactId</label>
+
+            <input type="text" class="form-control full-size" id="search-artifact-id" placeholder="ArtifactId"
+                   ng-change="application.filter()" ng-model="application.search.artifactId">
+        </div>
+        <div class="form-group col-md-2 margin-right-10">
+            <label for="search-version" class="sr-only">Recherche par version</label>
+
+            <input type="text" class="form-control full-size" id="search-version" ng-change="application.filter()"
+                   ng-model="application.search.version" placeholder="Version"/>
+        </div>
+        <button class="btn btn-warning" ng-click="application.resetFilter()"><i class="fa fa-times"></i> Reset</button>
+    </form>
     <table class="table table-striped table-wrap">
         <thead>
         <tr>
@@ -30,12 +71,12 @@
         </thead>
         <tbody>
         <tr ng-repeat="app in application.applications">
-            <td><a href="{{app.url}}">{{app.nom}}</a></td>
-            <td>{{app.environnement}}</td>
-            <td>{{app.groupId}}</td>
-            <td>{{app.artifactId}}</td>
-            <td>{{app.version}}</td>
-            <td>
+            <td class="col-md-3"><a href="{{app.url}}">{{app.nom}}</a></td>
+            <td class="col-md-2">{{app.environnement}}</td>
+            <td class="col-md-2">{{app.groupId}}</td>
+            <td class="col-md-2">{{app.artifactId}}</td>
+            <td class="col-md-2">{{app.version}}</td>
+            <td class="col-md-1">
                 <button type="button" class="btn btn-warning btn-xs margin-right-10" ng-click="application.edit(app)">
                     <i class="fa fa-edit"></i>
                 </button>
