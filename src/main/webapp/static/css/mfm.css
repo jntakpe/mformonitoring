@@ -65,3 +65,7 @@
     min-height: 28px;
     box-sizing: border-box;
 }
+
+#active-toggle {
+    margin-right: 30px;
+}
