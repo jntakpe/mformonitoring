@@ -1,6 +1,7 @@
 package com.github.jntakpe.mfm.config;
 
 import com.codahale.metrics.MetricRegistry;
+import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import com.github.jntakpe.mfm.config.properties.DatasourceProperties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -42,6 +43,11 @@ public class DataSourceConfig {
         config.setPassword(datasourceProperties.getPassword());
         config.setMetricRegistry(metricRegistry);
         return new HikariDataSource(config);
+    }
+
+    @Bean
+    public Hibernate4Module hibernate4Module() {
+        return new Hibernate4Module();
     }
 
 }

@@ -2,11 +2,9 @@ package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Entité représentant une application
@@ -31,6 +29,9 @@ public class Application extends GenericDomain {
 
     @Column(unique = true)
     private String url;
+
+    @ManyToMany
+    private Set<Partenaire> partenaires;
 
     public String getNom() {
         return nom;
@@ -86,6 +87,14 @@ public class Application extends GenericDomain {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Set<Partenaire> getPartenaires() {
+        return partenaires;
+    }
+
+    public void setPartenaires(Set<Partenaire> partenaires) {
+        this.partenaires = partenaires;
     }
 
     @Override
