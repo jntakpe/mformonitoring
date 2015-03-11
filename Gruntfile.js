@@ -136,6 +136,7 @@ module.exports = function (grunt) {
                     '<%= dirs.target %>/css/unify.min.css': [
                         '<%= dirs.source %>/css/unify/style.css',
                         '<%= dirs.source %>/css/unify/app.css',
+                        '<%= dirs.source %>/css/unify/blocks.css',
                         '<%= dirs.source %>/css/unify/header.css',
                         '<%= dirs.source %>/css/unify/footer.css',
                         '<%= dirs.source %>/css/unify/sky-forms.css',

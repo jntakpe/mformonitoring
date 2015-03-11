@@ -1,55 +1,58 @@
 <div class="header">
-    <div class="topbar">
-        <div class="container">
-            <ul class="loginbar pull-right">
-                <li><a>Connexion</a></li>
-                <li class="topbar-devider"></li>
-                <li><a>Créer un compte</a></li>
-            </ul>
+    <div class="container">
+        <!-- Logo -->
+        <a class="logo" href="index.html">
+            <img src="assets/img/logo1-default.png" alt="Logo">
+        </a>
+        <!-- End Logo -->
+
+        <!-- Topbar -->
+        <div class="topbar">
+            <ul class="loginbar pull-right"></ul>
         </div>
-    </div>
-    <div class="navbar navbar-default mega-menu" role="navigation">
+        <!-- End Topbar -->
+
+        <!-- Toggle get grouped for better mobile display -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars"></span>
+        </button>
+        <!-- End Toggle -->
+    </div><!--/end container-->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target=".navbar-responsive-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="fa fa-bars"></span>
-                </button>
-                <a class="navbar-brand" ui-sref="home">
-                    <img id="logo-header" src="assets/img/logo1-default.png" alt="Logo">
-                </a>
-            </div>
-            <div class="collapse navbar-collapse navbar-responsive-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a ui-sref="applications"><i class="fa fa-desktop"></i> Applications</a></li>
-                    <li class="dropdown">
+            <ul class="nav navbar-nav">
+
+                <li><a ui-sref="applications"><i class="fa fa-desktop"></i> Applications</a></li>
+                <li class="dropdown">
+                    <ul class="dropdown-menu">
                         <a ui-sref="envs" class="dropdown-toggle"><i class="fa fa-cloud"></i> Environnements</a>
-                        <ul class="dropdown-menu">
-                            <li><a ui-sref="envs.development"> Développement</a></li>
-                            <li><a ui-sref="envs.assemblage"> Assemblage</a></li>
-                            <li><a ui-sref="envs.integration"> Intégration</a></li>
-                            <li><a ui-sref="envs.qualification"> Qualification</a></li>
-                            <li><a ui-sref="envs.recette"> Recette</a></li>
-                            <li><a ui-sref="envs.preprod"> Pré-production</a></li>
-                            <li><a ui-sref="envs.production"> Production</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-heartbeat"></i> Administration
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a ui-sref="docs"><i class="fa fa-book"></i> Documentation API</a>
-                            </li>
-                            <li>
-                                <a ui-sref="metrics"><i class="fa fa-dashboard"></i> Monitoring</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+                        <li><a ui-sref="envs.development"> Développement</a></li>
+                        <li><a ui-sref="envs.assemblage"> Assemblage</a></li>
+                        <li><a ui-sref="envs.integration"> Intégration</a></li>
+                        <li><a ui-sref="envs.qualification"> Qualification</a></li>
+                        <li><a ui-sref="envs.recette"> Recette</a></li>
+                        <li><a ui-sref="envs.preprod"> Pré-production</a></li>
+                        <li><a ui-sref="envs.production"> Production</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-heartbeat"></i> Administration
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ui-sref="docs"><i class="fa fa-book"></i> Documentation API</a>
+                        </li>
+                        <li>
+                            <a ui-sref="metrics"><i class="fa fa-dashboard"></i> Monitoring</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div><!--/end container-->
+    </div><!--/navbar-collapse-->
 </div>
