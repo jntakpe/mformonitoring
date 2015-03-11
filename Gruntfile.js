@@ -139,8 +139,7 @@ module.exports = function (grunt) {
                         '<%= dirs.source %>/css/unify/header.css',
                         '<%= dirs.source %>/css/unify/footer.css',
                         '<%= dirs.source %>/css/unify/sky-forms.css',
-                        '<%= dirs.source %>/css/unify/custom-sky-forms.css',
-                        '<%= dirs.source %>/css/unify/profile.css'
+                        '<%= dirs.source %>/css/unify/custom-sky-forms.css'
                     ]
                 }],
                 options: {
