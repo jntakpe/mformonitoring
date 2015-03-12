@@ -1,0 +1,20 @@
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Partenaires</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a ui-sref="home">Home</a></li>
+            <li class="active">Partenaires</li>
+        </ul>
+    </div>
+</div>
+<div class="container content">
+    <div class="col-md-4 col-sm-6" ng-repeat="part in partenaires.partenaire">
+        <div class="service-block" ng-class="part.status == 'UP' ? 'service-block-u' : 'service-block-red'">
+            <i class="icon-custom icon-color-light rounded-x fa" ng-class="part.status == 'UP' ? 'fa-thumbs-o-up' : 'fa-thumbs-o-down'"></i>
+
+            <h2 class="heading-md">{{part.name}}</h2>
+
+            <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus</p>
+        </div>
+    </div>
+</div>
