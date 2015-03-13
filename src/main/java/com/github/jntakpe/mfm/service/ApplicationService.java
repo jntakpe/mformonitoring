@@ -29,10 +29,13 @@ public class ApplicationService {
 
     private ApplicationRepository applicationRepository;
 
+    private PartnerService partnerService;
+
     @Autowired
-    public ApplicationService(RestTemplate restTemplate, ApplicationRepository applicationRepository) {
+    public ApplicationService(RestTemplate restTemplate, ApplicationRepository applicationRepository, PartnerService partnerService) {
         this.restTemplate = restTemplate;
         this.applicationRepository = applicationRepository;
+        this.partnerService = partnerService;
     }
 
     /**
@@ -118,4 +121,5 @@ public class ApplicationService {
         Hibernate.initialize(application.getPartners());
         return application;
     }
+
 }

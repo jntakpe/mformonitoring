@@ -13,7 +13,7 @@ spring:
     show-sql: true
     generate-ddl: false
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     properties:
       hibernate.cache.use_second_level_cache: true
       hibernate.cache.use_query_cache: false

@@ -2,10 +2,7 @@ package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,6 +17,7 @@ public class Partner extends GenericDomain {
 
     private String name;
 
+    @Column(unique = true)
     private String url;
 
     @Enumerated(EnumType.STRING)
