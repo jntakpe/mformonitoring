@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringApplicationConfiguration(classes = MfmApp.class)
 public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
 
-    public static final String URL = "http://localhost:8080/eers/manage/info";
+    public static final String URL = "http://localhost:8080/bss/manage/info";
 
     @Autowired
     private DataSource dataSource;
@@ -75,7 +75,7 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
     public void testSave_shouldCreate() {
         Application application = new Application();
         application.setUrl("http://randomurl.io");
-        application.setNom("testApp");
+        application.setName("testApp");
         assertThat(applicationService.save(application)).isNotNull();
         assertThat(initCount).isEqualTo(count() - 1);
     }
@@ -86,9 +86,9 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         assertThat(application).isNotNull();
         String testAppName = "testAppName";
         Integer lock = application.getLock();
-        application.setNom(testAppName);
+        application.setName(testAppName);
         Application saved = applicationService.save(application);
-        assertThat(saved.getNom()).isEqualTo(testAppName);
+        assertThat(saved.getName()).isEqualTo(testAppName);
         assertThat(saved.getLock()).isEqualTo(lock + 1);
     }
 

@@ -5,10 +5,10 @@ package com.github.jntakpe.mfm.domain;
  *
  * @author jntakpe
  */
-public enum Statut {
+public enum Status {
 
-    OK,
+    UP,
     UNKNOWN,
-    KO
+    DOWN
 
 }

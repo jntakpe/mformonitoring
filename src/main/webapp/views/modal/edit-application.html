@@ -9,7 +9,7 @@
 
             <div class="col col-8">
                 <label class="select">
-                    <select id="environnement" name="environnement" ng-model="editAppModal.application.environnement"
+                    <select id="environment" name="environment" ng-model="editAppModal.application.environment"
                             required ng-disabled="editAppModal.urlChecked">
                         <option value="DEVELOPPEMENT" selected>Développement</option>
                         <option value="ASSEMBLAGE">Assemblage</option>
@@ -65,7 +65,7 @@
                 <tbody>
                 <tr>
                     <td>Nom</td>
-                    <td>{{editAppModal.application.nom}}</td>
+                    <td>{{editAppModal.application.name}}</td>
                 </tr>
                 <tr>
                     <td>ArtifactId</td>

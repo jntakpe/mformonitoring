@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.DispatcherType;
@@ -47,6 +49,19 @@ public class WebConfig implements ServletContextInitializer {
         factory.setConnectTimeout(webProperties.getTimeout());
         factory.setReadTimeout(webProperties.getTimeout());
         return new RestTemplate(factory);
+    }
+
+    /**
+     * Template permettant d'accéder aux ressources REST de manière asynchrone et non bloquante
+     *
+     * @return le template asynchrone configuré
+     */
+    @Bean
+    public AsyncRestTemplate asyncRestTemplate() {
+        HttpComponentsAsyncClientHttpRequestFactory factory = new HttpComponentsAsyncClientHttpRequestFactory();
+        factory.setConnectTimeout(webProperties.getTimeout());
+        factory.setReadTimeout(webProperties.getTimeout());
+        return new AsyncRestTemplate(factory);
     }
 
     @Override

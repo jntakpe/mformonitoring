@@ -14,16 +14,16 @@
     </alert>
     <form class="form-inline margin-bottom-10" role="form">
         <div class="form-group col-md-3">
-            <label class="sr-only" for="search-nom">Recherche par nom</label>
+            <label class="sr-only" for="search-name">Recherche par name</label>
 
-            <input type="text" class="form-control input-block-level" id="search-nom" placeholder="Nom"
-                   ng-change="application.filter()" ng-model="application.search.nom">
+            <input type="text" class="form-control input-block-level" id="search-name" placeholder="Nom"
+                   ng-change="application.filter()" ng-model="application.search.name">
         </div>
         <div class="form-group col-md-2">
             <label class="sr-only" for="search-env">Recherche par environnement</label>
 
             <select type="text" class="form-control input-block-level" id="search-env" ng-change="application.filter()"
-                    ng-model="application.search.environnement">
+                    ng-model="application.search.environment">
                 <option value="" selected>Environnement</option>
                 <option value="DEVELOPPEMENT">Développement</option>
                 <option value="ASSEMBLAGE">Assemblage</option>
@@ -56,10 +56,10 @@
     <table class="table table-striped table-wrap">
         <thead>
         <tr>
-            <th ng-click="application.sortColumn('nom')">Nom
-                <i class="pull-right fa" ng-class="application.sort.class.nom || 'fa-sort'"></i></th>
-            <th ng-click="application.sortColumn('environnement')">Environnement
-                <i class="pull-right fa" ng-class="application.sort.class.environnement || 'fa-sort'"></i></th>
+            <th ng-click="application.sortColumn('name')">Nom
+                <i class="pull-right fa" ng-class="application.sort.class.name || 'fa-sort'"></i></th>
+            <th ng-click="application.sortColumn('environment')">Environnement
+                <i class="pull-right fa" ng-class="application.sort.class.environment || 'fa-sort'"></i></th>
             <th ng-click="application.sortColumn('groupId')">GroupId
                 <i class="pull-right fa" ng-class="application.sort.class.groupId || 'fa-sort'"></i></th>
             <th ng-click="application.sortColumn('artifactId')">ArtifactId
@@ -71,8 +71,8 @@
         </thead>
         <tbody>
         <tr ng-repeat="app in application.applications">
-            <td class="col-md-3"><a href="{{app.url}}">{{app.nom}}</a></td>
-            <td class="col-md-2">{{app.environnement}}</td>
+            <td class="col-md-3"><a href="{{app.url}}">{{app.name}}</a></td>
+            <td class="col-md-2">{{app.environment}}</td>
             <td class="col-md-2">{{app.groupId}}</td>
             <td class="col-md-2">{{app.artifactId}}</td>
             <td class="col-md-2">{{app.version}}</td>

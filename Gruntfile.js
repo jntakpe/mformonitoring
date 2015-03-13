@@ -65,9 +65,9 @@ module.exports = function (grunt) {
                     '<%= dirs.source %>/js/applications/application.js',
                     '<%= dirs.source %>/js/applications/application.controller.js',
                     '<%= dirs.source %>/js/applications/application.service.js',
-                    '<%= dirs.source %>/js/partenaires/partenaire.js',
-                    '<%= dirs.source %>/js/partenaires/partenaire.controller.js',
-                    '<%= dirs.source %>/js/partenaires/partenaire.service.js'
+                    '<%= dirs.source %>/js/partners/partner.js',
+                    '<%= dirs.source %>/js/partners/partner.controller.js',
+                    '<%= dirs.source %>/js/partners/partner.service.js'
                 ],
                 dest: '<%= dirs.target %>/js/core.js'
             },

@@ -13,6 +13,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * Classe démarrant l'application Spring Boot
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
  * @author jntakpe
  */
 @Configuration
+@EnableAsync
 @EnableConfigurationProperties
 @ComponentScan("com.github.jntakpe.mfm")
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})

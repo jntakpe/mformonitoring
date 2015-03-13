@@ -2,11 +2,10 @@ package com.github.jntakpe.mfm.service;
 
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -54,7 +53,6 @@ public class ApplicationService {
      *
      * @return liste des applications
      */
-    @Cacheable(value = APPS_CACHE)
     @Transactional(readOnly = true)
     public List<Application> findAll() {
         LOG.debug("Récupération de la liste des applications");
@@ -80,7 +78,6 @@ public class ApplicationService {
      * @return application enregistrée
      */
     @Transactional
-    @CacheEvict(value = APPS_CACHE, allEntries = true)
     public Application save(Application application) {
         LOG.info("Enregistrement de l'application {}", application);
         return applicationRepository.save(application);
@@ -92,9 +89,33 @@ public class ApplicationService {
      * @param id identifiant de l'application à supprimer
      */
     @Transactional
-    @CacheEvict(value = APPS_CACHE, allEntries = true)
     public void delete(Long id) {
         LOG.info("Suppression de l'application id {}", id);
         applicationRepository.delete(id);
+    }
+
+    /**
+     * Récupère une application en fonction de son identifiant
+     *
+     * @param id identifiant de l'application
+     * @return l'application correspondante à l'identifiant
+     */
+    @Transactional(readOnly = true)
+    public Application findById(Long id) {
+        LOG.debug("Recherche de l'application id {}", id);
+        return applicationRepository.findOne(id);
+    }
+
+    /**
+     * Récupère une application en fonction de son identifiant avec les partenaires associés
+     *
+     * @param id identifiant de l'application
+     * @return l'application correspondante à l'identifiant et les partenaires associés
+     */
+    @Transactional(readOnly = true)
+    public Application findByIdWithPartners(Long id) {
+        Application application = findById(id);
+        Hibernate.initialize(application.getPartners());
+        return application;
     }
 }

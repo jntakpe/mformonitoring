@@ -87,7 +87,7 @@ function EditApplicationModalController(ApplicationService, $modalInstance, appl
         vm.application = application;
     } else {
         vm.application = {
-            environnement: 'DEVELOPPEMENT'
+            environment: 'DEVELOPPEMENT'
         };
     }
     vm.close = function () {

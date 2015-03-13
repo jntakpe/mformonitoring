@@ -12,25 +12,30 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <logger name="ch.qos.logback" level="WARN">
-    </logger>
+    <logger name="ch.qos.logback" level="WARN"/>
 
-    <logger name="org.apache" level="WARN">
-    </logger>
+    <logger name="org.apache" level="WARN"/>
 
-    <logger name="org.hibernate" level="WARN">
-    </logger>
+    <logger name="org.hibernate" level="WARN"/>
 
-    <logger name="org.springframework" level="WARN">
-    </logger>
+    <logger name="org.hibernate.validator" level="WARN"/>
 
-    <logger name="org.springframework.web" level="WANR">
-    </logger>
+    <logger name="org.hibernate.type" level="INFO"/>
 
-    <logger name="org.springframework.security" level="WARN">
-    </logger>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
 
-    <logger name="org.springframework.cache" level="WARN">
-    </logger>
+    <logger name="org.springframework" level="WARN"/>
+
+    <logger name="org.springframework.web" level="WARN"/>
+
+    <logger name="org.springframework.cache" level="WARN"/>
+
+    <logger name="com.ryantenney.metrics" level="WARN"/>
+
+    <logger name="com.mangofactory.swagger" level="WARN"/>
+
+    <logger name="com.hazelcast" level="WARN"/>
+
+    <logger name="com.zaxxer.hikari" level="WARN"/>
 
 </configuration>

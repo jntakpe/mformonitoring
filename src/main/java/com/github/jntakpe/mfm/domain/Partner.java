@@ -5,7 +5,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToMany;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Entité représentant un partenaire
@@ -13,21 +16,24 @@ import java.util.Objects;
  * @author jntakpe
  */
 @Entity
-public class Partenaire extends GenericDomain {
+public class Partner extends GenericDomain {
 
-    private String nom;
+    private String name;
 
     private String url;
 
     @Enumerated(EnumType.STRING)
-    private Statut statut;
+    private Status status;
 
-    public String getNom() {
-        return nom;
+    @ManyToMany(mappedBy = "partners")
+    private Set<Application> applications = new HashSet<>();
+
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUrl() {
@@ -38,19 +44,27 @@ public class Partenaire extends GenericDomain {
         this.url = url;
     }
 
-    public Statut getStatut() {
-        return statut;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStatut(Statut statut) {
-        this.statut = statut;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<Application> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(Set<Application> applications) {
+        this.applications = applications;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Partenaire that = (Partenaire) o;
+        Partner that = (Partner) o;
         return Objects.equals(url, that.url);
     }
 
@@ -62,9 +76,9 @@ public class Partenaire extends GenericDomain {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("statut", statut)
+                .append("status", status)
                 .append("url", url)
-                .append("nom", nom)
+                .append("name", name)
                 .toString();
     }
 }

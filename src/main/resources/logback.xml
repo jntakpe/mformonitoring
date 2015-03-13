@@ -4,7 +4,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>utf-8</charset>
-            <Pattern>[%p] %c - %m%n</Pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n %ex</pattern>
         </encoder>
     </appender>
 
@@ -26,6 +26,8 @@
 
     <logger name="org.springframework" level="WARN"/>
 
+    <logger name="org.springframework.boot" level="WARN"/>
+
     <logger name="org.springframework.web" level="WARN"/>
 
     <logger name="org.springframework.cache" level="WARN"/>
@@ -35,5 +37,7 @@
     <logger name="com.mangofactory.swagger" level="WARN"/>
 
     <logger name="com.hazelcast" level="WARN"/>
+
+    <logger name="com.zaxxer.hikari" level="WARN"/>
 
 </configuration>

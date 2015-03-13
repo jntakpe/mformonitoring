@@ -1,8 +1,11 @@
 package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,9 +15,10 @@ import java.util.Set;
  * @author jntakpe
  */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Application extends GenericDomain {
 
-    private String nom;
+    private String name;
 
     private String groupId;
 
@@ -23,22 +27,25 @@ public class Application extends GenericDomain {
     private String version;
 
     @Enumerated(EnumType.STRING)
-    private Environnement environnement;
+    private Environment environment;
 
     private boolean active;
 
     @Column(unique = true)
     private String url;
 
-    @ManyToMany
-    private Set<Partenaire> partenaires;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    public String getNom() {
-        return nom;
+    @ManyToMany
+    private Set<Partner> partners = new HashSet<>();
+
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGroupId() {
@@ -65,12 +72,12 @@ public class Application extends GenericDomain {
         this.version = version;
     }
 
-    public Environnement getEnvironnement() {
-        return environnement;
+    public Environment getEnvironment() {
+        return environment;
     }
 
-    public void setEnvironnement(Environnement environnement) {
-        this.environnement = environnement;
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
     public boolean isActive() {
@@ -89,12 +96,20 @@ public class Application extends GenericDomain {
         this.url = url;
     }
 
-    public Set<Partenaire> getPartenaires() {
-        return partenaires;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setPartenaires(Set<Partenaire> partenaires) {
-        this.partenaires = partenaires;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<Partner> getPartners() {
+        return partners;
+    }
+
+    public void setPartners(Set<Partner> partners) {
+        this.partners = partners;
     }
 
     @Override
@@ -113,11 +128,11 @@ public class Application extends GenericDomain {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("nom", nom)
+                .append("name", name)
                 .append("groupId", groupId)
                 .append("artifactId", artifactId)
                 .append("version", version)
-                .append("environnement", environnement)
+                .append("environment", environment)
                 .append("active", active)
                 .append("url", url)
                 .toString();
