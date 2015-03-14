@@ -27,7 +27,7 @@ public final class PartnerMapper {
      * @return set de partenaires
      */
     public static Set<Partner> toSet(HealthDTO health, Application application) {
-        HashSet<Partner> partners = new HashSet<>();
+        Set<Partner> partners = new HashSet<>();
         partners.add(health.getSelCrmHealth());
         partners.add(health.getSelClientHealth());
         return partners.stream()

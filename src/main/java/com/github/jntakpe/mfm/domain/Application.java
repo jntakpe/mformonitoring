@@ -37,7 +37,7 @@ public class Application extends GenericDomain {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "applications")
     private Set<Partner> partners = new HashSet<>();
 
     public String getName() {

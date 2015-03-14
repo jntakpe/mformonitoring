@@ -48,6 +48,12 @@ public class PartnerResource {
         return deferred;
     }
 
+    /**
+     * Enregistre un partenaire
+     *
+     * @param partner partenaire à enregistrer
+     * @return partenaire enregistré
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Partner> save(@RequestBody Partner partner) {
         return new ResponseEntity<>(partnerService.save(partner), HttpStatus.OK);

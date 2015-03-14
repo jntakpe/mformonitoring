@@ -23,7 +23,9 @@ public class Partner extends GenericDomain {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ManyToMany(mappedBy = "partners")
+    @ManyToMany
+    @JoinTable(name = "partner_application", joinColumns = {@JoinColumn(referencedColumnName = "id", name = "partner_id")},
+            inverseJoinColumns = {@JoinColumn(referencedColumnName = "id", name = "application_id")})
     private Set<Application> applications = new HashSet<>();
 
     public String getName() {
