@@ -19,6 +19,13 @@ public final class PartnerMapper {
     private PartnerMapper() {
     }
 
+    /**
+     * Transforme un {@link HealthDTO} en set de partenaires
+     *
+     * @param health      bean wrappant le résultat d'une url de vie d'une application
+     * @param application application
+     * @return set de partenaires
+     */
     public static Set<Partner> toSet(HealthDTO health, Application application) {
         HashSet<Partner> partners = new HashSet<>();
         partners.add(health.getSelCrmHealth());

@@ -1,7 +1,11 @@
-mfmApp.controller('PartnerController', function (PartnerService) {
+mfmApp.controller('PartnerController', function (PartnerService, $q) {
     "use strict";
 
-    var vm = this;
+    var vm = this, allDone = $q.defer();
 
-    vm.partners = PartnerService.refresh();
+    allDone.promise.then(function () {
+        console.log("Saving");
+    });
+
+    vm.partners = PartnerService.refresh(allDone);
 });

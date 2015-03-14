@@ -34,7 +34,7 @@ web:
 spring:
   profiles: dev
 server:
-  port: 9080
+  port: 8080
 datasource:
   url: jdbc:postgresql://localhost:5432/mfm
   username: postgres
