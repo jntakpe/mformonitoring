@@ -8,10 +8,7 @@ import com.github.jntakpe.mfm.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.Set;
@@ -22,6 +19,7 @@ import java.util.Set;
  * @author jntakpe
  */
 @RestController
+@RequestMapping(Urls.PARTNER)
 public class PartnerResource {
 
     private ApplicationService applicationService;
@@ -48,5 +46,10 @@ public class PartnerResource {
                 h -> deferred.setResult(new ResponseEntity<>(PartnerMapper.toSet(h.getBody(), app), HttpStatus.OK)),
                 h -> deferred.setResult(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)));
         return deferred;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Partner> save(@RequestBody Partner partner) {
+        return new ResponseEntity<>(partnerService.save(partner), HttpStatus.OK);
     }
 }

@@ -1,4 +1,4 @@
-mfmApp.factory('PartnerService', function (ApplicationService, $http, $q) {
+mfmApp.factory('PartnerService', function (ApplicationService, $http, $q, $resource) {
     "use strict";
 
     function addIfAbsent(partners, partner) {
@@ -15,7 +15,7 @@ mfmApp.factory('PartnerService', function (ApplicationService, $http, $q) {
         partners.push(partner);
     }
 
-    function allDone(promises, deferDone) {
+    function whenAllDone(promises, deferDone) {
         $q.all(promises).then(function () {
             deferDone.resolve();
         }, function () {
@@ -28,7 +28,7 @@ mfmApp.factory('PartnerService', function (ApplicationService, $http, $q) {
         ApplicationService.application.query(function (applications) {
             var promises = [];
             angular.forEach(applications, function (app) {
-                var deferred = $http.get('api/application/' + app.id + '/health');
+                var deferred = $http.get('api/partner', {params: {appId: app.id}});
                 deferred.then(function (response) {
                     var idx, data = response.data;
                     for (idx in data) {
@@ -39,12 +39,13 @@ mfmApp.factory('PartnerService', function (ApplicationService, $http, $q) {
                 });
                 promises.push(deferred);
             });
-            allDone(promises, deferDone);
+            whenAllDone(promises, deferDone);
         });
         return partners;
     }
 
     return {
-        refresh: refreshAll
+        refresh: refreshAll,
+        resource: $resource('api/partner/:id', {id: '@id'})
     };
 });

@@ -4,7 +4,9 @@ mfmApp.controller('PartnerController', function (PartnerService, $q) {
     var vm = this, allDone = $q.defer();
 
     allDone.promise.then(function () {
-        console.log("Saving");
+        angular.forEach(vm.partners, function (partner) {
+            PartnerService.resource.save(partner);
+        });
     });
 
     vm.partners = PartnerService.refresh(allDone);

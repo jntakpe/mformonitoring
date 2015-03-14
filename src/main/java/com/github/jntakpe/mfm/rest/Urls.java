@@ -11,6 +11,8 @@ public final class Urls {
 
     public static final String APPLICATION = API + "/application";
 
+    public static final String PARTNER = API + "/partner";
+
     private Urls() {
     }
 

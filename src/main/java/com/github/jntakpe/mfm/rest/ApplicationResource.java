@@ -1,19 +1,15 @@
 package com.github.jntakpe.mfm.rest;
 
 import com.github.jntakpe.mfm.domain.Application;
-import com.github.jntakpe.mfm.domain.Partner;
-import com.github.jntakpe.mfm.mapper.PartnerMapper;
 import com.github.jntakpe.mfm.service.ApplicationService;
 import com.github.jntakpe.mfm.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * Ressouce REST associé à une application
@@ -96,19 +92,4 @@ public class ApplicationResource {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    /**
-     * Récupère les informations sur le statut de l'application et de ces partenaires puis les met à jour
-     *
-     * @param id identifiant de l'application
-     * @return application avec les partenaires mis à jour
-     */
-    @RequestMapping(value = "/{id}/health", method = RequestMethod.GET)
-    public DeferredResult<ResponseEntity<Set<Partner>>> health(@PathVariable Long id) {
-        DeferredResult<ResponseEntity<Set<Partner>>> deferred = new DeferredResult<>();
-        Application app = applicationService.findByIdWithPartners(id);
-        partnerService.health(app.getUrl()).addCallback(
-                h -> deferred.setResult(new ResponseEntity<>(PartnerMapper.toSet(h.getBody(), app), HttpStatus.OK)),
-                h -> deferred.setResult(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)));
-        return deferred;
-    }
 }
