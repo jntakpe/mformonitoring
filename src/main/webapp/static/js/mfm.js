@@ -1,4 +1,4 @@
-var mfmApp = angular.module('mfmApp', ['ngMessages', 'ngResource', 'ui.router', 'ui.bootstrap']);
+var mfmApp = angular.module('mfmApp', ['ngMessages', 'ngResource', 'ui.router', 'ui.bootstrap', 'ui.utils']);
 
 mfmApp.config(function ($stateProvider, $urlRouterProvider) {
     "use strict";
@@ -15,7 +15,7 @@ mfmApp.config(function ($stateProvider, $urlRouterProvider) {
 
 });
 
-mfmApp.run(function ($rootScope, $state, $templateCache) {
+mfmApp.run(function ($rootScope, $state) {
     "use strict";
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {

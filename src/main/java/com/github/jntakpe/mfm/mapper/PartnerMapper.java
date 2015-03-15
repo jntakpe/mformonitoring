@@ -28,8 +28,15 @@ public final class PartnerMapper {
      */
     public static Set<Partner> toSet(HealthDTO health, Application application) {
         Set<Partner> partners = new HashSet<>();
-        partners.add(health.getSelCrmHealth());
-        partners.add(health.getSelClientHealth());
+        if (health.getSelClientHealth() != null) {
+            partners.add(health.getSelCrmHealth());
+        }
+        if (health.getSelClientHealth() != null) {
+            partners.add(health.getSelClientHealth());
+        }
+        if (health.getDatamart() != null) {
+            partners.add(health.getDatamart());
+        }
         return partners.stream()
                 .peek(p -> p.setApplications(Collections.singleton(application)))
                 .collect(Collectors.toSet());

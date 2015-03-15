@@ -9,12 +9,36 @@
 </div>
 <div class="container content">
     <div class="col-md-4 col-sm-6" ng-repeat="part in partner.partners">
-        <div class="service-block" ng-class="part.status == 'UP' ? 'service-block-u' : 'service-block-red'">
-            <i class="icon-custom icon-color-light rounded-x fa" ng-class="part.status == 'UP' ? 'fa-thumbs-o-up' : 'fa-thumbs-o-down'"></i>
+        <div class="service-block service-block-v3 rounded-2x"
+             ng-class="part.status == 'UP' ? 'service-block-u' : 'service-block-red'">
+            <i class="fa"
+               ng-class="part.status == 'UP' ? 'fa-thumbs-up' : 'fa-thumbs-down'"></i>
 
             <h2 class="heading-md">{{part.name}}</h2>
 
-            <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus</p>
+            <div class="row margin-bottom-20">
+                <div class="service-in"><h4>{{part.url}}</h4></div>
+            </div>
+
+            <div class="row margin-bottom-20">
+                <div class="service-in">
+                    <small>Applications</small>
+                    <div class="clearfix"></div>
+                    <span class="col-sm-4 label rounded" ng-repeat="app in part.applications | unique:'artifactId'">
+                        {{app.artifactId}}
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="service-in">
+                    <small>Environnements</small>
+                    <div class="clearfix"></div>
+                    <span class="col-sm-4 label rounded" ng-repeat="app in part.applications | unique:'environment'">
+                        {{app.environment}}
+                    </span>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

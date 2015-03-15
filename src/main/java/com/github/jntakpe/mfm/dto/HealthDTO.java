@@ -15,6 +15,8 @@ public class HealthDTO {
 
     private Partner selClientHealth;
 
+    private Partner datamart;
+
     public String getStatus() {
         return status;
     }
@@ -39,4 +41,11 @@ public class HealthDTO {
         this.selClientHealth = selClientHealth;
     }
 
+    public Partner getDatamart() {
+        return datamart;
+    }
+
+    public void setDatamart(Partner datamart) {
+        this.datamart = datamart;
+    }
 }

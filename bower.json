@@ -10,6 +10,7 @@
     "angular-resource": "latest",
     "angular-ui-router": "latest",
     "angular-bootstrap": "latest",
+    "angular-ui-utils": "latest",
     "swagger-ui": "latest"
   },
   "resolutions": {

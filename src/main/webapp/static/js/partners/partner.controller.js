@@ -1,4 +1,4 @@
-mfmApp.controller('PartnerController', function (PartnerService, $q) {
+mfmApp.controller('PartnerController', function (PartnerService, ApplicationService, $q) {
     "use strict";
 
     var vm = this, allDone = $q.defer();
@@ -10,4 +10,6 @@ mfmApp.controller('PartnerController', function (PartnerService, $q) {
     });
 
     vm.partners = PartnerService.refresh(allDone);
+
+    vm.appColor = ApplicationService.appColor;
 });

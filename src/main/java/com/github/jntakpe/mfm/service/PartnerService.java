@@ -59,8 +59,7 @@ public class PartnerService {
             return partnerRepository.save(partner);
         }
         Partner existing = opt.get();
-        existing.setId(partner.getId());
-        return partnerRepository.save(existing);
+        return existing.isSame(partner) ? existing : partnerRepository.save(partner);
     }
 
 }

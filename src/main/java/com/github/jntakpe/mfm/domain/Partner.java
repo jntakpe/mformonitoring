@@ -28,6 +28,16 @@ public class Partner extends GenericDomain {
             inverseJoinColumns = {@JoinColumn(referencedColumnName = "id", name = "application_id")})
     private Set<Application> applications = new HashSet<>();
 
+    /**
+     * Indique si le partenaire a été modifié (cad chgt de statut)
+     *
+     * @param partner partenaire a tester
+     * @return true si les partenaires sont identiques
+     */
+    public boolean isSame(Partner partner) {
+        return this.equals(partner) && status == partner.status && applications.equals(partner.applications);
+    }
+
     public String getName() {
         return name;
     }

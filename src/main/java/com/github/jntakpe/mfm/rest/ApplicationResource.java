@@ -2,7 +2,6 @@ package com.github.jntakpe.mfm.rest;
 
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.service.ApplicationService;
-import com.github.jntakpe.mfm.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +21,10 @@ public class ApplicationResource {
 
     private ApplicationService applicationService;
 
-    private PartnerService partnerService;
 
     @Autowired
-    public ApplicationResource(ApplicationService applicationService, PartnerService partnerService) {
+    public ApplicationResource(ApplicationService applicationService) {
         this.applicationService = applicationService;
-        this.partnerService = partnerService;
     }
 
     /**
