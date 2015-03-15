@@ -70,6 +70,14 @@ public class Partner extends GenericDomain {
         this.applications = applications;
     }
 
+    public void addApplication(Application application) {
+        applications.add(application);
+    }
+
+    public void removeApplication(Application application) {
+        applications.remove(application);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

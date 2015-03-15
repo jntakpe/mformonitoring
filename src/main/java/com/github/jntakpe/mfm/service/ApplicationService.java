@@ -93,8 +93,10 @@ public class ApplicationService {
      */
     @Transactional
     public void delete(Long id) {
-        LOG.info("Suppression de l'application id {}", id);
-        applicationRepository.delete(id);
+        Application app = findById(id);
+        LOG.info("Suppression de l'application", app);
+        app.getPartners().stream().forEach(p -> p.removeApplication(app));
+        applicationRepository.delete(app);
     }
 
     /**

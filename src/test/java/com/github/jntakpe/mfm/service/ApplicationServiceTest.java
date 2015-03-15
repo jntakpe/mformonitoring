@@ -3,6 +3,7 @@ package com.github.jntakpe.mfm.service;
 import com.github.jntakpe.mfm.MfmApp;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -104,6 +105,25 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         applicationService.delete(4L);
         assertThat(count()).isEqualTo(initCount - 1);
         assertThat(applicationRepository.findOne(4L)).isNull();
+    }
+
+    @Test
+    public void findById_shouldFind() {
+        Application app = applicationService.findById(1L);
+        assertThat(app).isNotNull();
+        assertThat(Hibernate.isInitialized(app.getPartners()));
+    }
+
+    @Test
+    public void findById_shouldNotFind() {
+        assertThat(applicationService.findById(666L)).isNull();
+    }
+
+    @Test
+    public void findByIdWithPartners_shouldBeInitialized() {
+        Application appWithPartners = applicationService.findByIdWithPartners(1L);
+        assertThat(appWithPartners).isNotNull();
+        assertThat(Hibernate.isInitialized(appWithPartners.getPartners())).isTrue();
     }
 
 }
