@@ -14,7 +14,7 @@ mfmApp.config(function ($stateProvider) {
 
     $stateProvider.state('applications.detail', {
         parent: 'site',
-        url: 'applications/:id',
+        abstract: true,
         views: {
             'content@': {
                 templateUrl: 'views/applications.detail.html',

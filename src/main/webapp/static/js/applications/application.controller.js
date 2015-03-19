@@ -1,6 +1,8 @@
 mfmApp.controller('ApplicationController', ApplicationController);
 mfmApp.controller('EditApplicationModalController', EditApplicationModalController);
 mfmApp.controller('RemoveApplicationModalController', RemoveApplicationModalController);
+mfmApp.controller('ApplicationDetailController', ApplicationDetailController);
+
 
 function ApplicationController(ApplicationService, PagingService, AlertService, $modal, $filter) {
     "use strict";
@@ -133,4 +135,9 @@ function RemoveApplicationModalController(ApplicationService, $modalInstance, ap
             $modalInstance.close(application);
         });
     };
+}
+
+function ApplicationDetailController($stateParams) {
+    "use strict";
+
 }

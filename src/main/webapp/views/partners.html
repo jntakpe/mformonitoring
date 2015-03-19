@@ -26,7 +26,7 @@
                     <div class="clearfix"></div>
                     <div class="col-sm-3" ng-repeat="app in part.applications | unique:'artifactId'">
                         <span class="label label-light rounded linked"
-                              ui-sref="applications.detail({id: app.id})">{{app.artifactId}}</span>
+                              ui-sref="applications.dashboard({id: app.id})">{{app.artifactId}}</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,8 @@
                     <small>Environnements</small>
                     <div class="clearfix"></div>
                     <div class="col-sm-4" ng-repeat="app in part.applications | unique:'environment'">
-                        <span class="label label-light rounded linked">{{app.environment}}</span>
+                        <span class="label label-light rounded linked"
+                              ui-sref="environnement({name: app.environment})">{{app.environment}}</span>
                     </div>
                 </div>
             </div>

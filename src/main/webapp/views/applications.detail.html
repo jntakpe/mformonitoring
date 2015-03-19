@@ -1,1 +1,29 @@
-<h1>Détail APP</h1>
+<div class="breadcrumbs">
+    <div class="container">
+        <h1 class="pull-left">Tableau de bord</h1>
+        <ul class="pull-right breadcrumb">
+            <li><a ui-sref="home">Home</a></li>
+            <li><a ui-sref="applications">Applications</a></li>
+            <li class="active">Tableau de bord</li>
+        </ul>
+    </div>
+</div>
+<div class="container content">
+    <div class="row">
+        <div class="col-md-2 md-margin-bottom-30">
+            <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+                <li class="list-group-item active">
+                    <a>Dashboard</a>
+                </li>
+                <li class="list-group-item">
+                    <a>Statistiques</a>
+                </li>
+                <li class="list-group-item">
+                    <a>Propriétés</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10" ui-view="detail">
+        </div>
+    </div>
+</div>
