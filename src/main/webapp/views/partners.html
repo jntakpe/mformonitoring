@@ -24,18 +24,19 @@
                 <div class="service-in">
                     <small>Applications</small>
                     <div class="clearfix"></div>
-                    <span class="col-sm-4 label rounded" ng-repeat="app in part.applications | unique:'artifactId'">
-                        {{app.artifactId}}
-                    </span>
+                    <div class="col-sm-3" ng-repeat="app in part.applications | unique:'artifactId'">
+                        <span class="label label-light rounded linked"
+                              ui-sref="applications.detail({id: app.id})">{{app.artifactId}}</span>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="service-in">
                     <small>Environnements</small>
                     <div class="clearfix"></div>
-                    <span class="col-sm-4 label rounded" ng-repeat="app in part.applications | unique:'environment'">
-                        {{app.environment}}
-                    </span>
+                    <div class="col-sm-4" ng-repeat="app in part.applications | unique:'environment'">
+                        <span class="label label-light rounded linked">{{app.environment}}</span>
+                    </div>
                 </div>
             </div>
 

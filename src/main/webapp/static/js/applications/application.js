@@ -12,4 +12,15 @@ mfmApp.config(function ($stateProvider) {
         }
     });
 
+    $stateProvider.state('applications.detail', {
+        parent: 'site',
+        url: 'applications/:id',
+        views: {
+            'content@': {
+                templateUrl: 'views/applications.detail.html',
+                controller: 'ApplicationDetailController as appDetail'
+            }
+        }
+    });
+
 });

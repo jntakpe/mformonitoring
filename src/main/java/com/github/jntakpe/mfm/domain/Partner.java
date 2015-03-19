@@ -35,7 +35,7 @@ public class Partner extends GenericDomain {
      * @return true si les partenaires sont identiques
      */
     public boolean isSame(Partner partner) {
-        return this.equals(partner) && status == partner.status && applications.equals(partner.applications);
+        return this.equals(partner) && status == partner.status;
     }
 
     public String getName() {

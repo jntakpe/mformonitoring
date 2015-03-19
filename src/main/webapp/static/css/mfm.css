@@ -69,3 +69,7 @@
 #active-toggle {
     margin-right: 30px;
 }
+
+.linked {
+    cursor: pointer;
+}
