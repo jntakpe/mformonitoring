@@ -66,6 +66,17 @@ public class ApplicationResource {
     }
 
     /**
+     * Récupère une application à partir de son identifiant
+     *
+     * @param id identifiant de l'application
+     * @return l'application correspondante à l'identifiant
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Application> find(@PathVariable Long id) {
+        return new ResponseEntity<>(applicationService.findById(id), HttpStatus.OK);
+    }
+
+    /**
      * Modification d'une application
      *
      * @param id          identifiant de l'application
