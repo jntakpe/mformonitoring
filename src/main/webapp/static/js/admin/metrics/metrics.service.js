@@ -1,6 +1,7 @@
 mfmApp.factory('Metrics', Metrics);
 
 function Metrics($http) {
+    "use strict";
 
     function resourceStats(stats) {
         var result = {};
@@ -13,8 +14,9 @@ function Metrics($http) {
     }
 
     return {
-        findMetrics: function () {
-            return $http.get('manage/metrics').then(function (response) {
+        findMetrics: function (url) {
+            var endpoint = url || 'manage/metrics';
+            return $http.get(endpoint).then(function (response) {
                 return response.data;
             });
         },
@@ -26,12 +28,12 @@ function Metrics($http) {
         threadDump: function () {
             return $http.get('manage/dump').then(function (response) {
                 return response.data;
-            })
+            });
         },
         extractStats: function (stats) {
             return {
                 resource: resourceStats(stats)
-            }
+            };
         }
     };
 }
