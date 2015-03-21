@@ -84,7 +84,7 @@ public class ApplicationResource {
      * @return code HTTP 200 si la suppression est effectuée
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable String id) {
         applicationService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }

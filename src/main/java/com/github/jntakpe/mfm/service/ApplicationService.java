@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -82,7 +81,7 @@ public class ApplicationService {
      *
      * @param id identifiant de l'application à supprimer
      */
-    public void delete(Long id) {
+    public void delete(String id) {
         Application app = findById(id);
         LOG.info("Suppression de l'application", app);
         app.getPartners().stream().forEach(p -> p.removeApplication(app));
@@ -95,7 +94,7 @@ public class ApplicationService {
      * @param id identifiant de l'application
      * @return l'application correspondante à l'identifiant
      */
-    public Application findById(Long id) {
+    public Application findById(String id) {
         LOG.debug("Recherche de l'application id {}", id);
         return applicationRepository.findOne(id);
     }
@@ -106,7 +105,7 @@ public class ApplicationService {
      * @param id identifiant de l'application
      * @return l'application correspondante à l'identifiant et les partenaires associés
      */
-    public Application findByIdWithPartners(Long id) {
+    public Application findByIdWithPartners(String id) {
         Application application = findById(id);
         return application;
     }

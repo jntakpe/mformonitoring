@@ -9,6 +9,6 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @author jntakpe
  */
 @NoRepositoryBean
-public interface GenericRepository<T> extends MongoRepository<T, Long> {
+public interface GenericRepository<T> extends MongoRepository<T, String> {
 
 }

@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Bean mappand l'identifiant technique et la version
@@ -17,10 +18,10 @@ public abstract class GenericDomain implements Serializable {
     private String id;
 
     @CreatedDate
-    private String createdAt;
+    private Date createdAt;
 
     @LastModifiedDate
-    private String lastModifiedAt;
+    private Date lastModifiedAt;
 
     public String getId() {
         return id;
@@ -30,19 +31,19 @@ public abstract class GenericDomain implements Serializable {
         this.id = id;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getLastModifiedAt() {
+    public Date getLastModifiedAt() {
         return lastModifiedAt;
     }
 
-    public void setLastModifiedAt(String lastModifiedAt) {
+    public void setLastModifiedAt(Date lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
 }

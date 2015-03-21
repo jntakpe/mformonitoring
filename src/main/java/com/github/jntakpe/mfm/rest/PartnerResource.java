@@ -39,7 +39,7 @@ public class PartnerResource {
      * @return application avec les partenaires mis à jour
      */
     @RequestMapping(method = RequestMethod.GET)
-    public DeferredResult<ResponseEntity<Set<Partner>>> health(@RequestParam Long appId) {
+    public DeferredResult<ResponseEntity<Set<Partner>>> health(@RequestParam String appId) {
         DeferredResult<ResponseEntity<Set<Partner>>> deferred = new DeferredResult<>();
         Application app = applicationService.findByIdWithPartners(appId);
         partnerService.health(app.getUrl()).addCallback(

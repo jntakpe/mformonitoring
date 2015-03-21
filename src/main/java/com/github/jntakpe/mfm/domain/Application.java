@@ -21,26 +21,20 @@ public class Application extends GenericDomain {
     @NotNull
     private String name;
 
-    @NotNull
     private String groupId;
 
-    @NotNull
     private String artifactId;
 
-    @NotNull
     private String version;
 
-    @NotNull
     private String environment;
 
-    @NotNull
     private boolean active;
 
     @NotNull
     @Indexed(unique = true)
     private String url;
 
-    @NotNull
     private String status;
 
     @DBRef(lazy = true)
