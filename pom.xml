@@ -15,15 +15,14 @@
         <start-class>com.github.jntakpe.mfm.MfmApp</start-class>
         <java.version>1.8</java.version>
         <spring-boot.version>1.2.2.RELEASE</spring-boot.version>
+        <spring-data-mongo.version>1.7.0.RC1</spring-data-mongo.version>
         <commons-lang3.version>3.3.2</commons-lang3.version>
-        <postgres.version>9.3-1100-jdbc41</postgres.version>
-        <hazelcast.version>3.4</hazelcast.version>
-        <javassist.version>3.18.2-GA</javassist.version>
         <testng.version>6.8.8</testng.version>
         <assertj.version>1.2.0</assertj.version>
         <swagger-springmvc.version>0.9.5</swagger-springmvc.version>
         <metrics-spring.version>3.0.3</metrics-spring.version>
         <http-async-client.version>4.0.2</http-async-client.version>
+        <mongeez.version>0.9.4</mongeez.version>
     </properties>
 
     <parent>
@@ -44,7 +43,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -55,6 +54,11 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.mongeez</groupId>
+            <artifactId>mongeez</artifactId>
+            <version>${mongeez.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpasyncclient</artifactId>
             <version>${http-async-client.version}</version>
@@ -63,11 +67,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgres.version}</version>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -138,21 +137,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-            <version>${hazelcast.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-hibernate4</artifactId>
-            <version>${hazelcast.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-spring</artifactId>
-            <version>${hazelcast.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.mangofactory</groupId>
             <artifactId>swagger-springmvc</artifactId>
             <version>${swagger-springmvc.version}</version>
@@ -212,4 +196,14 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

@@ -2,7 +2,6 @@ package com.github.jntakpe.mfm.service;
 
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +20,16 @@ import java.util.Optional;
 @Service
 public class ApplicationService {
 
-    public static final String APPS_CACHE = "apps";
-
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationService.class);
 
     private RestTemplate restTemplate;
 
     private ApplicationRepository applicationRepository;
 
-    private PartnerService partnerService;
-
     @Autowired
-    public ApplicationService(RestTemplate restTemplate, ApplicationRepository applicationRepository, PartnerService partnerService) {
+    public ApplicationService(RestTemplate restTemplate, ApplicationRepository applicationRepository) {
         this.restTemplate = restTemplate;
         this.applicationRepository = applicationRepository;
-        this.partnerService = partnerService;
     }
 
     /**
@@ -56,7 +50,6 @@ public class ApplicationService {
      *
      * @return liste des applications
      */
-    @Transactional(readOnly = true)
     public List<Application> findAll() {
         LOG.debug("Récupération de la liste des applications");
         return applicationRepository.findAll();
@@ -68,7 +61,6 @@ public class ApplicationService {
      * @param url url de l'application
      * @return l'application correspondante à l'url
      */
-    @Transactional(readOnly = true)
     public Optional<Application> findByUrl(String url) {
         LOG.debug("Recherche d'une application possédant url {}", url);
         return applicationRepository.findByUrl(url);
@@ -80,7 +72,6 @@ public class ApplicationService {
      * @param application application à enregistrer
      * @return application enregistrée
      */
-    @Transactional
     public Application save(Application application) {
         LOG.info("Enregistrement de l'application {}", application);
         return applicationRepository.save(application);
@@ -91,7 +82,6 @@ public class ApplicationService {
      *
      * @param id identifiant de l'application à supprimer
      */
-    @Transactional
     public void delete(Long id) {
         Application app = findById(id);
         LOG.info("Suppression de l'application", app);
@@ -105,7 +95,6 @@ public class ApplicationService {
      * @param id identifiant de l'application
      * @return l'application correspondante à l'identifiant
      */
-    @Transactional(readOnly = true)
     public Application findById(Long id) {
         LOG.debug("Recherche de l'application id {}", id);
         return applicationRepository.findOne(id);
@@ -117,10 +106,8 @@ public class ApplicationService {
      * @param id identifiant de l'application
      * @return l'application correspondante à l'identifiant et les partenaires associés
      */
-    @Transactional(readOnly = true)
     public Application findByIdWithPartners(Long id) {
         Application application = findById(id);
-        Hibernate.initialize(application.getPartners());
         return application;
     }
 

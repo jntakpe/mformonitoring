@@ -1,9 +1,9 @@
 package com.github.jntakpe.mfm.domain;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -11,15 +11,10 @@ import java.io.Serializable;
  *
  * @author jntakpe
  */
-@MappedSuperclass
 public abstract class GenericDomain implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Version
-    private Integer lock;
+    private String id;
 
     @CreatedDate
     private String createdAt;
@@ -27,20 +22,12 @@ public abstract class GenericDomain implements Serializable {
     @LastModifiedDate
     private String lastModifiedAt;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Integer getLock() {
-        return lock;
-    }
-
-    public void setLock(Integer lock) {
-        this.lock = lock;
     }
 
     public String getCreatedAt() {

@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Propriétés associés au requêtes HTTP
+ * Propriétés associés aux requêtes HTTP
  *
  * @author jntakpe
  */

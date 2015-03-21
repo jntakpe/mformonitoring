@@ -1,10 +1,11 @@
 package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,30 +15,35 @@ import java.util.Set;
  *
  * @author jntakpe
  */
-@Entity
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Document
 public class Application extends GenericDomain {
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String groupId;
 
+    @NotNull
     private String artifactId;
 
+    @NotNull
     private String version;
 
-    @Enumerated(EnumType.STRING)
-    private Environment environment;
+    @NotNull
+    private String environment;
 
+    @NotNull
     private boolean active;
 
-    @Column(unique = true)
+    @NotNull
+    @Indexed(unique = true)
     private String url;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    @NotNull
+    private String status;
 
-    @ManyToMany(mappedBy = "applications")
+    @DBRef(lazy = true)
     private Set<Partner> partners = new HashSet<>();
 
     public String getName() {
@@ -72,11 +78,11 @@ public class Application extends GenericDomain {
         this.version = version;
     }
 
-    public Environment getEnvironment() {
+    public String getEnvironment() {
         return environment;
     }
 
-    public void setEnvironment(Environment environment) {
+    public void setEnvironment(String environment) {
         this.environment = environment;
     }
 
@@ -96,11 +102,11 @@ public class Application extends GenericDomain {
         this.url = url;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

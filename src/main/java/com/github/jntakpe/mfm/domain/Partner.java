@@ -1,6 +1,8 @@
 package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,20 +14,16 @@ import java.util.Set;
  *
  * @author jntakpe
  */
-@Entity
+@Document
 public class Partner extends GenericDomain {
 
     private String name;
 
-    @Column(unique = true)
     private String url;
 
-    @Enumerated(EnumType.STRING)
     private Status status;
 
-    @ManyToMany
-    @JoinTable(name = "partner_application", joinColumns = {@JoinColumn(referencedColumnName = "id", name = "partner_id")},
-            inverseJoinColumns = {@JoinColumn(referencedColumnName = "id", name = "application_id")})
+    @DBRef(lazy = true)
     private Set<Application> applications = new HashSet<>();
 
     /**
