@@ -22,7 +22,6 @@
         <swagger-springmvc.version>0.9.5</swagger-springmvc.version>
         <metrics-spring.version>3.0.3</metrics-spring.version>
         <http-async-client.version>4.0.2</http-async-client.version>
-        <mongeez.version>0.9.4</mongeez.version>
     </properties>
 
     <parent>
@@ -52,11 +51,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mongeez</groupId>
-            <artifactId>mongeez</artifactId>
-            <version>${mongeez.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
