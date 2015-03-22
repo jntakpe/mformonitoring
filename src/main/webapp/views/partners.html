@@ -26,7 +26,7 @@
                     <div class="clearfix"></div>
                     <div class="col-sm-3" ng-repeat="app in part.applications | unique:'artifactId'">
                         <span class="label label-light rounded linked"
-                              ui-sref="applications.dashboard({id: app.id})">{{app.artifactId}}</span>
+                              ui-sref="applications.detail.dashboard({id: app.id})">{{app.artifactId}}</span>
                     </div>
                 </div>
             </div>

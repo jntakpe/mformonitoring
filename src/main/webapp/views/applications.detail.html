@@ -12,14 +12,17 @@
     <div class="row">
         <div class="col-md-2 md-margin-bottom-30">
             <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-                <li class="list-group-item active">
-                    <a>Dashboard</a>
+                <li class="list-group-item" ui-sref-active="active">
+                    <a ui-sref="applications.detail.dashboard({id: appDetail.application.id})">
+                        <i class="fa fa-dashboard"></i> Dashboard</a>
                 </li>
-                <li class="list-group-item">
-                    <a>Statistiques</a>
+                <li class="list-group-item" ui-sref-active="active">
+                    <a ui-sref="applications.detail.stats({id: appDetail.application.id})">
+                        <i class="fa fa-bar-chart"></i> Statistiques</a>
                 </li>
-                <li class="list-group-item">
-                    <a>Propriétés</a>
+                <li class="list-group-item" ui-sref-active="active">
+                    <a ui-sref="applications.detail.properties({id: appDetail.application.id})">
+                        <i class="fa fa-cogs"></i> Propriétés</a>
                 </li>
             </ul>
         </div>

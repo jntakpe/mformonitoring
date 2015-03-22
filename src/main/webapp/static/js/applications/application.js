@@ -14,11 +14,16 @@ mfmApp.config(function ($stateProvider) {
 
     $stateProvider.state('applications.detail', {
         parent: 'site',
-        abstract: true,
+        url: '/applications/:id',
         views: {
             'content@': {
                 templateUrl: 'views/applications.detail.html',
                 controller: 'ApplicationDetailController as appDetail'
+            }
+        },
+        resolve: {
+            application: function (ApplicationService, $stateParams) {
+                return ApplicationService.application.get({id: $stateParams.id}).$promise;
             }
         }
     });

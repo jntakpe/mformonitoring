@@ -71,7 +71,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="app in application.applications">
-            <td class="col-md-3"><a ui-sref="applications.dashboard({id: app.id})">{{app.name}}</a></td>
+            <td class="col-md-3"><a ui-sref="applications.detail.dashboard({id: app.id})">{{app.name}}</a></td>
             <td class="col-md-2">{{app.environment}}</td>
             <td class="col-md-2">{{app.groupId}}</td>
             <td class="col-md-2">{{app.artifactId}}</td>

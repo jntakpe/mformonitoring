@@ -24,8 +24,7 @@ public class MetricsResource {
 
     /**
      * Recherche de métriques à l'url donnée
-     *
-     * @param id  identifiant de l'application
+     * @param id identifiant de l'application
      * @param url url des métriques
      * @return JSON de métriques
      */
