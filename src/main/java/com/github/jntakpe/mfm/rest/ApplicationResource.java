@@ -72,7 +72,7 @@ public class ApplicationResource {
      * @return l'application correspondante à l'identifiant
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Application> find(@PathVariable Long id) {
+    public ResponseEntity<Application> find(@PathVariable String id) {
         return new ResponseEntity<>(applicationService.findById(id), HttpStatus.OK);
     }
 

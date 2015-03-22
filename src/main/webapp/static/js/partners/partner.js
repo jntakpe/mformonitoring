@@ -3,7 +3,7 @@ mfmApp.config(function ($stateProvider) {
 
     $stateProvider.state('partners', {
         parent: 'site',
-        url: 'partners',
+        url: '/partners',
         views: {
             'content@': {
                 templateUrl: 'views/partners.html',

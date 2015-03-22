@@ -2,6 +2,7 @@ package com.github.jntakpe.mfm.service;
 
 import com.github.jntakpe.mfm.MfmApp;
 import com.github.jntakpe.mfm.domain.Application;
+import com.github.jntakpe.mfm.domain.Environment;
 import com.github.jntakpe.mfm.domain.Partner;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import com.mongodb.Mongo;
@@ -15,7 +16,6 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
@@ -56,6 +56,29 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
 
     private String appId;
 
+    public static Set<Application> data(List<Partner> partners) {
+        Set<Application> apps = new HashSet<>();
+        Application eers = new Application();
+        eers.setName("Entrée en relation");
+        eers.setUrl("https://fra.herokuapp.com/rest/manage/health");
+        eers.setEnvironment(Environment.DEVELOPPEMENT);
+        eers.setGroupId("com.bforbank");
+        eers.setArtifactId("eers");
+        eers.setVersion("0.0.1-SNAPSHOT");
+        eers.setPartners(new HashSet<>(partners));
+        apps.add(eers);
+        Application ec = new Application();
+        ec.setName("Espace client");
+        ec.setUrl("https://fra.herokuapp.com/rest/manage/health3");
+        ec.setEnvironment(Environment.DEVELOPPEMENT);
+        ec.setGroupId("com.bforbank");
+        ec.setArtifactId("ec");
+        ec.setVersion("0.0.1-SNAPSHOT");
+        ec.setPartners(new HashSet<>(partners));
+        apps.add(ec);
+        return apps;
+    }
+
     @BeforeClass
     public void setUp() throws Exception {
         mongoOperations = new MongoTemplate(mongo, mongoProperties.getDatabase());
@@ -73,29 +96,6 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         appId = mongoOperations.find(Query.query(where("artifactId").is("eers")), Application.class).get(0).getId();
         initCount = count();
         assertThat(initCount).isNotZero();
-    }
-
-    public static Set<Application> data(List<Partner> partners) {
-        Set<Application> apps = new HashSet<>();
-        Application eers = new Application();
-        eers.setName("Entrée en relation");
-        eers.setUrl("https://fra.herokuapp.com/rest/manage/health");
-        eers.setEnvironment("DEVELOPPEMENT");
-        eers.setGroupId("com.bforbank");
-        eers.setArtifactId("eers");
-        eers.setVersion("0.0.1-SNAPSHOT");
-        eers.setPartners(new HashSet<>(partners));
-        apps.add(eers);
-        Application ec = new Application();
-        ec.setName("Espace client");
-        ec.setUrl("https://fra.herokuapp.com/rest/manage/health3");
-        ec.setEnvironment("DEVELOPPEMENT");
-        ec.setGroupId("com.bforbank");
-        ec.setArtifactId("ec");
-        ec.setVersion("0.0.1-SNAPSHOT");
-        ec.setPartners(new HashSet<>(partners));
-        apps.add(ec);
-        return apps;
     }
 
     private Long count() {

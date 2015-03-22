@@ -1,6 +1,6 @@
-mfmApp.factory('Metrics', Metrics);
+mfmApp.factory('MetricsService', MetricsService);
 
-function Metrics($http) {
+function MetricsService($http) {
     "use strict";
 
     function resourceStats(stats) {
@@ -14,11 +14,9 @@ function Metrics($http) {
     }
 
     return {
-        findMetrics: function (url) {
-            var endpoint = url || 'manage/metrics';
-            return $http.get(endpoint).then(function (response) {
-                return response.data;
-            });
+        find: $http.get('manage/metrics'),
+        findExternal: function (id, url) {
+            return $http.get('api/application/' + id + '/metrics', {params: {url: url}});
         },
         checkHealth: function () {
             return $http.get('manage/health').then(function (response) {

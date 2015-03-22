@@ -1,6 +1,7 @@
 package com.github.jntakpe.mfm.config;
 
 import com.github.jntakpe.mfm.domain.Application;
+import com.github.jntakpe.mfm.domain.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class DatabaseConfig {
         Application eersDev = new Application();
         eersDev.setName("Entrée en relation");
         eersDev.setUrl("https://fra.herokuapp.com/rest/manage/health");
-        eersDev.setEnvironment("DEVELOPPEMENT");
+        eersDev.setEnvironment(Environment.DEVELOPPEMENT);
         eersDev.setGroupId("com.bforbank");
         eersDev.setArtifactId("eers");
         eersDev.setVersion("0.0.1-SNAPSHOT");
@@ -58,7 +59,7 @@ public class DatabaseConfig {
         Application eersAssemb = new Application();
         eersAssemb.setName("Entrée en relation");
         eersAssemb.setUrl("https://fra.herokuapp.com/rest/manage/health2");
-        eersAssemb.setEnvironment("ASSEMBLAGE");
+        eersAssemb.setEnvironment(Environment.ASSEMBLAGE);
         eersAssemb.setGroupId("com.bforbank");
         eersAssemb.setArtifactId("eers");
         eersAssemb.setVersion("0.0.1-SNAPSHOT");
@@ -66,7 +67,7 @@ public class DatabaseConfig {
         Application ec = new Application();
         ec.setName("Espace client");
         ec.setUrl("https://fra.herokuapp.com/rest/manage/health3");
-        ec.setEnvironment("ASSEMBLAGE");
+        ec.setEnvironment(Environment.ASSEMBLAGE);
         ec.setGroupId("com.bforbank");
         ec.setArtifactId("ec");
         ec.setVersion("0.0.1-SNAPSHOT");
@@ -74,7 +75,7 @@ public class DatabaseConfig {
         Application bss = new Application();
         bss.setName("BSS");
         bss.setUrl("https://fra.herokuapp.com/rest/manage/health4");
-        bss.setEnvironment("ASSEMBLAGE");
+        bss.setEnvironment(Environment.ASSEMBLAGE);
         bss.setGroupId("com.bforbank");
         bss.setArtifactId("bss");
         bss.setVersion("0.0.1-SNAPSHOT");

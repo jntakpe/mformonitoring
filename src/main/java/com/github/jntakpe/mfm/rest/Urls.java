@@ -13,6 +13,7 @@ public final class Urls {
 
     public static final String PARTNER = API + "/partner";
 
+    public static final String METRICS = APPLICATION + "/{id}/metrics";
     private Urls() {
     }
 

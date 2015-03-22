@@ -72,12 +72,12 @@ public class Application extends GenericDomain {
         this.version = version;
     }
 
-    public String getEnvironment() {
-        return environment;
+    public Environment getEnvironment() {
+        return Environment.valueOf(environment);
     }
 
-    public void setEnvironment(String environment) {
-        this.environment = environment;
+    public void setEnvironment(Environment environment) {
+        this.environment = environment.name();
     }
 
     public boolean isActive() {

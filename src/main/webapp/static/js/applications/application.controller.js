@@ -137,7 +137,6 @@ function RemoveApplicationModalController(ApplicationService, $modalInstance, ap
     };
 }
 
-function ApplicationDetailController($stateParams) {
+function ApplicationDetailController() {
     "use strict";
-
 }
