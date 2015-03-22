@@ -2,6 +2,7 @@ package com.github.jntakpe.mfm.service;
 
 import com.github.jntakpe.mfm.MfmApp;
 import com.github.jntakpe.mfm.domain.Application;
+import com.github.jntakpe.mfm.domain.Partner;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import com.mongodb.Mongo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -60,6 +59,9 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
     @BeforeClass
     public void setUp() throws Exception {
         mongoOperations = new MongoTemplate(mongo, mongoProperties.getDatabase());
+        mongoOperations.dropCollection(Partner.class);
+        mongoOperations.createCollection(Partner.class);
+        mongoOperations.insert(PartenaireServiceTest.data(Collections.emptyList()), Partner.class);
     }
 
     @BeforeMethod
@@ -67,14 +69,14 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         mongoOperations.dropCollection(Application.class);
         mongoOperations.createCollection(Application.class);
         mongoOperations.indexOps(Application.class).ensureIndex(new Index().unique().on("url", Sort.Direction.ASC));
-        mongoOperations.insert(data(), Application.class);
+        mongoOperations.insert(data(mongoOperations.findAll(Partner.class)), Application.class);
         appId = mongoOperations.find(Query.query(where("artifactId").is("eers")), Application.class).get(0).getId();
         initCount = count();
         assertThat(initCount).isNotZero();
     }
 
-    private List<Application> data() {
-        List<Application> apps = new ArrayList<>();
+    public static Set<Application> data(List<Partner> partners) {
+        Set<Application> apps = new HashSet<>();
         Application eers = new Application();
         eers.setName("Entrée en relation");
         eers.setUrl("https://fra.herokuapp.com/rest/manage/health");
@@ -82,6 +84,8 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         eers.setGroupId("com.bforbank");
         eers.setArtifactId("eers");
         eers.setVersion("0.0.1-SNAPSHOT");
+        eers.setPartners(new HashSet<>(partners));
+        apps.add(eers);
         Application ec = new Application();
         ec.setName("Espace client");
         ec.setUrl("https://fra.herokuapp.com/rest/manage/health3");
@@ -89,7 +93,7 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         ec.setGroupId("com.bforbank");
         ec.setArtifactId("ec");
         ec.setVersion("0.0.1-SNAPSHOT");
-        apps.add(eers);
+        ec.setPartners(new HashSet<>(partners));
         apps.add(ec);
         return apps;
     }

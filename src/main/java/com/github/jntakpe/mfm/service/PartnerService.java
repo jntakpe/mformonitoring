@@ -51,7 +51,6 @@ public class PartnerService {
      * @param partner partenaire à enregistrer
      * @return partenaire enregistré
      */
-    @Transactional
     public Partner save(Partner partner) {
         LOG.info("Enregistrement du partenaire {}", partner);
         Optional<Partner> opt = partnerRepository.findByUrl(partner.getUrl());

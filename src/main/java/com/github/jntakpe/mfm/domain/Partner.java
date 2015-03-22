@@ -1,10 +1,10 @@
 package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -21,7 +21,7 @@ public class Partner extends GenericDomain {
 
     private String url;
 
-    private Status status;
+    private String status;
 
     @DBRef(lazy = true)
     private Set<Application> applications = new HashSet<>();
@@ -33,7 +33,7 @@ public class Partner extends GenericDomain {
      * @return true si les partenaires sont identiques
      */
     public boolean isSame(Partner partner) {
-        return this.equals(partner) && status == partner.status;
+        return this.equals(partner) && status.equals(partner.status);
     }
 
     public String getName() {
@@ -52,11 +52,11 @@ public class Partner extends GenericDomain {
         this.url = url;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -80,21 +80,17 @@ public class Partner extends GenericDomain {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Partner that = (Partner) o;
-        return Objects.equals(url, that.url);
+
+        Partner partner = (Partner) o;
+
+        return !(name != null ? !name.equals(partner.name) : partner.name != null) && !(url != null ? !url.equals(partner.url) : partner.url != null);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("status", status)
-                .append("url", url)
-                .append("name", name)
-                .toString();
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        return result;
     }
 }
