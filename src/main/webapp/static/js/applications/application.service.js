@@ -21,7 +21,7 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
     function stateLabel(state) {
         var name = state.current.name;
         switch (name) {
-            case 'applications.detail.stats':
+            case 'applications.detail.controllers':
                 return 'Statistiques';
             case 'applications.detail.properties':
                 return 'Paramétrage';

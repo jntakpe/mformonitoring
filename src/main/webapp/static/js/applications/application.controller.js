@@ -144,4 +144,7 @@ function ApplicationDetailController(ApplicationService, $state, application) {
     vm.application = application;
     vm.label = ApplicationService.stateLabel($state);
     vm.readableName = ApplicationService.readableName(application);
+    vm.refresh = function () {
+        $state.go($state.current, {}, {reload: true});
+    };
 }
