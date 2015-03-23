@@ -270,7 +270,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="(k, v) in metrics.stats.resource">
+            <tr ng-repeat="(k, v) in metrics.stats">
                 <td>{{k}}</td>
                 <td class="text-right">{{v.count}}</td>
                 <td class="text-right">{{v.mean * 1000 | number:0}}</td>

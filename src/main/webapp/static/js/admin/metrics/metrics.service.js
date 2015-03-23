@@ -29,9 +29,7 @@ function MetricsService($http) {
             });
         },
         extractStats: function (stats) {
-            return {
-                resource: resourceStats(stats)
-            };
+            return resourceStats(stats);
         }
     };
 }

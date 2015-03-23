@@ -4,7 +4,7 @@ mfmApp.controller('DashboardController', function (application, MetricsService) 
     var vm = this;
     vm.data = {};
     vm.refresh = function () {
-        MetricsService.findExternal(application.id, 'https://fra.herokuapp.com/rest/eers/manage/metrics').success(function (response) {
+        MetricsService.findExternal(application.id, 'http://localhost:9080/manage/metrics').success(function (response) {
             vm.data = response;
         });
     };
