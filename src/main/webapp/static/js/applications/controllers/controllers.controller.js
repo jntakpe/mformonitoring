@@ -3,7 +3,7 @@ mfmApp.controller('ControllersController', function (application, MetricsService
 
     var vm = this;
     vm.stats = {};
-    MetricsService.findExternal(application.id, 'http://localhost:9080/manage/metrics').success(function (response) {
+    MetricsService.findExternal(application.id, 'http://localhost:8080/manage/metrics').success(function (response) {
         vm.stats = MetricsService.extractStats(response);
     });
 });

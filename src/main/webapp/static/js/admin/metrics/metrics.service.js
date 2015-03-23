@@ -6,7 +6,7 @@ function MetricsService($http) {
     function resourceStats(stats) {
         var result = {};
         angular.forEach(stats.timers, function (value, key) {
-            if (key.indexOf('com.github.jntakpe.qpq.web') !== -1) {
+            if (key.indexOf('Controller') !== -1 || key.indexOf('Resource') !== -1) {
                 result[key] = value;
             }
         });
