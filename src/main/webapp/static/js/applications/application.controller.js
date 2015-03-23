@@ -143,4 +143,5 @@ function ApplicationDetailController(ApplicationService, $state, application) {
     var vm = this;
     vm.application = application;
     vm.label = ApplicationService.stateLabel($state);
+    vm.readableName = ApplicationService.readableName(application);
 }

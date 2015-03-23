@@ -30,10 +30,15 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
         }
     }
 
+    function readableName(application) {
+        return application.artifactId === 'bss' ? application.name : 'l\'' + application.name;
+    }
+
     return {
         application: $resource('api/application/:id', {id: '@id'}, {update: {method: 'PUT'}}),
         check: check,
         remove: remove,
-        stateLabel: stateLabel
+        stateLabel: stateLabel,
+        readableName: readableName
     };
 });
