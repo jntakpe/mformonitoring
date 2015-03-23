@@ -1,6 +1,6 @@
-<h3>HTTP requests (events per second)</h3>
+<h3>Requêtes HTTP (nombre par secondes)</h3>
 
-<p>Active requests
+<p>Requêtes actives
     <b>{{dashboard.data.counters['com.codahale.metrics.servlet.InstrumentedFilter.activeRequests'].count |
         number:0}}</b>
     - Total requests <b>{{dashboard.data.timers['com.codahale.metrics.servlet.InstrumentedFilter.requests'].count |
@@ -120,7 +120,7 @@
 </div>
 
 
-<h3>DataSource statistics</h3>
+<h3>Statistiques du pool de connexion de la base de données</h3>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -167,7 +167,7 @@
     </table>
 </div>
 
-<h3>JVM Metrics</h3>
+<h3>Métriques de la JVM</h3>
 
 <div class="row">
     <div class="col-md-4">
@@ -286,37 +286,4 @@
             <div class="col-md-3 text-right">{{dashboard.data.gauges['jvm.garbage.PS-Scavenge.time'].value}}ms</div>
         </div>
     </div>
-</div>
-
-<h3>Resource usage statistics (time in millisecond)</h3>
-
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Resource name</th>
-            <th class="text-right">Count</th>
-            <th class="text-right">Mean</th>
-            <th class="text-right">Min</th>
-            <th class="text-right">p50</th>
-            <th class="text-right">p75</th>
-            <th class="text-right">p95</th>
-            <th class="text-right">p99</th>
-            <th class="text-right">Max</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="(k, v) in metrics.stats.resource">
-            <td>{{k}}</td>
-            <td class="text-right">{{v.count}}</td>
-            <td class="text-right">{{v.mean * 1000 | number:0}}</td>
-            <td class="text-right">{{v.min * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p50 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p75 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p95 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p99 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.max * 1000 | number:0}}</td>
-        </tr>
-        </tbody>
-    </table>
 </div>
