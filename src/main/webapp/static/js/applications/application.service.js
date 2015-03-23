@@ -18,9 +18,22 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
         }
     }
 
+    function stateLabel(state) {
+        var name = state.current.name;
+        switch (name) {
+            case 'applications.detail.stats':
+                return 'Statistiques';
+            case 'applications.detail.properties':
+                return 'Paramétrage';
+            default:
+                return 'Tableau de bord';
+        }
+    }
+
     return {
         application: $resource('api/application/:id', {id: '@id'}, {update: {method: 'PUT'}}),
         check: check,
-        remove: remove
+        remove: remove,
+        stateLabel: stateLabel
     };
 });

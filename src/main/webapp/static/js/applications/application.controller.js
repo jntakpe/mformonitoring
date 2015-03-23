@@ -137,8 +137,10 @@ function RemoveApplicationModalController(ApplicationService, $modalInstance, ap
     };
 }
 
-function ApplicationDetailController(application) {
+function ApplicationDetailController(ApplicationService, $state, application) {
     "use strict";
+
     var vm = this;
     vm.application = application;
+    vm.label = ApplicationService.stateLabel($state);
 }
