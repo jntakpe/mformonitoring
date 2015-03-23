@@ -1,5 +1,6 @@
 package com.github.jntakpe.mfm.rest;
 
+import com.codahale.metrics.annotation.Timed;
 import com.github.jntakpe.mfm.service.MetricsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class MetricsResource {
      * @param url url des métriques
      * @return JSON de métriques
      */
+    @Timed
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> find(@PathVariable String id, @RequestParam String url) {
         return new ResponseEntity<>(metricsService.findMetrics(url), HttpStatus.OK);

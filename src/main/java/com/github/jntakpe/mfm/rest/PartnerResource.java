@@ -1,5 +1,6 @@
 package com.github.jntakpe.mfm.rest;
 
+import com.codahale.metrics.annotation.Timed;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Partner;
 import com.github.jntakpe.mfm.mapper.PartnerMapper;
@@ -38,6 +39,7 @@ public class PartnerResource {
      * @param appId identifiant de l'application
      * @return application avec les partenaires mis à jour
      */
+    @Timed
     @RequestMapping(method = RequestMethod.GET)
     public DeferredResult<ResponseEntity<Set<Partner>>> health(@RequestParam String appId) {
         DeferredResult<ResponseEntity<Set<Partner>>> deferred = new DeferredResult<>();
@@ -54,6 +56,7 @@ public class PartnerResource {
      * @param partner partenaire à enregistrer
      * @return partenaire enregistré
      */
+    @Timed
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Partner> save(@RequestBody Partner partner) {
         return new ResponseEntity<>(partnerService.save(partner), HttpStatus.OK);

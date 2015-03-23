@@ -1,5 +1,6 @@
 package com.github.jntakpe.mfm.rest;
 
+import com.codahale.metrics.annotation.Timed;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class ApplicationResource {
      *
      * @return la liste des applications
      */
+    @Timed
     @RequestMapping(method = RequestMethod.GET)
     public List<Application> list() {
         return applicationService.findAll();
@@ -45,6 +47,7 @@ public class ApplicationResource {
      * @param id  identifiant de l'application dans le cas d'une application déjà existante
      * @return la récupération des informations du projet sinon un code erreur
      */
+    @Timed
     @RequestMapping(value = "/check", method = RequestMethod.GET)
     public ResponseEntity<Application> check(@RequestParam String url, @RequestParam(required = false) Long id) {
         Optional<Application> app = applicationService.findByUrl(url);
@@ -60,6 +63,7 @@ public class ApplicationResource {
      * @param application application à ajouter
      * @return application enregistrée
      */
+    @Timed
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Application> create(@RequestBody Application application) {
         return new ResponseEntity<>(applicationService.save(application), HttpStatus.OK);
@@ -71,6 +75,7 @@ public class ApplicationResource {
      * @param id identifiant de l'application
      * @return l'application correspondante à l'identifiant
      */
+    @Timed
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Application> find(@PathVariable String id) {
         return new ResponseEntity<>(applicationService.findById(id), HttpStatus.OK);
@@ -83,6 +88,7 @@ public class ApplicationResource {
      * @param application application à modifier
      * @return application modifiée
      */
+    @Timed
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Application> update(@PathVariable Long id, @RequestBody Application application) {
         return new ResponseEntity<>(applicationService.save(application), HttpStatus.OK);
@@ -94,6 +100,7 @@ public class ApplicationResource {
      * @param id identifiant de l'application à supprimer
      * @return code HTTP 200 si la suppression est effectuée
      */
+    @Timed
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable String id) {
         applicationService.delete(id);
