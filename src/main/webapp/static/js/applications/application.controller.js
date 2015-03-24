@@ -4,18 +4,13 @@ mfmApp.controller('RemoveApplicationModalController', RemoveApplicationModalCont
 mfmApp.controller('ApplicationDetailController', ApplicationDetailController);
 
 
-function ApplicationController(ApplicationService, PagingService, AlertService, $modal, $filter) {
+function ApplicationController(ApplicationService, PagingService, AlertService, $modal) {
     "use strict";
 
     var vm = this, applications;
 
     function refresh() {
-        var filtered, sorted, paginated;
-        filtered = $filter('filter')(applications, vm.search);
-        sorted = $filter('orderBy')(filtered, vm.sort.column, vm.sort.reverse);
-        paginated = PagingService.paginate(vm.props.current, vm.props.numberPerPage, sorted);
-        vm.applications = paginated.data;
-        vm.props.total = paginated.total;
+        vm.applications = PagingService.process(applications, vm.search, vm.sort, vm.props);
     }
 
     vm.search = {};
