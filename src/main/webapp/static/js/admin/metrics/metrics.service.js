@@ -4,10 +4,11 @@ function MetricsService($http) {
     "use strict";
 
     function resourceStats(stats) {
-        var result = {};
+        var result = [];
         angular.forEach(stats.timers, function (value, key) {
             if (key.indexOf('Controller') !== -1 || key.indexOf('Resource') !== -1) {
-                result[key] = value;
+                value.method = key;
+                result.push(value);
             }
         });
         return result;

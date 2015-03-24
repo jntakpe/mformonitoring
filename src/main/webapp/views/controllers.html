@@ -4,7 +4,8 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Nom de la ressource</th>
+            <th ng-click="ctrls.sortColumn('method')">Nom de la ressource
+                <i class="pull-right fa" ng-class="ctrls.sort.class.method || 'fa-sort'"></i></th>
             <th ng-click="ctrls.sortColumn('count')">Count
                 <i class="pull-right fa" ng-class="ctrls.sort.class.count || 'fa-sort'"></i></th>
             <th ng-click="ctrls.sortColumn('mean')">Mean
@@ -21,20 +22,19 @@
                 <i class="pull-right fa" ng-class="ctrls.sort.class.p75 || 'fa-sort'"></i></th>
             <th ng-click="ctrls.sortColumn('max')">Max
                 <i class="pull-right fa" ng-class="ctrls.sort.class.max || 'fa-sort'"></i></th>
-            <th class="col-md-1">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="(k, v) in ctrls.stats">
-            <td>{{k}}</td>
-            <td class="text-right">{{v.count}}</td>
-            <td class="text-right">{{v.mean * 1000 | number:0}}</td>
-            <td class="text-right">{{v.min * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p50 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p75 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p95 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.p99 * 1000 | number:0}}</td>
-            <td class="text-right">{{v.max * 1000 | number:0}}</td>
+        <tr ng-repeat="stat in ctrls.stats">
+            <td>{{stat.method}}</td>
+            <td class="text-right">{{stat.count}}</td>
+            <td class="text-right">{{stat.mean * 1000 | number:0}}</td>
+            <td class="text-right">{{stat.min * 1000 | number:0}}</td>
+            <td class="text-right">{{stat.p50 * 1000 | number:0}}</td>
+            <td class="text-right">{{stat.p75 * 1000 | number:0}}</td>
+            <td class="text-right">{{stat.p95 * 1000 | number:0}}</td>
+            <td class="text-right">{{stat.p99 * 1000 | number:0}}</td>
+            <td class="text-right">{{stat.max * 1000 | number:0}}</td>
         </tr>
         </tbody>
     </table>

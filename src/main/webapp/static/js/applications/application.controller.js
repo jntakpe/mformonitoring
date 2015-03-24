@@ -15,7 +15,6 @@ function ApplicationController(ApplicationService, PagingService, AlertService, 
     vm.alert = {
         active: false
     };
-    vm.props = {};
     vm.search = {};
     vm.sort = {
         class: []

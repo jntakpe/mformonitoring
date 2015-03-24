@@ -270,16 +270,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="(k, v) in metrics.stats">
-                <td>{{k}}</td>
-                <td class="text-right">{{v.count}}</td>
-                <td class="text-right">{{v.mean * 1000 | number:0}}</td>
-                <td class="text-right">{{v.min * 1000 | number:0}}</td>
-                <td class="text-right">{{v.p50 * 1000 | number:0}}</td>
-                <td class="text-right">{{v.p75 * 1000 | number:0}}</td>
-                <td class="text-right">{{v.p95 * 1000 | number:0}}</td>
-                <td class="text-right">{{v.p99 * 1000 | number:0}}</td>
-                <td class="text-right">{{v.max * 1000 | number:0}}</td>
+            <tr ng-repeat="m in metrics.stats">
+                <td>{{m.method}}</td>
+                <td class="text-right">{{m.count}}</td>
+                <td class="text-right">{{m.mean * 1000 | number:0}}</td>
+                <td class="text-right">{{m.min * 1000 | number:0}}</td>
+                <td class="text-right">{{m.p50 * 1000 | number:0}}</td>
+                <td class="text-right">{{m.p75 * 1000 | number:0}}</td>
+                <td class="text-right">{{m.p95 * 1000 | number:0}}</td>
+                <td class="text-right">{{m.p99 * 1000 | number:0}}</td>
+                <td class="text-right">{{m.max * 1000 | number:0}}</td>
             </tr>
             </tbody>
         </table>
