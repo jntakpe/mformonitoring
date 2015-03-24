@@ -10,4 +10,25 @@ mfmApp.config(function ($stateProvider) {
             }
         }
     });
+
+    $stateProvider.state('applications.detail.properties.params', {
+        url: '/params',
+        views: {
+            'tab': {
+                templateUrl: 'views/properties.params.html',
+                controller: 'PropertiesParamsController as propParams'
+            }
+        }
+    });
+
+    $stateProvider.state('applications.detail.properties.env', {
+        url: '/env',
+        views: {
+            'tab': {
+                templateUrl: 'views/properties.env.html',
+                controller: 'PropertiesEnvController as propEnv'
+            }
+        }
+    });
+
 });
