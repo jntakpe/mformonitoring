@@ -73,3 +73,7 @@
 .linked {
     cursor: pointer;
 }
+
+.sky-form.no-border {
+    border: 0;
+}
