@@ -258,7 +258,8 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Resource name</th>
+                <th>Class</th>
+                <th>Method</th>
                 <th class="text-right">Count</th>
                 <th class="text-right">Mean</th>
                 <th class="text-right">Min</th>
@@ -271,6 +272,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="m in metrics.stats">
+                <td>{{m.class}}</td>
                 <td>{{m.method}}</td>
                 <td class="text-right">{{m.count}}</td>
                 <td class="text-right">{{m.mean * 1000 | number:0}}</td>

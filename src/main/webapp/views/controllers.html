@@ -16,7 +16,9 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th ng-click="ctrls.sortColumn('method')">Nom de la ressource
+            <th ng-click="ctrls.sortColumn('class')">Classe
+                <i class="pull-right fa" ng-class="ctrls.sort.class.class || 'fa-sort'"></i></th>
+            <th ng-click="ctrls.sortColumn('method')">Méthode
                 <i class="pull-right fa" ng-class="ctrls.sort.class.method || 'fa-sort'"></i></th>
             <th ng-click="ctrls.sortColumn('count')">Count
                 <i class="pull-right fa" ng-class="ctrls.sort.class.count || 'fa-sort'"></i></th>
@@ -38,6 +40,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="stat in ctrls.stats">
+            <td>{{stat.class}}</td>
             <td>{{stat.method}}</td>
             <td class="text-right">{{stat.count}}</td>
             <td class="text-right">{{stat.mean * 1000 | number:0}}</td>
