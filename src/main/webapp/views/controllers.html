@@ -13,7 +13,8 @@
                        placeholder="Méthode" ng-change="ctrls.refresh()" ng-model="ctrls.search.method">
             </label>
         </div>
-        <button class="btn btn-warning" ng-click="ctrls.resetFilter()"><i class="fa fa-times"></i> Reset</button>
+        <button class="btn btn-warning pull-right" ng-click="ctrls.resetFilter()"><i class="fa fa-times"></i> Reset
+        </button>
     </form>
 </div>
 <div class="table-responsive">
@@ -30,7 +31,7 @@
                 <i class="pull-right fa" ng-class="ctrls.sort.class.mean || 'fa-sort'"></i></th>
             <th ng-click="ctrls.sortColumn('min')">Min
                 <i class="pull-right fa" ng-class="ctrls.sort.class.min || 'fa-sort'"></i></th>
-            <th ng-click="ctrls.sortColumn('p50')">ArtifactId
+            <th ng-click="ctrls.sortColumn('p50')">p50
                 <i class="pull-right fa" ng-class="ctrls.sort.class.p50 || 'fa-sort'"></i></th>
             <th ng-click="ctrls.sortColumn('p75')">p75
                 <i class="pull-right fa" ng-class="ctrls.sort.class.p75 || 'fa-sort'"></i></th>
@@ -46,14 +47,14 @@
         <tr ng-repeat="stat in ctrls.stats">
             <td>{{stat.class}}</td>
             <td>{{stat.method}}</td>
-            <td class="text-right">{{stat.count}}</td>
-            <td class="text-right">{{stat.mean * 1000 | number:0}}</td>
-            <td class="text-right">{{stat.min * 1000 | number:0}}</td>
-            <td class="text-right">{{stat.p50 * 1000 | number:0}}</td>
-            <td class="text-right">{{stat.p75 * 1000 | number:0}}</td>
-            <td class="text-right">{{stat.p95 * 1000 | number:0}}</td>
-            <td class="text-right">{{stat.p99 * 1000 | number:0}}</td>
-            <td class="text-right">{{stat.max * 1000 | number:0}}</td>
+            <td>{{stat.count}}</td>
+            <td>{{stat.mean * 1000 | number:0}}</td>
+            <td>{{stat.min * 1000 | number:0}}</td>
+            <td>{{stat.p50 * 1000 | number:0}}</td>
+            <td>{{stat.p75 * 1000 | number:0}}</td>
+            <td>{{stat.p95 * 1000 | number:0}}</td>
+            <td>{{stat.p99 * 1000 | number:0}}</td>
+            <td>{{stat.max * 1000 | number:0}}</td>
         </tr>
         </tbody>
     </table>
