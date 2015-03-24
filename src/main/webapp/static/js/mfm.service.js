@@ -56,7 +56,6 @@ function PagingService($filter) {
     }
 
     return {
-        paginate: paginate,
         toListParams: toListParams,
         sort: sortColumn,
         process: process

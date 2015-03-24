@@ -9,14 +9,14 @@ function ApplicationController(ApplicationService, PagingService, AlertService, 
 
     var vm = this, applications;
 
-    function refresh() {
+    vm.refresh = function () {
         vm.applications = PagingService.process(applications, vm.search, vm.sort, vm.props);
-    }
-
-    vm.search = {};
+    };
     vm.alert = {
         active: false
     };
+    vm.props = {};
+    vm.search = {};
     vm.sort = {
         class: []
     };
@@ -34,7 +34,7 @@ function ApplicationController(ApplicationService, PagingService, AlertService, 
         });
         modalInstance.result.then(function (result) {
             applications.push(result.data);
-            refresh();
+            vm.refresh();
             vm.alert = AlertService.success(result.action + ' de l\'application effectuée avec succès.');
         });
     };
@@ -51,27 +51,21 @@ function ApplicationController(ApplicationService, PagingService, AlertService, 
         });
         modalInstance.result.then(function (application) {
             ApplicationService.remove(application, applications);
-            refresh();
+            vm.refresh();
             vm.alert = AlertService.success('Suppression de l\'application effectuée avec succès.');
         });
     };
     applications.$promise.then(function () {
         vm.props = PagingService.toListParams(applications, 8);
-        refresh();
+        vm.refresh();
     });
     vm.sortColumn = function (column) {
         PagingService.sort(column, vm.sort);
-        refresh();
-    };
-    vm.pageChange = function () {
-        refresh();
-    };
-    vm.filter = function () {
-        refresh();
+        vm.refresh();
     };
     vm.resetFilter = function () {
         vm.search = {};
-        refresh();
+        vm.refresh();
     };
 }
 

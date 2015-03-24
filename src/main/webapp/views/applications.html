@@ -17,12 +17,12 @@
             <label class="sr-only" for="search-name">Recherche par name</label>
 
             <input type="text" class="form-control input-block-level" id="search-name" placeholder="Nom"
-                   ng-change="application.filter()" ng-model="application.search.name">
+                   ng-change="application.refresh()" ng-model="application.search.name">
         </div>
         <div class="form-group col-md-2">
             <label class="sr-only" for="search-env">Recherche par environnement</label>
 
-            <select type="text" class="form-control input-block-level" id="search-env" ng-change="application.filter()"
+            <select type="text" class="form-control input-block-level" id="search-env" ng-change="application.refresh()"
                     ng-model="application.search.environment">
                 <option value="" selected>Environnement</option>
                 <option value="DEVELOPPEMENT">Développement</option>
@@ -37,19 +37,19 @@
             <label class="sr-only" for="search-group-id">Recherche par groupId</label>
 
             <input type="text" class="form-control input-block-level" id="search-group-id" placeholder="groupId"
-                   ng-change="application.filter()" ng-model="application.search.groupId">
+                   ng-change="application.refresh()" ng-model="application.search.groupId">
         </div>
         <div class="form-group col-md-2">
             <label class="sr-only" for="search-artifact-id">Recherche par artifactId</label>
 
             <input type="text" class="form-control input-block-level" id="search-artifact-id" placeholder="artifactId"
-                   ng-change="application.filter()" ng-model="application.search.artifactId">
+                   ng-change="application.refresh()" ng-model="application.search.artifactId">
         </div>
         <div class="form-group col-md-2 margin-right-10">
             <label for="search-version" class="sr-only">Recherche par version</label>
 
             <input type="text" class="form-control input-block-level" id="search-version"
-                   ng-change="application.filter()" ng-model="application.search.version" placeholder="Version"/>
+                   ng-change="application.refresh()" ng-model="application.search.version" placeholder="Version"/>
         </div>
         <button class="btn btn-warning" ng-click="application.resetFilter()"><i class="fa fa-times"></i> Reset</button>
     </form>
@@ -89,7 +89,7 @@
         </tbody>
     </table>
     <pagination total-items="application.props.total" ng-model="application.props.current" boundary-links="true"
-                ng-change="application.pageChange()" max-size="5" items-per-page="application.props.numberPerPage"
+                ng-change="application.refresh()" max-size="5" items-per-page="application.props.numberPerPage"
                 class="pull-right"></pagination>
     <button class="btn btn-u" ng-click="application.editModal()"><i class="fa fa-plus"></i> Ajouter une
         application
