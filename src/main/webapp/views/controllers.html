@@ -1,15 +1,19 @@
 <h3>Utilisation des contrôleurs (temps en ms)</h3>
 <div class="row">
     <form class="sky-form no-border" role="form">
-        <label class="label col col-4" for="search-method">Recherche par nom de méthode</label>
-
-        <div class="col col-6">
+        <div class="col col-5">
             <label class="input">
-                <input type="text" class="form-control input-block-level" id="search-method"
-                       placeholder="Nom de la méthode"
-                       ng-change="ctrls.refresh()" ng-model="ctrls.search.method">
+                <input type="text" class="form-control input-block-level" id="search-class"
+                       placeholder="Classe" ng-change="ctrls.refresh()" ng-model="ctrls.search.class">
             </label>
         </div>
+        <div class="col col-5">
+            <label class="input">
+                <input type="text" class="form-control input-block-level" id="search-method"
+                       placeholder="Méthode" ng-change="ctrls.refresh()" ng-model="ctrls.search.method">
+            </label>
+        </div>
+        <button class="btn btn-warning" ng-click="ctrls.resetFilter()"><i class="fa fa-times"></i> Reset</button>
     </form>
 </div>
 <div class="table-responsive">
