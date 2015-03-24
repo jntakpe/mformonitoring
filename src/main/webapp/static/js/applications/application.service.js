@@ -20,14 +20,12 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
 
     function stateLabel(state) {
         var name = state.current.name;
-        switch (name) {
-            case 'applications.detail.controllers':
-                return 'Statistiques';
-            case 'applications.detail.properties':
-                return 'Paramétrage';
-            default:
-                return 'Tableau de bord';
+        if (name.indexOf('applications.detail.controllers') !== -1) {
+            return 'Utilisation des contrôleurs';
+        } else if (name.indexOf('applications.detail.properties') !== -1) {
+            return 'Paramétrage';
         }
+        return 'Tableau de board';
     }
 
     function readableName(application) {
