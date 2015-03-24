@@ -13,7 +13,7 @@ mfmApp.controller('ControllersController', function (application, MetricsService
     };
     MetricsService.findExternal(application.id, 'http://localhost:8080/manage/metrics').success(function (response) {
         vm.data = MetricsService.extractStats(response);
-        vm.props = PagingService.toListParams(vm.data, 15);
+        vm.props = PagingService.toListParams(vm.data, 12);
         vm.refresh();
     });
     vm.sortColumn = function (column) {

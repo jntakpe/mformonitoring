@@ -6,14 +6,14 @@ function PagingService($filter) {
 
     function paginate(props, data) {
         var offset, page, numberPerPage = props.numberPerPage, currentPage = props.current, paginated;
-        page = data.length / numberPerPage;
+        props.total = data.length;
+        page = props.total / numberPerPage;
         if (currentPage > page) {
             page = page < 1 ? 1 : Math.ceil(page);
             currentPage = page;
         }
         offset = (currentPage - 1) * numberPerPage;
         paginated = data.slice(offset, offset + numberPerPage);
-        props.total = paginated.length;
         return paginated;
     }
 
