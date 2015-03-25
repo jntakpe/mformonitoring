@@ -2,7 +2,7 @@ mfmApp.controller('PropertiesController', PropertiesController);
 mfmApp.controller('PropertiesParamsController', PropertiesParamsController);
 mfmApp.controller('PropertiesEnvController', PropertiesEnvController);
 
-function PropertiesController(application) {
+function PropertiesController(properties) {
     "use strict";
 
     var vm = this;

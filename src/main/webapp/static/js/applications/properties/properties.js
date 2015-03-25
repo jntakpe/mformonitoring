@@ -8,7 +8,13 @@ mfmApp.config(function ($stateProvider) {
                 templateUrl: 'views/properties.html',
                 controller: 'PropertiesController as properties'
             }
+        },
+        resolve: {
+            properties: function ($http) {
+                return $http({method: 'GET', url: 'manage/env'});
+            }
         }
+
     });
 
     $stateProvider.state('applications.detail.properties.params', {

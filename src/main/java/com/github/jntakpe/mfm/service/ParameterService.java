@@ -7,30 +7,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Services associés aux métriques
+ * Services associés aux paramétrage
  *
  * @author jntakpe
  */
 @Service
-public class MetricsService {
+public class ParameterService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MetricsService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ParameterService.class);
 
     private RestTemplate restTemplate;
 
     @Autowired
-    public MetricsService(RestTemplate restTemplate) {
+    public ParameterService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     /**
-     * Récupération des métriques à l'url donnée
+     * Récupération des paramètres
      *
-     * @param url url des métriques
-     * @return JSON brut de métriques
+     * @param url url des paramètres
+     * @return JSON brut de paramétrage
      */
-    public String findMetrics(String url) {
-        LOG.debug("Récupération des métriques à l'url {}", url);
+    public String findParameters(String url) {
+        LOG.debug("Récupération des propriétés à l'url {}", url);
         return restTemplate.getForObject(url, String.class);
     }
 }

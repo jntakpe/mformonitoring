@@ -1,7 +1,7 @@
 package com.github.jntakpe.mfm.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.github.jntakpe.mfm.service.MetricsService;
+import com.github.jntakpe.mfm.service.ParameterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Ressource associée aux métriques
+ * Resource REST associé aux informations de paramétrage et d'environnement d'une application
  *
  * @author jntakpe
  */
 @RestController
-@RequestMapping(Urls.METRICS)
-public class MetricsResource {
+@RequestMapping(Urls.PARAM)
+public class ParameterResource {
 
-    private MetricsService metricsService;
+    private ParameterService parameterService;
 
     @Autowired
-    public MetricsResource(MetricsService metricsService) {
-        this.metricsService = metricsService;
+    public ParameterResource(ParameterService parameterService) {
+        this.parameterService = parameterService;
     }
 
     /**
-     * Recherche de métriques à l'url donnée
+     * Recherche des paramètres de l'application
      *
-     * @param url url des métriques
-     * @return JSON de métriques
+     * @param url url des paramètres
+     * @return JSON des paramètres
      */
     @Timed
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> find(@RequestParam String url) {
-        return new ResponseEntity<>(metricsService.findMetrics(url), HttpStatus.OK);
+        return new ResponseEntity<>(parameterService.findParameters(url), HttpStatus.OK);
     }
 }
