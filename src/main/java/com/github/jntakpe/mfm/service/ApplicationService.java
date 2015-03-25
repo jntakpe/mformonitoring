@@ -106,8 +106,7 @@ public class ApplicationService {
      * @return l'application correspondante à l'identifiant et les partenaires associés
      */
     public Application findByIdWithPartners(String id) {
-        Application application = findById(id);
-        return application;
+        return findById(id);
     }
 
 }
