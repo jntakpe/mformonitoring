@@ -7,28 +7,18 @@ function PropertiesController() {
 
 }
 
-function PropertiesParamsController(properties, PagingService) {
+function PropertiesParamsController(properties, PropertiesService) {
     "use strict";
 
     var vm = this;
-    vm.refresh = function () {
-        vm.data = PagingService.process(properties.app, vm.search, vm.sort, vm.props);
-    };
-    vm.data = {};
-    vm.search = {};
-    vm.sort = {
-        class: []
-    };
-    vm.props = PagingService.toListParams(properties, 4);
-    vm.refresh();
-    vm.sortColumn = function (column) {
-        PagingService.sort(column, vm.sort);
-        vm.refresh();
-    };
-    vm.resetFilter = function () {
-        vm.search = {};
-        vm.refresh();
-    };
+    PropertiesService.initKeyValueList(vm, properties.app);
+}
+
+function PropertiesSysController(properties, PagingService) {
+    "use strict";
+
+    var vm = this;
+
 }
 
 function PropertiesEnvController() {
@@ -36,3 +26,4 @@ function PropertiesEnvController() {
 
     var vm = this;
 }
+

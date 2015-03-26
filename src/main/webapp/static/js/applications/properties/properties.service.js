@@ -1,28 +1,31 @@
-mfmApp.factory('PropertiesService', function PropertiesService($http, environments) {
+mfmApp.factory('PropertiesService', function PropertiesService(PagingService, $http) {
     "use strict";
 
     function find() {
         return $http.get('manage/env');
     }
 
+    function literalToArray(literal) {
+        var array = [], entry;
+        for (entry in literal) {
+            if (literal.hasOwnProperty(entry)) {
+                array.push({key: entry, value: literal[entry]});
+            }
+        }
+        return array;
+    }
+
     function extract() {
         return find().then(function (response) {
-            var properties = {}, data = response.data, key, propKey, envIdx, prop;
+            var properties = {}, data = response.data, key;
             properties.sys = {
-                app: data.systemProperties,
-                env: data.systemEnvironment
+                app: literalToArray(data.systemProperties),
+                env: literalToArray(data.systemEnvironment)
             };
             for (key in data) {
                 if (data.hasOwnProperty(key)) {
-                    prop = data[key];
-                    console.log(prop);
                     if (key.indexOf('applicationConfig') !== -1 && key.indexOf('#') === -1) {
-                        properties.app = [];
-                        for (propKey in prop) {
-                            if (prop.hasOwnProperty(propKey)) {
-                                properties.app.push({key: propKey, value: prop[propKey]});
-                            }
-                        }
+                        properties.app = literalToArray(data[key]);
                     }
                 }
             }
@@ -30,8 +33,30 @@ mfmApp.factory('PropertiesService', function PropertiesService($http, environmen
         });
     }
 
+    function initKeyValueList(vm, data) {
+        vm.refresh = function () {
+            vm.data = PagingService.process(data, vm.search, vm.sort, vm.props);
+        };
+        vm.data = {};
+        vm.search = {};
+        vm.sort = {
+            class: []
+        };
+        vm.props = PagingService.toListParams(data, 10);
+        vm.refresh();
+        vm.sortColumn = function (column) {
+            PagingService.sort(column, vm.sort);
+            vm.refresh();
+        };
+        vm.resetFilter = function () {
+            vm.search = {};
+            vm.refresh();
+        };
+
+    }
 
     return {
-        extract: extract
+        extract: extract,
+        initKeyValueList: initKeyValueList
     };
 });

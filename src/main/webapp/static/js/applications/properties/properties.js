@@ -38,4 +38,14 @@ mfmApp.config(function ($stateProvider) {
         }
     });
 
+    $stateProvider.state('applications.detail.properties.sys', {
+        url: '/sys',
+        views: {
+            'tab': {
+                templateUrl: 'views/properties.sys.html',
+                controller: 'PropertiesEnvController as propSys'
+            }
+        }
+    });
+
 });
