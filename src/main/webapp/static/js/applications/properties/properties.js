@@ -10,8 +10,8 @@ mfmApp.config(function ($stateProvider) {
             }
         },
         resolve: {
-            properties: function ($http) {
-                return $http({method: 'GET', url: 'manage/env'});
+            properties: function (PropertiesService) {
+                return PropertiesService.extract();
             }
         }
 

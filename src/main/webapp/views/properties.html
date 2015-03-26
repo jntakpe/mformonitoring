@@ -1,11 +1,12 @@
 <div class="shadow-wrapper">
     <blockquote class="hero box-shadow shadow-effect-2">
-        <h2><em>Utilisation du profil Spring : </em></h2>
+        <h2><em>Utilisation du profil Spring : {{properties}}</em></h2>
     </blockquote>
 </div>
 <div class="tab-v2">
     <ul class="nav nav-tabs">
-        <li ui-sref-active="active"><a ui-sref="applications.detail.properties.params">Paramétrage</a></li>
+        <li ui-sref-active="active"><a ui-sref="applications.detail.properties.params">Paramétrage applicatif
+            (application.yml)</a></li>
         <li ui-sref-active="active"><a ui-sref="applications.detail.properties.env">Environnment</a></li>
     </ul>
     <div class="tab-content" ui-view="tab"></div>
