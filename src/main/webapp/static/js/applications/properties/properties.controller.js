@@ -2,11 +2,9 @@ mfmApp.controller('PropertiesController', PropertiesController);
 mfmApp.controller('PropertiesParamsController', PropertiesParamsController);
 mfmApp.controller('PropertiesEnvController', PropertiesEnvController);
 
-function PropertiesController(properties) {
+function PropertiesController() {
     "use strict";
 
-    var vm = this;
-    vm.profile = properties.profile;
 }
 
 function PropertiesParamsController(properties, PagingService) {
@@ -23,6 +21,14 @@ function PropertiesParamsController(properties, PagingService) {
     };
     vm.props = PagingService.toListParams(properties, 4);
     vm.refresh();
+    vm.sortColumn = function (column) {
+        PagingService.sort(column, vm.sort);
+        vm.refresh();
+    };
+    vm.resetFilter = function () {
+        vm.search = {};
+        vm.refresh();
+    };
 }
 
 function PropertiesEnvController() {

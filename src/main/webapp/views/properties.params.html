@@ -1,8 +1,29 @@
+<form class="sky-form no-border" role="form">
+    <div class="col col-5">
+        <label class="input">
+            <input type="text" class="form-control input-block-level" id="search-key"
+                   placeholder="Clé" ng-change="propParams.refresh()" ng-model="propParams.search.key">
+        </label>
+    </div>
+    <div class="col col-5">
+        <label class="input">
+            <input type="text" class="form-control input-block-level" id="search-value"
+                   placeholder="Valeur" ng-change="propParams.refresh()" ng-model="propParams.search.value">
+        </label>
+    </div>
+    <button class="btn btn-warning pull-right" ng-click="propParams.resetFilter()"><i class="fa fa-times"></i> Reset
+    </button>
+</form>
+
 <table class="table table-stripped">
     <thead>
     <tr>
-        <th>Clé</th>
-        <th>Valeur</th>
+        <th ng-click="propParams.sortColumn('key')" class="col-md-5">Clé
+            <i class="pull-right fa" ng-class="propParams.sort.class.key || 'fa-sort'"></i>
+        </th>
+        <th ng-click="propParams.sortColumn('value')" class="col-md-7">Valeur
+            <i class="pull-right fa" ng-class="propParams.sort.class.value || 'fa-sort'"></i>
+        </th>
     </tr>
     </thead>
     <tbody>

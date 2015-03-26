@@ -23,13 +23,6 @@ mfmApp.factory('PropertiesService', function PropertiesService($http, environmen
                                 properties.app.push({key: propKey, value: prop[propKey]});
                             }
                         }
-                    } else if (key.indexOf('profiles') !== -1) {
-                        for (envIdx in environments) {
-                            if (environments.hasOwnProperty(envIdx) && prop.indexOf(environments[envIdx]) !== -1) {
-                                properties.profile = environments[envIdx];
-                                break;
-                            }
-                        }
                     }
                 }
             }

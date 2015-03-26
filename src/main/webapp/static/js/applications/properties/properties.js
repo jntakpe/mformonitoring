@@ -3,6 +3,7 @@ mfmApp.config(function ($stateProvider) {
 
     $stateProvider.state('applications.detail.properties', {
         url: '/properties',
+        abstract: true,
         views: {
             'detail': {
                 templateUrl: 'views/properties.html',
