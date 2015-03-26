@@ -6,9 +6,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="(k, v) in propParams.data">
-        <td>{{k}}</td>
-        <td>{{v}}</td>
+    <tr ng-repeat="prop in propParams.data">
+        <td>{{prop.key}}</td>
+        <td>{{prop.value}}</td>
     </tr>
     </tbody>
 </table>
+<pagination total-items="propParams.props.total" ng-model="propParams.props.current" boundary-links="true"
+            ng-change="propParams.refresh()" max-size="5" items-per-page="propParams.props.numberPerPage"
+            class="pull-right"></pagination>
