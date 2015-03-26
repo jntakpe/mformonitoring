@@ -6,7 +6,8 @@ function PropertiesController(properties) {
     "use strict";
 
     var vm = this;
-    vm.profiles = properties.properties;
+    console.log(properties);
+    vm.profile = properties.profile;
 }
 
 function PropertiesParamsController(properties) {

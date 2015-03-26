@@ -54,6 +54,7 @@ module.exports = function (grunt) {
                     '<%= dirs.source %>/js/mfm.js',
                     '<%= dirs.source %>/js/mfm.directive.js',
                     '<%= dirs.source %>/js/mfm.service.js',
+                    '<%= dirs.source %>/js/mfm.constant.js',
                     '<%= dirs.source %>/js/header/header.js',
                     '<%= dirs.source %>/js/header/header.controller.js',
                     '<%= dirs.source %>/js/home/home.js',

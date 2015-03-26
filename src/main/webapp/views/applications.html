@@ -24,13 +24,8 @@
 
             <select type="text" class="form-control input-block-level" id="search-env" ng-change="application.refresh()"
                     ng-model="application.search.environment">
-                <option value="" selected>Environnement</option>
-                <option value="DEVELOPPEMENT">Développement</option>
-                <option value="ASSEMBLAGE">Assemblage</option>
-                <option value="INTEGRATION">Intégration</option>
-                <option value="RECETTE">Recette</option>
-                <option value="PRE_PRODUCTION">Pré-production</option>
-                <option value="PRODUCTION">Production</option>
+                <option value="">Environnement</option>
+                <option ng-repeat="env in application.environments" value="{{env}}">{{env}}</option>
             </select>
         </div>
         <div class="form-group col-md-2">

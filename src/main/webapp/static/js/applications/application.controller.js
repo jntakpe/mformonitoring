@@ -4,7 +4,7 @@ mfmApp.controller('RemoveApplicationModalController', RemoveApplicationModalCont
 mfmApp.controller('ApplicationDetailController', ApplicationDetailController);
 
 
-function ApplicationController(ApplicationService, PagingService, AlertService, $modal) {
+function ApplicationController(ApplicationService, PagingService, AlertService, environments, $modal) {
     "use strict";
 
     var vm = this, applications;
@@ -19,6 +19,7 @@ function ApplicationController(ApplicationService, PagingService, AlertService, 
     vm.sort = {
         class: []
     };
+    vm.environments = environments;
     applications = ApplicationService.application.query();
     vm.editModal = function (application) {
         var modalInstance = $modal.open({
