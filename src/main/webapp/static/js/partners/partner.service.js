@@ -1,6 +1,10 @@
 mfmApp.factory('PartnerService', function (ApplicationService, $http, $q, $resource) {
     "use strict";
 
+    function find(id) {
+        return $http.get('api/partner', {params: {appId: id}});
+    }
+
     function addIfAbsent(partners, partner) {
         var idx, applications;
         for (idx in partners) {
@@ -28,7 +32,7 @@ mfmApp.factory('PartnerService', function (ApplicationService, $http, $q, $resou
         ApplicationService.application.query(function (applications) {
             var promises = [];
             angular.forEach(applications, function (app) {
-                var deferred = $http.get('api/partner', {params: {appId: app.id}});
+                var deferred = find(app.id);
                 deferred.then(function (response) {
                     var idx, data = response.data;
                     for (idx in data) {
@@ -46,6 +50,7 @@ mfmApp.factory('PartnerService', function (ApplicationService, $http, $q, $resou
 
     return {
         refresh: refreshAll,
+        find: find,
         resource: $resource('api/partner/:id', {id: '@id'})
     };
 });

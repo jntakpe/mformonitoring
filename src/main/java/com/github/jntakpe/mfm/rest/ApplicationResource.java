@@ -49,7 +49,7 @@ public class ApplicationResource {
      */
     @Timed
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public ResponseEntity<Application> check(@RequestParam String url, @RequestParam(required = false) Long id) {
+    public ResponseEntity<Application> check(@RequestParam String url, @RequestParam(required = false) String id) {
         Optional<Application> app = applicationService.findByUrl(url);
         if (app.isPresent() && !app.get().getId().equals(id)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);

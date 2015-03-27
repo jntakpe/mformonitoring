@@ -17,6 +17,8 @@ public final class Urls {
 
     public static final String PARAM = APPLICATION + "/{id}/params";
 
+    public static final String HEALTH = APPLICATION + "/{id}/health";
+
     private Urls() {
     }
 
