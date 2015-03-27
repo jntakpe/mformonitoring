@@ -43,7 +43,7 @@ mfmApp.config(function ($stateProvider) {
         views: {
             'tab': {
                 templateUrl: 'views/properties.sys.html',
-                controller: 'PropertiesEnvController as propSys'
+                controller: 'PropertiesSysController as propSys'
             }
         }
     });

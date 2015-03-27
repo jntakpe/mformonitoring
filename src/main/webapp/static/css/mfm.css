@@ -77,3 +77,19 @@
 .sky-form.no-border {
     border: 0;
 }
+
+.table-wrap {
+    table-layout: fixed;
+}
+
+.table-wrap td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table-wrap td.unwrap {
+    white-space: normal;
+    overflow: auto;
+    text-overflow: clip;
+}

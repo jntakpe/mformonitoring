@@ -1,1 +1,38 @@
-<h1>Environnement</h1>
+<form class="sky-form no-border" role="form">
+    <div class="col col-5">
+        <label class="input">
+            <input type="text" class="form-control input-block-level" id="search-key"
+                   placeholder="Clé" ng-change="propSys.refresh()" ng-model="propSys.search.key">
+        </label>
+    </div>
+    <div class="col col-5">
+        <label class="input">
+            <input type="text" class="form-control input-block-level" id="search-value"
+                   placeholder="Valeur" ng-change="propSys.refresh()" ng-model="propSys.search.value">
+        </label>
+    </div>
+    <button class="btn btn-warning pull-right" ng-click="propSys.resetFilter()"><i class="fa fa-times"></i> Reset
+    </button>
+</form>
+
+<table class="table table-stripped table-wrap">
+    <thead>
+    <tr>
+        <th ng-click="propSys.sortColumn('key')" class="col-md-5">Clé
+            <i class="pull-right fa" ng-class="propSys.sort.class.key || 'fa-sort'"></i>
+        </th>
+        <th ng-click="propSys.sortColumn('value')" class="col-md-7">Valeur
+            <i class="pull-right fa" ng-class="propSys.sort.class.value || 'fa-sort'"></i>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="prop in propSys.data">
+        <td>{{prop.key}}</td>
+        <td>{{prop.value}}</td>
+    </tr>
+    </tbody>
+</table>
+<pagination total-items="propSys.props.total" ng-model="propSys.props.current" boundary-links="true"
+            ng-change="propSys.refresh()" max-size="5" items-per-page="propSys.props.numberPerPage"
+            class="pull-right"></pagination>

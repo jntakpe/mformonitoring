@@ -22,10 +22,11 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
         var name = state.current.name;
         if (name.indexOf('applications.detail.controllers') !== -1) {
             return 'Utilisation des contrôleurs';
-        } else if (name.indexOf('applications.detail.properties') !== -1) {
+        }
+        if (name.indexOf('applications.detail.properties') !== -1) {
             return 'Paramétrage';
         }
-        return 'Tableau de board';
+        return 'Tableau de bord';
     }
 
     function readableName(application) {
