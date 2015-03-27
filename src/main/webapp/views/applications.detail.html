@@ -25,6 +25,11 @@
                     <a ui-sref="applications.detail.properties.params({id: appDetail.application.id})">
                         <i class="fa fa-cogs"></i> Propriétés</a>
                 </li>
+                <li class="list-group-item" ui-sref-active="active">
+                    <a ui-sref="applications.detail.health({id: appDetail.application.id})">
+                        <i class="fa fa-heartbeat"></i> Fil de vie</a>
+                </li>
+
             </ul>
             <button class="btn btn-u margin-left-10" ng-click="appDetail.refresh()">
                 <i class="fa fa-refresh"></i> Rafraîchir

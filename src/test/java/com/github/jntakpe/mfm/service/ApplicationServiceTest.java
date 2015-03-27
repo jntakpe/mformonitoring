@@ -84,7 +84,7 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         mongoOperations = new MongoTemplate(mongo, mongoProperties.getDatabase());
         mongoOperations.dropCollection(Partner.class);
         mongoOperations.createCollection(Partner.class);
-        mongoOperations.insert(PartenaireServiceTest.data(Collections.emptyList()), Partner.class);
+        mongoOperations.insert(PartnerServiceTest.data(Collections.emptyList()), Partner.class);
     }
 
     @BeforeMethod

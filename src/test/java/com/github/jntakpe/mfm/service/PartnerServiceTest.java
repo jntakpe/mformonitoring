@@ -32,7 +32,7 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
  */
 @IntegrationTest
 @SpringApplicationConfiguration(classes = MfmApp.class)
-public class PartenaireServiceTest extends AbstractTestNGSpringContextTests {
+public class PartnerServiceTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private PartnerService partnerService;
