@@ -1,5 +1,6 @@
 package com.github.jntakpe.mfm.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -89,5 +90,14 @@ public class Partner extends GenericDomain {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (url != null ? url.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("name", name)
+                .append("url", url)
+                .append("status", status)
+                .toString();
     }
 }

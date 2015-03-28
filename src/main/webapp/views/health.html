@@ -1,1 +1,16 @@
-<h1>Health</h1>
+<table class="table table-stripped">
+    <thead>
+    <tr>
+        <th>Partenaire</th>
+        <th>Statut</th>
+        <th>Url</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="part in health.data" ng-class="part.status == 'UP' ? 'success' : 'danger'">
+        <td>{{part.name}}</td>
+        <td>{{part.status}}</td>
+        <td>{{part.url}}</td>
+    </tr>
+    </tbody>
+</table>
