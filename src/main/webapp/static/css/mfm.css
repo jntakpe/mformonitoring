@@ -87,3 +87,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.header .navbar-nav > li > a:focus {
+    border-bottom: 2px solid #72c02c;
+}
