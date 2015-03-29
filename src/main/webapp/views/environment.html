@@ -9,12 +9,28 @@
 </div>
 <div class="container content">
     <div class="row">
-        <div class="tab-v2">
-            <ul class="nav nav-tabs">
-                <li ui-sref-active="active"><a ui-sref="environment.app({name: env.name})">Applications</a></li>
-                <li ui-sref-active="active"><a ui-sref="environment.partner({name: env.name})">Partenaires</a></li>
-            </ul>
-            <div class="tab-content" ui-view="tab"></div>
+        <div class="headline"><h2>Applications</h2></div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>GroupId</th>
+                    <th>ArtifactId</th>
+                    <th>Version</th>
+                    <th>Détail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="app in env.app">
+                    <td>{{app.name}}</td>
+                    <td>{{app.groupId}}</td>
+                    <td>{{app.artifactId}}</td>
+                    <td>{{app.version}}</td>
+                    <td>{{app.name}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
