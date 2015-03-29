@@ -16,7 +16,7 @@ mfmApp.config(function ($stateProvider) {
     $stateProvider.state('environment.app', {
         url: '/applications',
         views: {
-            'detail': {
+            'tab': {
                 templateUrl: 'views/environment.app.html',
                 controller: 'EnvironmentAppController as envApp'
             }
@@ -26,7 +26,7 @@ mfmApp.config(function ($stateProvider) {
     $stateProvider.state('environment.partner', {
         url: '/partners',
         views: {
-            'detail': {
+            'tab': {
                 templateUrl: 'views/environment.partner.html',
                 controller: 'EnvironmentPartnerController as envPartner'
             }

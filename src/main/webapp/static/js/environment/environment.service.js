@@ -18,5 +18,5 @@ mfmApp.factory('EnvironmentService', function () {
                     return 'de production';
             }
         }
-    }
+    };
 });

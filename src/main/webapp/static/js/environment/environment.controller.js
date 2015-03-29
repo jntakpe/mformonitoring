@@ -7,7 +7,6 @@ function EnvironmentController(EnvironmentService, $stateParams) {
 
     var vm = this;
     vm.name = $stateParams.name;
-    console.log(vm.name);
     vm.readableName = EnvironmentService.readableName(vm.name);
 }
 

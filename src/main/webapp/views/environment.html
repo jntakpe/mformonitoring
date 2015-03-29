@@ -1,12 +1,20 @@
 <div class="breadcrumbs">
     <div class="container">
-        <h1 class="pull-left">Environnement {{environment.readableName}}</h1>
+        <h1 class="pull-left">Environnement {{env.readableName}}</h1>
         <ul class="pull-right breadcrumb">
             <li><a ui-sref="home">Home</a></li>
-            <li class="active"><a>Environnement</a></li>
+            <li class="active">Environnement</li>
         </ul>
     </div>
 </div>
 <div class="container content">
-    <h1>Coucou</h1>
+    <div class="row">
+        <div class="tab-v2">
+            <ul class="nav nav-tabs">
+                <li ui-sref-active="active"><a ui-sref="environment.app({name: env.name})">Applications</a></li>
+                <li ui-sref-active="active"><a ui-sref="environment.partner({name: env.name})">Partenaires</a></li>
+            </ul>
+            <div class="tab-content" ui-view="tab"></div>
+        </div>
+    </div>
 </div>
