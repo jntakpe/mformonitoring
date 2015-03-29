@@ -5,9 +5,6 @@ mfmApp.config(function ($stateProvider) {
         .state('home', {
             parent: 'site',
             url: '/',
-            data: {
-                roles: []
-            },
             views: {
                 'content@': {
                     templateUrl: 'views/home.html',
