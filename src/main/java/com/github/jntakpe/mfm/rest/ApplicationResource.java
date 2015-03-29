@@ -2,6 +2,7 @@ package com.github.jntakpe.mfm.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.github.jntakpe.mfm.domain.Application;
+import com.github.jntakpe.mfm.domain.Environment;
 import com.github.jntakpe.mfm.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -105,6 +106,18 @@ public class ApplicationResource {
     public ResponseEntity delete(@PathVariable String id) {
         applicationService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    /**
+     * Recherche les applications en fonction de leur environnement
+     *
+     * @param environment environnements des applications
+     * @return liste des applications recherchés
+     */
+    @Timed
+    @RequestMapping(value = "/env/{environment}", method = RequestMethod.GET)
+    public ResponseEntity<List<Application>> findByEnvironment(@PathVariable Environment environment) {
+        return new ResponseEntity<>(applicationService.findByEnvironment(environment), HttpStatus.OK);
     }
 
 }

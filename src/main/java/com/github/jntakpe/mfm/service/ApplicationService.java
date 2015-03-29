@@ -1,6 +1,7 @@
 package com.github.jntakpe.mfm.service;
 
 import com.github.jntakpe.mfm.domain.Application;
+import com.github.jntakpe.mfm.domain.Environment;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,4 +110,14 @@ public class ApplicationService {
         return findById(id);
     }
 
+    /**
+     * Récupère la liste des applications en fonction d'un environnement
+     *
+     * @param environment environnement des applications
+     * @return la liste des applications correspondantes à l'environnement
+     */
+    public List<Application> findByEnvironment(Environment environment) {
+        LOG.debug("Recherche des applications de l'environnement {}");
+        return applicationRepository.findByEnvironment(environment);
+    }
 }

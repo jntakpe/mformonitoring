@@ -6,6 +6,7 @@ function EnvironmentController(EnvironmentService, $stateParams) {
     var vm = this;
     vm.name = $stateParams.name;
     vm.readableName = EnvironmentService.readableName(vm.name);
-
-
+    EnvironmentService.find(vm.name).then(function (response) {
+        vm.apps = response.data;
+    });
 }

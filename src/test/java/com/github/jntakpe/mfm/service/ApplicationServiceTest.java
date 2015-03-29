@@ -171,4 +171,16 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         assertThat(applicationService.findById("someunknownid")).isNull();
     }
 
+
+    @Test
+    public void findByEnvironment_shouldFind() {
+        List<Application> applications = applicationService.findByEnvironment(Environment.DEVELOPPEMENT);
+        assertThat(applications).isNotEmpty()
+                .isEqualTo(mongoOperations.find(Query.query(where("environment").is(Environment.DEVELOPPEMENT)), Application.class));
+    }
+
+    @Test
+    public void findByEnvironment_shouldNotFind() {
+        assertThat(applicationService.findByEnvironment(Environment.PRODUCTION)).isEmpty();
+    }
 }

@@ -1,7 +1,9 @@
 package com.github.jntakpe.mfm.repository;
 
 import com.github.jntakpe.mfm.domain.Application;
+import com.github.jntakpe.mfm.domain.Environment;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -13,4 +15,5 @@ public interface ApplicationRepository extends GenericRepository<Application> {
 
     Optional<Application> findByUrl(String url);
 
+    List<Application> findByEnvironment(Environment environment);
 }
