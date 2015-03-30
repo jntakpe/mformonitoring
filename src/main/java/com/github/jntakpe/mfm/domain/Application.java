@@ -1,5 +1,6 @@
 package com.github.jntakpe.mfm.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -29,14 +30,13 @@ public class Application extends GenericDomain {
 
     private String environment;
 
-    private boolean active;
-
     @NotNull
     @Indexed(unique = true)
     private String url;
 
     private String status;
 
+    @JsonIgnore
     @DBRef(lazy = true)
     private Set<Partner> partners = new HashSet<>();
 
@@ -78,14 +78,6 @@ public class Application extends GenericDomain {
 
     public void setEnvironment(Environment environment) {
         this.environment = environment.name();
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public String getUrl() {
@@ -137,7 +129,6 @@ public class Application extends GenericDomain {
                 .append("artifactId", artifactId)
                 .append("version", version)
                 .append("environment", environment)
-                .append("active", active)
                 .append("url", url)
                 .toString();
     }

@@ -3,6 +3,7 @@ package com.github.jntakpe.mfm.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Environment;
+import com.github.jntakpe.mfm.dto.ApplicationDTO;
 import com.github.jntakpe.mfm.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Ressouce REST associé à une application
@@ -116,8 +118,11 @@ public class ApplicationResource {
      */
     @Timed
     @RequestMapping(value = "/env/{environment}", method = RequestMethod.GET)
-    public ResponseEntity<List<Application>> findByEnvironment(@PathVariable Environment environment) {
-        return new ResponseEntity<>(applicationService.findByEnvironment(environment), HttpStatus.OK);
+    public ResponseEntity<List<ApplicationDTO>> findByEnvironment(@PathVariable Environment environment) {
+        List<ApplicationDTO> apps = applicationService.findByEnvironment(environment).stream()
+                .map(ApplicationDTO::new)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(apps, HttpStatus.OK);
     }
 
 }

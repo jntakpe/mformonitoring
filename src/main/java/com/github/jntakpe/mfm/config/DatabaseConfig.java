@@ -2,6 +2,7 @@ package com.github.jntakpe.mfm.config;
 
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Environment;
+import com.github.jntakpe.mfm.domain.Partner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,8 @@ public class DatabaseConfig {
         LOG.warn("Initialisation de MongoDB avec des données de développement");
         mongoOperations.dropCollection(Application.class);
         mongoOperations.createCollection(Application.class);
+        mongoOperations.dropCollection(Partner.class);
+        mongoOperations.createCollection(Partner.class);
         Application eersDev = new Application();
         eersDev.setName("Entrée en relation");
         eersDev.setUrl("https://fra.herokuapp.com/rest/manage/health");
