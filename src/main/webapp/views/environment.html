@@ -34,3 +34,24 @@
         </div>
     </div>
 </div>
+<div class="container content">
+    <div class="row">
+        <div class="headline"><h2>Partenaires</h2></div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Url</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="partner in env.partners">
+                    <td>{{partner.name}}</td>
+                    <td>{{partner.url}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

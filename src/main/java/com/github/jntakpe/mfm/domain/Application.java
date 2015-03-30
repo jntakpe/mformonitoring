@@ -112,6 +112,10 @@ public class Application extends GenericDomain {
         this.partners = partners;
     }
 
+    public void addPartner(Partner partner) {
+        partners.add(partner);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

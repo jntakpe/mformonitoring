@@ -4,6 +4,7 @@ import com.github.jntakpe.mfm.MfmApp;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Environment;
 import com.github.jntakpe.mfm.domain.Partner;
+import com.github.jntakpe.mfm.domain.Status;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import com.mongodb.Mongo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,5 +183,32 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findByEnvironment_shouldNotFind() {
         assertThat(applicationService.findByEnvironment(Environment.PRODUCTION)).isEmpty();
+    }
+
+    @Test
+    public void testSavePartner_shouldWork() {
+        Application application = new Application();
+        String url = "http://randomurl.io";
+        application.setUrl(url);
+        application.setName("testSavePartner");
+        mongoOperations.insert(application);
+        List<Application> applications = mongoOperations.find(Query.query(where("url").is(url)), Application.class);
+        assertThat(applications).isNotEmpty();
+        Application savedApp = applications.get(0);
+        Partner partner = new Partner();
+        partner.setStatus(Status.UP);
+        String partName = "partApp";
+        partner.setName(partName);
+        partner.setUrl("http://www.mymonitoringpart.url");
+        mongoOperations.insert(partner);
+        List<Partner> partners = mongoOperations.find(Query.query(where("name").is(partName)), Partner.class);
+        assertThat(partners).isNotEmpty();
+        Partner savedPart = partners.get(0);
+        savedPart.setApplications(Collections.singleton(savedApp));
+        Set<Application> apps = applicationService.save(savedPart);
+        assertThat(apps).isNotEmpty();
+        List<Application> savedApps = mongoOperations.find(Query.query(where("url").is(url)), Application.class);
+        assertThat(savedApps).isNotEmpty();
+        assertThat(savedApps.get(0).getPartners().stream().allMatch(p -> p.getId() != null)).isTrue();
     }
 }

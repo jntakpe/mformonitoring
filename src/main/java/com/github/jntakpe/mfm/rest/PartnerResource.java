@@ -59,6 +59,8 @@ public class PartnerResource {
     @Timed
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Partner> save(@RequestBody Partner partner) {
-        return new ResponseEntity<>(partnerService.save(partner), HttpStatus.OK);
+        partner = partnerService.save(partner);
+        partner.setApplications(applicationService.save(partner));
+        return new ResponseEntity<>(partner, HttpStatus.OK);
     }
 }

@@ -2,6 +2,7 @@ package com.github.jntakpe.mfm.service;
 
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Environment;
+import com.github.jntakpe.mfm.domain.Partner;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Services associés à l'entité {@link com.github.jntakpe.mfm.domain.Application}
@@ -119,5 +122,19 @@ public class ApplicationService {
     public List<Application> findByEnvironment(Environment environment) {
         LOG.debug("Recherche des applications de l'environnement {}");
         return applicationRepository.findByEnvironment(environment);
+    }
+
+    /**
+     * Récupère la liste des applications d'un partenaire et les enregistre
+     *
+     * @param partner partenaire contenant la liste des applications
+     * @return la liste des applications enregistrées
+     */
+    public Set<Application> save(Partner partner) {
+        return partner.getApplications().stream()
+                .filter(a -> a.getId() != null)
+                .peek(a -> a.addPartner(partner))
+                .peek(this::save)
+                .collect(Collectors.toSet());
     }
 }
