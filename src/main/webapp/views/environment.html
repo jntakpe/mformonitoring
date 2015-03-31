@@ -31,7 +31,11 @@
                             <i class="fa" ng-class="env.icon(app.status).icon"></i> {{app.status}}
                         </span>
                     </td>
-                    <td>{{app.name}}</td>
+                    <td>
+                        <a class="btn btn-info btn-xs" ui-sref="applications.detail.dashboard({id: app.id})">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -45,12 +49,18 @@
                 <tr>
                     <th>Nom</th>
                     <th>Url</th>
+                    <th>Statut</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="partner in env.partners">
                     <td>{{partner.name}}</td>
                     <td>{{partner.url}}</td>
+                    <td>
+                        <span class="label rounded-2x" ng-class="'label-' + env.icon(partner.status).class">
+                            <i class="fa" ng-class="env.icon(partner.status).icon"></i> {{partner.status}}
+                        </span>
+                    </td>
                 </tr>
                 </tbody>
             </table>

@@ -15,6 +15,8 @@ import java.util.Set;
  */
 public class ApplicationDTO {
 
+    private String id;
+
     private String name;
 
     private String groupId;
@@ -32,6 +34,7 @@ public class ApplicationDTO {
     private Set<Partner> partners = new HashSet<>();
 
     public ApplicationDTO(Application application) {
+        id = application.getId();
         name = application.getName();
         groupId = application.getGroupId();
         artifactId = application.getArtifactId();
@@ -40,6 +43,14 @@ public class ApplicationDTO {
         url = application.getUrl();
         status = application.getStatus();
         partners = application.getPartners();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
