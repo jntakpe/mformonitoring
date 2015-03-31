@@ -8,5 +8,6 @@ function EnvironmentController(EnvironmentService, $stateParams) {
     vm.readableName = EnvironmentService.readableName(vm.name);
     EnvironmentService.find(vm.name).then(function (response) {
         vm.apps = response.data;
+        vm.partners = EnvironmentService.extractPartners(vm.apps);
     });
 }

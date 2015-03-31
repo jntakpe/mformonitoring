@@ -22,8 +22,36 @@ mfmApp.factory('EnvironmentService', function ($http) {
         return $http.get('api/application/env/' + name);
     }
 
+    function addIfAbsent(partners, partner) {
+        var idx;
+        for (idx in partners) {
+            if (partners.hasOwnProperty(idx)) {
+                if (partners[idx].url === partner.url && partners[idx].name === partner.name) {
+                    return;
+                }
+            }
+        }
+        partners.push(partner);
+    }
+
+    function extractPartners(apps) {
+        var appIdx, allPartners = [], partIdx, partners;
+        for (appIdx in apps) {
+            if (apps.hasOwnProperty(appIdx)) {
+                partners = apps[appIdx].partners;
+                for (partIdx in partners) {
+                    if (partners.hasOwnProperty(partIdx)) {
+                        addIfAbsent(allPartners, partners[partIdx]);
+                    }
+                }
+            }
+        }
+        return allPartners;
+    }
+
     return {
         readableName: readableName,
-        find: find
+        find: find,
+        extractPartners: extractPartners
     };
 });

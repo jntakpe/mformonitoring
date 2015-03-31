@@ -9,7 +9,7 @@ mfmApp.factory('PartnerService', function (ApplicationService, $http, $q, $resou
         var idx, applications;
         for (idx in partners) {
             if (partners.hasOwnProperty(idx)) {
-                if (partners[idx].url === partner.url) {
+                if (partners[idx].url === partner.url && partners[idx].name === partner.name) {
                     applications = partners[idx].applications || [];
                     applications.push(partner.applications[0]);
                     return;
