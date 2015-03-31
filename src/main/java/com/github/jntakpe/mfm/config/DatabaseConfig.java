@@ -53,7 +53,7 @@ public class DatabaseConfig {
         mongoOperations.createCollection(Partner.class);
         Application eersDev = new Application();
         eersDev.setName("Entrée en relation");
-        eersDev.setUrl("https://fra.herokuapp.com/rest/manage/health");
+        eersDev.setUrl("https://fra.herokuapp.com/rest/dev/eers/manage/info");
         eersDev.setEnvironment(Environment.DEVELOPPEMENT);
         eersDev.setGroupId("com.bforbank");
         eersDev.setArtifactId("eers");
@@ -61,7 +61,7 @@ public class DatabaseConfig {
         mongoOperations.insert(eersDev);
         Application eersAssemb = new Application();
         eersAssemb.setName("Entrée en relation");
-        eersAssemb.setUrl("https://fra.herokuapp.com/rest/manage/health2");
+        eersAssemb.setUrl("https://fra.herokuapp.com/rest/assembl/eers/manage/info");
         eersAssemb.setEnvironment(Environment.ASSEMBLAGE);
         eersAssemb.setGroupId("com.bforbank");
         eersAssemb.setArtifactId("eers");
@@ -69,16 +69,16 @@ public class DatabaseConfig {
         mongoOperations.insert(eersAssemb);
         Application ec = new Application();
         ec.setName("Espace client");
-        ec.setUrl("https://fra.herokuapp.com/rest/manage/health3");
-        ec.setEnvironment(Environment.ASSEMBLAGE);
+        ec.setUrl("https://fra.herokuapp.com/rest/dev/ec/manage/info");
+        ec.setEnvironment(Environment.DEVELOPPEMENT);
         ec.setGroupId("com.bforbank");
         ec.setArtifactId("ec");
         ec.setVersion("0.0.1-SNAPSHOT");
         mongoOperations.insert(ec);
         Application bss = new Application();
         bss.setName("BSS");
-        bss.setUrl("https://fra.herokuapp.com/rest/manage/health4");
-        bss.setEnvironment(Environment.ASSEMBLAGE);
+        bss.setUrl("https://fra.herokuapp.com/rest/dev/bss/manage/info");
+        bss.setEnvironment(Environment.DEVELOPPEMENT);
         bss.setGroupId("com.bforbank");
         bss.setArtifactId("bss");
         bss.setVersion("0.0.1-SNAPSHOT");

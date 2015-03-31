@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.List;
 import java.util.Optional;
@@ -52,12 +53,21 @@ public class ApplicationResource {
      */
     @Timed
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public ResponseEntity<Application> check(@RequestParam String url, @RequestParam(required = false) String id) {
+    public DeferredResult<ResponseEntity<Application>> check(@RequestParam String url, @RequestParam(required = false) String id) {
+        DeferredResult<ResponseEntity<Application>> deferred = new DeferredResult<>();
         Optional<Application> app = applicationService.findByUrl(url);
         if (app.isPresent() && !app.get().getId().equals(id)) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            deferred.setResult(new ResponseEntity<>(HttpStatus.CONFLICT));
         }
-        return new ResponseEntity<>(applicationService.findAppInfos(url), HttpStatus.OK);
+        applicationService.findAppInfos(url).addCallback(
+                i -> {
+                    Application application = i.getBody();
+                    application.setUrl(url);
+                    deferred.setResult(new ResponseEntity<>(application, HttpStatus.OK));
+                },
+                i -> deferred.setResult(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR))
+        );
+        return deferred;
     }
 
     /**

@@ -3,12 +3,16 @@ package com.github.jntakpe.mfm.service;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Environment;
 import com.github.jntakpe.mfm.domain.Partner;
+import com.github.jntakpe.mfm.mapper.ApplicationMapper;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.web.client.AsyncRestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,13 +29,13 @@ public class ApplicationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationService.class);
 
-    private RestTemplate restTemplate;
+    private AsyncRestTemplate asyncRestTemplate;
 
     private ApplicationRepository applicationRepository;
 
     @Autowired
-    public ApplicationService(RestTemplate restTemplate, ApplicationRepository applicationRepository) {
-        this.restTemplate = restTemplate;
+    public ApplicationService(AsyncRestTemplate asyncRestTemplate, ApplicationRepository applicationRepository) {
+        this.asyncRestTemplate = asyncRestTemplate;
         this.applicationRepository = applicationRepository;
     }
 
@@ -41,11 +45,9 @@ public class ApplicationService {
      * @param url url de monitoring du projet
      * @return renvoie les informations du projet
      */
-    public Application findAppInfos(String url) {
+    public ListenableFuture<ResponseEntity<Application>> findAppInfos(String url) {
         LOG.debug("Tentative de récupération des informations pour à l'uri {}", url);
-        Application application = restTemplate.getForObject(url, Application.class);
-        application.setUrl(url);
-        return application;
+        return asyncRestTemplate.getForEntity(url, Application.class);
     }
 
     /**
@@ -120,7 +122,7 @@ public class ApplicationService {
      * @return la liste des applications correspondantes à l'environnement
      */
     public List<Application> findByEnvironment(Environment environment) {
-        LOG.debug("Recherche des applications de l'environnement {}");
+        LOG.debug("Recherche des applications de l'environnement {}", environment);
         return applicationRepository.findByEnvironment(environment);
     }
 
@@ -136,5 +138,18 @@ public class ApplicationService {
                 .peek(a -> a.addPartner(partner))
                 .peek(this::save)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Met à jour le statut des applications
+     */
+    @Scheduled(fixedRate = 30000L)
+    public void update() {
+        LOG.info("Mise à jour des statuts des applications");
+        findAll().parallelStream()
+                .forEach(app -> findAppInfos(app.getUrl()).addCallback(
+                        a -> save(ApplicationMapper.updateUp(app, a.getBody())),
+                        a -> save(ApplicationMapper.updateDown(app))
+                ));
     }
 }

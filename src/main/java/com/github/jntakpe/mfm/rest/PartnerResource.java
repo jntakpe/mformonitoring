@@ -44,7 +44,7 @@ public class PartnerResource {
     public DeferredResult<ResponseEntity<Set<Partner>>> health(@RequestParam String appId) {
         DeferredResult<ResponseEntity<Set<Partner>>> deferred = new DeferredResult<>();
         Application app = applicationService.findByIdWithPartners(appId);
-        partnerService.health(app.getUrl()).addCallback(
+        partnerService.health(app.healthUrl()).addCallback(
                 h -> deferred.setResult(new ResponseEntity<>(PartnerMapper.toSet(h.getBody(), app), HttpStatus.OK)),
                 h -> deferred.setResult(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR)));
         return deferred;

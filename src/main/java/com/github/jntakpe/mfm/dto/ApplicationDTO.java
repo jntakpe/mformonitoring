@@ -3,6 +3,7 @@ package com.github.jntakpe.mfm.dto;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Environment;
 import com.github.jntakpe.mfm.domain.Partner;
+import com.github.jntakpe.mfm.domain.Status;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class ApplicationDTO {
 
     private String url;
 
-    private String status;
+    private Status status;
 
     private Set<Partner> partners = new HashSet<>();
 
@@ -89,11 +90,11 @@ public class ApplicationDTO {
         this.url = url;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

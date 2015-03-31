@@ -1,6 +1,7 @@
 package com.github.jntakpe.mfm.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -39,6 +40,10 @@ public class Application extends GenericDomain {
     @JsonIgnore
     @DBRef(lazy = true)
     private Set<Partner> partners = new HashSet<>();
+
+    public String healthUrl() {
+        return StringUtils.removeEnd(url, "info") + "health";
+    }
 
     public String getName() {
         return name;
@@ -88,12 +93,12 @@ public class Application extends GenericDomain {
         this.url = url;
     }
 
-    public String getStatus() {
-        return status;
+    public Status getStatus() {
+        return Status.valueOf(status);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(Status status) {
+        this.status = status.name();
     }
 
     public Set<Partner> getPartners() {
@@ -130,6 +135,7 @@ public class Application extends GenericDomain {
                 .append("version", version)
                 .append("environment", environment)
                 .append("url", url)
+                .append("status", status)
                 .toString();
     }
 }
