@@ -35,7 +35,7 @@ public class Application extends GenericDomain {
     @Indexed(unique = true)
     private String url;
 
-    private String status;
+    private String status = Status.UNKNOWN.name();
 
     @JsonIgnore
     @DBRef(lazy = true)

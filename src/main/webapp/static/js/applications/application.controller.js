@@ -67,6 +67,7 @@ function ApplicationController(ApplicationService, PagingService, AlertService, 
         vm.search = {};
         vm.refresh();
     };
+    vm.icon = ApplicationService.icon;
 }
 
 function EditApplicationModalController(ApplicationService, $modalInstance, application) {

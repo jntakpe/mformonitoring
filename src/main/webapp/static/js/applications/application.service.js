@@ -33,11 +33,33 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
         return application.artifactId === 'bss' ? application.name : 'l\'' + application.name;
     }
 
+    function icon(status) {
+        var label;
+        if (status === 'UP') {
+            label = {
+                icon: 'fa-thumbs-up',
+                class: 'success'
+            };
+        } else if (status === 'DOWN') {
+            label = {
+                icon: 'fa-thumbs-down',
+                class: 'danger'
+            };
+        } else {
+            label = {
+                icon: 'fa-cog',
+                class: 'warning'
+            };
+        }
+        return label;
+    }
+
     return {
         application: $resource('api/application/:id', {id: '@id'}, {update: {method: 'PUT'}}),
         check: check,
         remove: remove,
         stateLabel: stateLabel,
-        readableName: readableName
+        readableName: readableName,
+        icon: icon
     };
 });
