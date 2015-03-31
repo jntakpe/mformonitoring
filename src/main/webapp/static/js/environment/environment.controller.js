@@ -1,6 +1,6 @@
 mfmApp.controller('EnvironmentController', EnvironmentController);
 
-function EnvironmentController(EnvironmentService, $stateParams) {
+function EnvironmentController(ApplicationService, EnvironmentService, $stateParams) {
     "use strict";
 
     var vm = this;
@@ -10,4 +10,5 @@ function EnvironmentController(EnvironmentService, $stateParams) {
         vm.apps = response.data;
         vm.partners = EnvironmentService.extractPartners(vm.apps);
     });
+    vm.icon = ApplicationService.icon;
 }

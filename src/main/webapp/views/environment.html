@@ -15,18 +15,22 @@
                 <thead>
                 <tr>
                     <th>Nom</th>
-                    <th>GroupId</th>
                     <th>ArtifactId</th>
                     <th>Version</th>
+                    <th>Statut</th>
                     <th>Détail</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="app in env.apps">
                     <td>{{app.name}}</td>
-                    <td>{{app.groupId}}</td>
                     <td>{{app.artifactId}}</td>
                     <td>{{app.version}}</td>
+                    <td>
+                        <span class="label rounded-2x" ng-class="'label-' + env.icon(app.status).class">
+                            <i class="fa" ng-class="env.icon(app.status).icon"></i> {{app.status}}
+                        </span>
+                    </td>
                     <td>{{app.name}}</td>
                 </tr>
                 </tbody>
