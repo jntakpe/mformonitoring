@@ -18,28 +18,37 @@
             <span class="fa fa-bars"></span>
         </button>
         <!-- End Toggle -->
-    </div><!--/end container-->
+    </div>
+    <!--/end container-->
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
         <div class="container">
             <ul class="nav navbar-nav">
 
-                <li ui-sref-active="active"><a ui-sref="applications"><i class="fa fa-desktop"></i> Applications</a></li>
+                <li ng-class="{ active: ('applications.detail' | includedByState) || ('applications' | includedByState)}">
+                    <a ui-sref="applications"><i class="fa fa-desktop"></i> Applications</a>
+                </li>
                 <li ui-sref-active="active"><a ui-sref="partners"><i class="fa fa-sitemap"></i> Partenaires</a></li>
-                <li class="dropdown">
+                <li class="dropdown" ng-class="{ active: ('environment' | includedByState) }">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cloud"></i> Environnements
+                    </a>
                     <ul class="dropdown-menu">
-                        <a ui-sref="envs" class="dropdown-toggle"><i class="fa fa-cloud"></i> Environnements</a>
-                        <li><a ui-sref="envs.development"> Développement</a></li>
-                        <li><a ui-sref="envs.assemblage"> Assemblage</a></li>
-                        <li><a ui-sref="envs.integration"> Intégration</a></li>
-                        <li><a ui-sref="envs.qualification"> Qualification</a></li>
-                        <li><a ui-sref="envs.recette"> Recette</a></li>
-                        <li><a ui-sref="envs.preprod"> Pré-production</a></li>
-                        <li><a ui-sref="envs.production"> Production</a></li>
+                        <li ui-sref-active="active"><a ui-sref="environment({name: 'DEVELOPPEMENT'})"> Développement</a>
+                        </li>
+                        <li ui-sref-active="active"><a ui-sref="environment({name: 'ASSEMBLAGE'})"> Assemblage</a></li>
+                        <li ui-sref-active="active"><a ui-sref="environment({name: 'INTEGRATION'})"> Intégration</a>
+                        </li>
+                        <li ui-sref-active="active"><a ui-sref="environment({name: 'QUALIFICATION'})"> Qualification</a>
+                        </li>
+                        <li ui-sref-active="active"><a ui-sref="environment({name: 'RECETTE'})"> Recette</a></li>
+                        <li ui-sref-active="active"><a ui-sref="environment({name: 'PRE_PRODUCTION'})">
+                            Pré-production</a></li>
+                        <li ui-sref-active="active"><a ui-sref="environment({name: 'PRODUCTION'})"> Production</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" ui-sref-active="active">
+                <li class="dropdown" ng-class="{ active: ('docs' | includedByState) || ('metrics' | includedByState) }">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-heartbeat"></i> Administration
                     </a>
@@ -52,8 +61,9 @@
                         </li>
                     </ul>
                 </li>
-
             </ul>
-        </div><!--/end container-->
-    </div><!--/navbar-collapse-->
+        </div>
+        <!--/end container-->
+    </div>
+    <!--/navbar-collapse-->
 </div>
