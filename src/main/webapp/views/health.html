@@ -2,15 +2,19 @@
     <thead>
     <tr>
         <th>Partenaire</th>
-        <th>Statut</th>
         <th>Url</th>
+        <th>Statut</th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="part in health.data" ng-class="part.status == 'UP' ? 'success' : 'danger'">
+    <tr ng-repeat="part in health.data">
         <td>{{part.name}}</td>
-        <td>{{part.status}}</td>
         <td>{{part.url}}</td>
+        <td>
+            <span class="label rounded-2x" ng-class="'label-' + health.icon(part.status).class">
+                <i class="fa" ng-class="health.icon(part.status).icon"></i> {{part.status}}
+            </span>
+        </td>
     </tr>
     </tbody>
 </table>
