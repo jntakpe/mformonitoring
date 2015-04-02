@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * Informations sur l'application
+ * Informations sur l'app
  *
  * @author jntakpe
  */

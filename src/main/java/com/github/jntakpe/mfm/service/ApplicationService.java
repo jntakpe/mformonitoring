@@ -42,14 +42,14 @@ public class ApplicationService {
     }
 
     /**
-     * Récupère les informations d'une application à l'aide de l'url de monitoring
+     * Récupère les informations d'une app à l'aide de l'url de monitoring
      *
      * @param url url de monitoring du projet
      * @return renvoie les informations du projet
      */
-    public ListenableFuture<ResponseEntity<Application>> findAppInfos(String url) {
+    public ListenableFuture<ResponseEntity<Informations>> findAppInfos(String url) {
         LOG.debug("Tentative de récupération des informations pour à l'uri {}", url);
-        return asyncRestTemplate.getForEntity(url, Application.class);
+        return asyncRestTemplate.getForEntity(url, Informations.class);
     }
 
     /**
@@ -63,10 +63,10 @@ public class ApplicationService {
     }
 
     /**
-     * Recherche d'une application correspondante à l'url
+     * Recherche d'une app correspondante à l'url
      *
-     * @param url url de l'application
-     * @return l'application correspondante à l'url
+     * @param url url de l'app
+     * @return l'app correspondante à l'url
      */
     public Optional<Application> findByUrl(String url) {
         LOG.debug("Recherche d'une application possédant url {}", url);
@@ -74,10 +74,10 @@ public class ApplicationService {
     }
 
     /**
-     * Enregistrement de l'application
+     * Enregistrement de l'app
      *
-     * @param application application à enregistrer
-     * @return application enregistrée
+     * @param application app à enregistrer
+     * @return app enregistrée
      */
     public Application save(Application application) {
         LOG.info("Enregistrement de l'application {}", application);
@@ -85,9 +85,9 @@ public class ApplicationService {
     }
 
     /**
-     * Suppression de l'application possédant cet identifiant
+     * Suppression de l'app possédant cet identifiant
      *
-     * @param id identifiant de l'application à supprimer
+     * @param id identifiant de l'app à supprimer
      */
     public void delete(String id) {
         Application app = findById(id);
@@ -97,10 +97,10 @@ public class ApplicationService {
     }
 
     /**
-     * Récupère une application en fonction de son identifiant
+     * Récupère une app en fonction de son identifiant
      *
-     * @param id identifiant de l'application
-     * @return l'application correspondante à l'identifiant
+     * @param id identifiant de l'app
+     * @return l'app correspondante à l'identifiant
      */
     public Application findById(String id) {
         LOG.debug("Recherche de l'application id {}", id);
@@ -108,10 +108,10 @@ public class ApplicationService {
     }
 
     /**
-     * Récupère une application en fonction de son identifiant avec les partenaires associés
+     * Récupère une app en fonction de son identifiant avec les partenaires associés
      *
-     * @param id identifiant de l'application
-     * @return l'application correspondante à l'identifiant et les partenaires associés
+     * @param id identifiant de l'app
+     * @return l'app correspondante à l'identifiant et les partenaires associés
      */
     public Application findByIdWithPartners(String id) {
         return findById(id);
@@ -172,7 +172,7 @@ public class ApplicationService {
         LOG.info("Mise à jour des statuts des applications");
         findAll().parallelStream()
                 .forEach(app -> findAppInfos(app.getUrl()).addCallback(
-                        a -> saveAndNotifyUp(app, a.getBody()),
+                        a -> saveAndNotifyUp(app, a.getBody().getApp()),
                         a -> saveAndNotifyDown(app)
                 ));
     }

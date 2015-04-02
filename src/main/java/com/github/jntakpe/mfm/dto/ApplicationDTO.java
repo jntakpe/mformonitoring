@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * DTO représentant une application
+ * DTO représentant une app
  *
  * @author jntakpe
  */

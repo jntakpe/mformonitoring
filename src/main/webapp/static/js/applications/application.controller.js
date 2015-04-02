@@ -95,6 +95,8 @@ function EditApplicationModalController(ApplicationService, $modalInstance, appl
             vm.application.artifactId = response.artifactId;
             vm.application.version = response.version;
             vm.urlChecked = true;
+            form.url.$setValidity('conflict', true);
+            form.url.$setValidity('check', true);
         }).error(function (data, status) {
             form.url.$setValidity(status === 409 ? 'conflict' : 'check', false);
         });

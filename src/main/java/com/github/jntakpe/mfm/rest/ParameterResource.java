@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Resource REST associé aux informations de paramétrage et d'environnement d'une application
+ * Resource REST associé aux informations de paramétrage et d'environnement d'une app
  *
  * @author jntakpe
  */
@@ -27,7 +27,7 @@ public class ParameterResource {
     }
 
     /**
-     * Recherche des paramètres de l'application
+     * Recherche des paramètres de l'app
      *
      * @param url url des paramètres
      * @return JSON des paramètres

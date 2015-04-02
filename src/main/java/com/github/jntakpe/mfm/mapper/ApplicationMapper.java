@@ -11,11 +11,11 @@ import com.github.jntakpe.mfm.domain.Status;
 public final class ApplicationMapper {
 
     /**
-     * Mise à jour d'une application existante à partir des informations récupérées
+     * Mise à jour d'une app existante à partir des informations récupérées
      *
-     * @param origin application existante stockée en DB
+     * @param origin app existante stockée en DB
      * @param infos  informations récupérées par endpoint REST
-     * @return l'application existante avec les informations mises à jour
+     * @return l'app existante avec les informations mises à jour
      */
     public static Application up(Application origin, Application infos) {
         origin.setStatus(Status.UP);
@@ -26,10 +26,10 @@ public final class ApplicationMapper {
     }
 
     /**
-     * Mise à jour d'une application existante au statut DOWN
+     * Mise à jour d'une app existante au statut DOWN
      *
-     * @param origin application existante stockée en DB
-     * @return l'application existante avec le statut DOWN
+     * @param origin app existante stockée en DB
+     * @return l'app existante avec le statut DOWN
      */
     public static Application down(Application origin) {
         origin.setStatus(Status.DOWN);

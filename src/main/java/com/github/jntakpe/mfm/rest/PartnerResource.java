@@ -34,10 +34,10 @@ public class PartnerResource {
     }
 
     /**
-     * Récupère les informations sur le statut de l'application et de ces partenaires puis les met à jour
+     * Récupère les informations sur le statut de l'app et de ces partenaires puis les met à jour
      *
-     * @param appId identifiant de l'application
-     * @return application avec les partenaires mis à jour
+     * @param appId identifiant de l'app
+     * @return app avec les partenaires mis à jour
      */
     @Timed
     @RequestMapping(method = RequestMethod.GET)

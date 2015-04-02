@@ -7,6 +7,7 @@ package com.github.jntakpe.mfm.domain;
  */
 public enum Environment {
 
+    UNKNOWN,
     DEVELOPPEMENT,
     ASSEMBLAGE,
     INTEGRATION,

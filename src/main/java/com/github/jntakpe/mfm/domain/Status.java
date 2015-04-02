@@ -1,7 +1,7 @@
 package com.github.jntakpe.mfm.domain;
 
 /**
- * Enumération des statuts possibles d'une application ou d'un partenaire
+ * Enumération des statuts possibles d'une app ou d'un partenaire
  *
  * @author jntakpe
  */

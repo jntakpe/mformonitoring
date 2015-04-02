@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Entité représentant une application
+ * Entité représentant une app
  *
  * @author jntakpe
  */
@@ -29,7 +29,7 @@ public class Application extends GenericDomain {
 
     private String version;
 
-    private String environment;
+    private String environment = Environment.UNKNOWN.name();
 
     @NotNull
     @Indexed(unique = true)

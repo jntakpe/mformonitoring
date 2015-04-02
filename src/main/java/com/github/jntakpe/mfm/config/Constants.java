@@ -1,7 +1,7 @@
 package com.github.jntakpe.mfm.config;
 
 /**
- * Constantes de l'application
+ * Constantes de l'app
  *
  * @author jntakpe
  */

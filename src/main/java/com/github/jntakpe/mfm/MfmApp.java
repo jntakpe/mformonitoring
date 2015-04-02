@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * Classe démarrant l'application Spring Boot
+ * Classe démarrant l'app Spring Boot
  *
  * @author jntakpe
  */
@@ -32,7 +32,7 @@ public class MfmApp extends SpringBootServletInitializer {
     private static final Logger LOG = LoggerFactory.getLogger(MfmApp.class);
 
     /**
-     * Démarre l'application en mode 'embedded'
+     * Démarre l'app en mode 'embedded'
      *
      * @param args arguments passés par le goal maven
      */

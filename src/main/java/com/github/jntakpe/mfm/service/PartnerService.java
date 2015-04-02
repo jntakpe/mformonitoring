@@ -36,7 +36,7 @@ public class PartnerService {
     /**
      * Récupération des informations de health check pour une url
      *
-     * @param url url de l'application
+     * @param url url de l'app
      * @return callback sur les informations du health check
      */
     public ListenableFuture<ResponseEntity<HealthDTO>> health(String url) {

@@ -3,6 +3,7 @@ package com.github.jntakpe.mfm.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.github.jntakpe.mfm.domain.Application;
 import com.github.jntakpe.mfm.domain.Environment;
+import com.github.jntakpe.mfm.domain.Status;
 import com.github.jntakpe.mfm.dto.ApplicationDTO;
 import com.github.jntakpe.mfm.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Ressouce REST associé à une application
+ * Ressouce REST associé à une app
  *
  * @author jntakpe
  */
@@ -48,7 +49,7 @@ public class ApplicationResource {
      * Si la récupération des informations échoue à l'url donnée renvoie un code d'erreur 500.
      *
      * @param url url de monitoring à tester
-     * @param id  identifiant de l'application dans le cas d'une application déjà existante
+     * @param id  identifiant de l'app dans le cas d'une app déjà existante
      * @return la récupération des informations du projet sinon un code erreur
      */
     @Timed
@@ -61,7 +62,7 @@ public class ApplicationResource {
         }
         applicationService.findAppInfos(url).addCallback(
                 i -> {
-                    Application application = i.getBody();
+                    Application application = i.getBody().getApp();
                     if (application == null || application.getArtifactId() == null) {
                         deferred.setResult(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
                     } else {
@@ -75,22 +76,23 @@ public class ApplicationResource {
     }
 
     /**
-     * Ajout d'une nouvelle application
+     * Ajout d'une nouvelle app
      *
-     * @param application application à ajouter
-     * @return application enregistrée
+     * @param application app à ajouter
+     * @return app enregistrée
      */
     @Timed
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Application> create(@RequestBody Application application) {
+        application.setStatus(Status.UP);
         return new ResponseEntity<>(applicationService.save(application), HttpStatus.OK);
     }
 
     /**
-     * Récupère une application à partir de son identifiant
+     * Récupère une app à partir de son identifiant
      *
-     * @param id identifiant de l'application
-     * @return l'application correspondante à l'identifiant
+     * @param id identifiant de l'app
+     * @return l'app correspondante à l'identifiant
      */
     @Timed
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -99,11 +101,11 @@ public class ApplicationResource {
     }
 
     /**
-     * Modification d'une application
+     * Modification d'une app
      *
-     * @param id          identifiant de l'application
-     * @param application application à modifier
-     * @return application modifiée
+     * @param id          identifiant de l'app
+     * @param application app à modifier
+     * @return app modifiée
      */
     @Timed
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -112,9 +114,9 @@ public class ApplicationResource {
     }
 
     /**
-     * Suppression de l'application possédant l'id
+     * Suppression de l'app possédant l'id
      *
-     * @param id identifiant de l'application à supprimer
+     * @param id identifiant de l'app à supprimer
      * @return code HTTP 200 si la suppression est effectuée
      */
     @Timed
