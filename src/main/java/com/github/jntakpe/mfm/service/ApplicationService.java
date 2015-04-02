@@ -1,8 +1,6 @@
 package com.github.jntakpe.mfm.service;
 
-import com.github.jntakpe.mfm.domain.Application;
-import com.github.jntakpe.mfm.domain.Environment;
-import com.github.jntakpe.mfm.domain.Partner;
+import com.github.jntakpe.mfm.domain.*;
 import com.github.jntakpe.mfm.mapper.ApplicationMapper;
 import com.github.jntakpe.mfm.repository.ApplicationRepository;
 import org.slf4j.Logger;
@@ -33,10 +31,14 @@ public class ApplicationService {
 
     private ApplicationRepository applicationRepository;
 
+    private NotificationService notificationService;
+
     @Autowired
-    public ApplicationService(AsyncRestTemplate asyncRestTemplate, ApplicationRepository applicationRepository) {
+    public ApplicationService(AsyncRestTemplate asyncRestTemplate, ApplicationRepository applicationRepository,
+                              NotificationService notificationService) {
         this.asyncRestTemplate = asyncRestTemplate;
         this.applicationRepository = applicationRepository;
+        this.notificationService = notificationService;
     }
 
     /**
@@ -140,16 +142,38 @@ public class ApplicationService {
                 .collect(Collectors.toSet());
     }
 
+    private void saveAndNotifyUp(Application origin, Application response) {
+        if (origin.getStatus() != Status.UP) {
+            LOG.info("Notification de démarrage de l'application {}", origin);
+            notificationService.create(new Notification(origin, response, Type.START));
+            save(ApplicationMapper.up(origin, response));
+        }
+        System.out.println(origin + " |||| " + response);
+        if (!origin.getVersion().equals(response.getVersion())) {
+            LOG.info("Notification de changement de version de l'application {}", origin);
+            notificationService.create(new Notification(origin, response, Type.CHANGE_VERSION));
+            save(ApplicationMapper.up(origin, response));
+        }
+    }
+
+    private void saveAndNotifyDown(Application application) {
+        if (application.getStatus() == Status.UP) {
+            LOG.info("Notification d'arrêt sur l'application {}", application);
+            notificationService.create(new Notification(application));
+            save(ApplicationMapper.down(application));
+        }
+    }
+
     /**
-     * Met à jour le statut des applications
+     * Met à jour le statut des applications et créé les notifications associées si nécessaire
      */
-    @Scheduled(fixedRate = 30000L)
+    @Scheduled(fixedRate = 30000)
     public void update() {
         LOG.info("Mise à jour des statuts des applications");
         findAll().parallelStream()
                 .forEach(app -> findAppInfos(app.getUrl()).addCallback(
-                        a -> save(ApplicationMapper.updateUp(app, a.getBody())),
-                        a -> save(ApplicationMapper.updateDown(app))
+                        a -> saveAndNotifyUp(app, a.getBody()),
+                        a -> saveAndNotifyDown(app)
                 ));
     }
 }

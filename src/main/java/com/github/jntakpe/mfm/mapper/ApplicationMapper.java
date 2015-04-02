@@ -17,7 +17,7 @@ public final class ApplicationMapper {
      * @param infos  informations récupérées par endpoint REST
      * @return l'application existante avec les informations mises à jour
      */
-    public static Application updateUp(Application origin, Application infos) {
+    public static Application up(Application origin, Application infos) {
         origin.setStatus(Status.UP);
         origin.setArtifactId(infos.getArtifactId());
         origin.setGroupId(infos.getGroupId());
@@ -31,8 +31,9 @@ public final class ApplicationMapper {
      * @param origin application existante stockée en DB
      * @return l'application existante avec le statut DOWN
      */
-    public static Application updateDown(Application origin) {
+    public static Application down(Application origin) {
         origin.setStatus(Status.DOWN);
         return origin;
     }
+
 }
