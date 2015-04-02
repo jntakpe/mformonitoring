@@ -44,7 +44,6 @@ public class DatabaseConfig {
         return new LocalValidatorFactoryBean();
     }
 
-    @PostConstruct
     public void initDatabase() {
         LOG.warn("Initialisation de MongoDB avec des données de développement");
         mongoOperations.dropCollection(Application.class);

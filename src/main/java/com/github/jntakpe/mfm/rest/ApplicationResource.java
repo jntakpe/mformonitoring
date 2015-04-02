@@ -62,8 +62,12 @@ public class ApplicationResource {
         applicationService.findAppInfos(url).addCallback(
                 i -> {
                     Application application = i.getBody();
-                    application.setUrl(url);
-                    deferred.setResult(new ResponseEntity<>(application, HttpStatus.OK));
+                    if (application == null || application.getArtifactId() == null) {
+                        deferred.setResult(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+                    } else {
+                        application.setUrl(url);
+                        deferred.setResult(new ResponseEntity<>(application, HttpStatus.OK));
+                    }
                 },
                 i -> deferred.setResult(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR))
         );

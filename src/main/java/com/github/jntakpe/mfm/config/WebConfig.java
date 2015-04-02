@@ -4,6 +4,9 @@ import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import com.github.jntakpe.mfm.config.properties.WebProperties;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,7 @@ public class WebConfig implements ServletContextInitializer {
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
         factory.setConnectTimeout(webProperties.getTimeout());
         factory.setReadTimeout(webProperties.getTimeout());
+        factory.setHttpClient(HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build());
         return new RestTemplate(factory);
     }
 
@@ -61,6 +65,7 @@ public class WebConfig implements ServletContextInitializer {
         HttpComponentsAsyncClientHttpRequestFactory factory = new HttpComponentsAsyncClientHttpRequestFactory();
         factory.setConnectTimeout(webProperties.getTimeout());
         factory.setReadTimeout(webProperties.getTimeout());
+        factory.setHttpAsyncClient(HttpAsyncClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build());
         return new AsyncRestTemplate(factory);
     }
 
