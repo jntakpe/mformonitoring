@@ -1,6 +1,8 @@
-mfmApp.controller('HomeController', function () {
+mfmApp.controller('HomeController', function (HomeService) {
     "use strict";
 
     var vm = this;
-    vm.alert = {};
+    HomeService.findAll.success(function (data) {
+        vm.notifications = HomeService.display(data);
+    });
 });

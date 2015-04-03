@@ -59,6 +59,7 @@ module.exports = function (grunt) {
                     '<%= dirs.source %>/js/header/header.controller.js',
                     '<%= dirs.source %>/js/home/home.js',
                     '<%= dirs.source %>/js/home/home.controller.js',
+                    '<%= dirs.source %>/js/home/home.service.js',
                     '<%= dirs.source %>/js/admin/admin.js',
                     '<%= dirs.source %>/js/admin/docs/docs.js',
                     '<%= dirs.source %>/js/admin/metrics/metrics.js',
@@ -157,6 +158,7 @@ module.exports = function (grunt) {
                         '<%= dirs.source %>/css/unify/blocks.css',
                         '<%= dirs.source %>/css/unify/header.css',
                         '<%= dirs.source %>/css/unify/footer.css',
+                        '<%= dirs.source %>/css/unify/profile.css',
                         '<%= dirs.source %>/css/unify/sky-forms.css',
                         '<%= dirs.source %>/css/unify/custom-sky-forms.css'
                     ]

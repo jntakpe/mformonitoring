@@ -11,37 +11,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Notification extends GenericDomain {
 
-    private String message;
-
     private String target;
 
     private String type;
 
+    private ApplicationInfos appInfos;
+
+    public Notification() {
+    }
+
     public Notification(Application origin) {
         setTarget(Target.APPPLICATION);
         setType(Type.STOP);
-        message = "L'application " + origin.getName() + " n'est plus accessible en " + origin.getEnvironment();
+        appInfos = new ApplicationInfos(origin);
     }
 
     public Notification(Application origin, Application dest, Type type) {
         setTarget(Target.APPPLICATION);
         setType(type);
-        switch (type) {
-            case START:
-                message = "L'application " + origin.getName() + " est à présent démarrée en " + origin.getEnvironment();
-                break;
-            case CHANGE_VERSION:
-                message = "La version de l'application " + origin.getName() + " en " + origin.getEnvironment()
-                        + "a été modifié de " + origin.getVersion() + " à " + dest.getVersion();
-        }
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+        appInfos = type == Type.START ? new ApplicationInfos(origin) : new ApplicationInfos(origin, dest);
     }
 
     public Target getTarget() {
@@ -60,12 +48,20 @@ public class Notification extends GenericDomain {
         this.type = type.name();
     }
 
+    public ApplicationInfos getAppInfos() {
+        return appInfos;
+    }
+
+    public void setAppInfos(ApplicationInfos appInfos) {
+        this.appInfos = appInfos;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("message", message)
                 .append("target", target)
-                .append("status", type)
+                .append("type", type)
+                .append("appInfos", appInfos)
                 .toString();
     }
 }

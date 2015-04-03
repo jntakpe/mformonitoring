@@ -13,11 +13,11 @@ public final class Urls {
 
     public static final String PARTNER = API + "/partner";
 
+    public static final String NOTIF = API + "/notification";
+
     public static final String METRICS = APPLICATION + "/{id}/metrics";
 
     public static final String PARAM = APPLICATION + "/{id}/params";
-
-    public static final String HEALTH = APPLICATION + "/{id}/health";
 
     private Urls() {
     }

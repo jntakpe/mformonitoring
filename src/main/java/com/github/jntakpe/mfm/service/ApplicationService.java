@@ -166,7 +166,7 @@ public class ApplicationService {
     /**
      * Met à jour le statut des applications et créé les notifications associées si nécessaire
      */
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(initialDelay = 10000, fixedRate = 30000)
     public void update() {
         LOG.info("Mise à jour des statuts des applications");
         findAll().parallelStream()

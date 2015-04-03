@@ -1,8 +1,7 @@
 mfmApp.config(function ($stateProvider) {
     "use strict";
 
-    $stateProvider
-        .state('home', {
+    $stateProvider.state('home', {
             parent: 'site',
             url: '/',
             views: {

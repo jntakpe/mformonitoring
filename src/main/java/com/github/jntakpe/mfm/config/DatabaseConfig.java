@@ -1,8 +1,6 @@
 package com.github.jntakpe.mfm.config;
 
-import com.github.jntakpe.mfm.domain.Application;
-import com.github.jntakpe.mfm.domain.Environment;
-import com.github.jntakpe.mfm.domain.Partner;
+import com.github.jntakpe.mfm.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +49,8 @@ public class DatabaseConfig {
         mongoOperations.createCollection(Application.class);
         mongoOperations.dropCollection(Partner.class);
         mongoOperations.createCollection(Partner.class);
+        mongoOperations.dropCollection(Notification.class);
+        mongoOperations.createCollection(Notification.class);
         Application eersDev = new Application();
         eersDev.setName("Entrée en relation");
         eersDev.setUrl("https://fra.herokuapp.com/rest/dev/eers/manage/info");
@@ -58,6 +58,7 @@ public class DatabaseConfig {
         eersDev.setGroupId("com.bforbank");
         eersDev.setArtifactId("eers");
         eersDev.setVersion("0.0.1-SNAPSHOT");
+        eersDev.setStatus(Status.UP);
         mongoOperations.insert(eersDev);
         Application eersAssemb = new Application();
         eersAssemb.setName("Entrée en relation");
@@ -66,6 +67,7 @@ public class DatabaseConfig {
         eersAssemb.setGroupId("com.bforbank");
         eersAssemb.setArtifactId("eers");
         eersAssemb.setVersion("0.0.1-SNAPSHOT");
+        eersAssemb.setStatus(Status.UP);
         mongoOperations.insert(eersAssemb);
         Application ec = new Application();
         ec.setName("Espace client");
@@ -74,6 +76,7 @@ public class DatabaseConfig {
         ec.setGroupId("com.bforbank");
         ec.setArtifactId("ec");
         ec.setVersion("0.0.1-SNAPSHOT");
+        ec.setStatus(Status.UP);
         mongoOperations.insert(ec);
         Application bss = new Application();
         bss.setName("BSS");
@@ -82,6 +85,7 @@ public class DatabaseConfig {
         bss.setGroupId("com.bforbank");
         bss.setArtifactId("bss");
         bss.setVersion("0.0.1-SNAPSHOT");
+        bss.setStatus(Status.UP);
         mongoOperations.insert(bss);
     }
 }

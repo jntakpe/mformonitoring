@@ -27,7 +27,7 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
         if (status === 'UP') {
             label = {
                 icon: 'fa-thumbs-up',
-                class: 'success'
+                class: 'u'
             };
         } else if (status === 'DOWN') {
             label = {
