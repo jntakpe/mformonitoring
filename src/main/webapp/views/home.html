@@ -14,7 +14,8 @@
                         <h2 class="panel-title heading-sm pull-left"><i class="fa fa-send"></i> Notifications</h2>
                     </div>
                     <div class="panel-body no-padding">
-                        <div class="alert-blocks" ng-repeat="notif in home.notifications" ng-class="notif.display.alert">
+                        <div class="alert-blocks" ng-repeat="notif in home.notifications | orderBy:'createdAt':true"
+                             ng-class="notif.display.alert">
                             <i class="icon-custom rounded-x icon fa" ng-class="notif.display.icon"></i>
                             <div class="overflow-h" ng-switch="notif.type">
                                 <strong ng-class="notif.display.color">{{notif.display.title}} <small class="pull-right"><em>{{notif.display.time}}</em></small></strong>
