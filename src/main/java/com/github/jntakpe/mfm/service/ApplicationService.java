@@ -148,7 +148,6 @@ public class ApplicationService {
             notificationService.create(new Notification(origin, response, Type.START));
             save(ApplicationMapper.up(origin, response));
         }
-        System.out.println(origin + " |||| " + response);
         if (!origin.getVersion().equals(response.getVersion())) {
             LOG.info("Notification de changement de version de l'application {}", origin);
             notificationService.create(new Notification(origin, response, Type.CHANGE_VERSION));

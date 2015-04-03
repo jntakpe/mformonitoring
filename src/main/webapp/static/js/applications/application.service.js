@@ -18,17 +18,6 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
         }
     }
 
-    function stateLabel(state) {
-        var name = state.current.name;
-        if (name.indexOf('applications.detail.controllers') !== -1) {
-            return 'Utilisation des contrôleurs';
-        }
-        if (name.indexOf('applications.detail.properties') !== -1) {
-            return 'Paramétrage';
-        }
-        return 'Tableau de bord';
-    }
-
     function readableName(application) {
         return application.artifactId === 'bss' ? application.name : 'l\'' + application.name;
     }
@@ -58,7 +47,6 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
         application: $resource('api/application/:id', {id: '@id'}, {update: {method: 'PUT'}}),
         check: check,
         remove: remove,
-        stateLabel: stateLabel,
         readableName: readableName,
         icon: icon
     };
