@@ -17,7 +17,7 @@
                         <div class="alert-blocks" ng-repeat="notif in home.notifications" ng-class="notif.display.alert">
                             <i class="icon-custom rounded-x icon fa" ng-class="notif.display.icon"></i>
                             <div class="overflow-h" ng-switch="notif.type">
-                                <strong ng-class="notif.display.color">{{notif.display.title}} <small class="pull-right"><em>Just now</em></small></strong>
+                                <strong ng-class="notif.display.color">{{notif.display.title}} <small class="pull-right"><em>{{notif.display.time}}</em></small></strong>
                                 <p ng-switch-when="START">
                                     L'application
                                     <span class="label rounded-2x label-success linked margin-left-5 margin-right-5" ui-sref="applications.detail.dashboard({id: notif.appInfos.id})">{{notif.appInfos.name}}</span>

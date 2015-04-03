@@ -45,7 +45,8 @@ module.exports = function (grunt) {
                     '<%= dirs.bowerRes %>/angular-resource/angular-resource.min.js',
                     '<%= dirs.bowerRes %>/angular-ui-router/release/angular-ui-router.min.js',
                     '<%= dirs.bowerRes %>/angular-ui-utils/ui-utils.min.js',
-                    '<%= dirs.bowerRes %>/angular-bootstrap/ui-bootstrap-tpls.min.js'
+                    '<%= dirs.bowerRes %>/angular-bootstrap/ui-bootstrap-tpls.min.js',
+                    '<%= dirs.bowerRes %>/moment/min/moment-with-locales.js'
                 ],
                 dest: '<%= dirs.target %>/js/third-party.min.js'
             },

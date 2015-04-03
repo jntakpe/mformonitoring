@@ -13,7 +13,8 @@ mfmApp.factory('HomeService', function ($http) {
     }
 
     function extractInfo(notif) {
-        var display = {}, name = notif.appInfos.name, environment = notif.appInfos.environment;
+        var display = {};
+        display.time = moment(new Date(notif.createdAt)).locale('fr').fromNow();
         if (notif.type === 'START') {
             display.icon = 'fa-thumbs-up icon-bg-green';
             display.alert = 'alert-blocks-success';
