@@ -142,27 +142,6 @@ public class ApplicationService {
                 .collect(Collectors.toSet());
     }
 
-    private void saveAndNotifyUp(Application origin, Application response) {
-        if (origin.getStatus() != Status.UP) {
-            LOG.info("Notification de démarrage de l'application {}", origin);
-            notificationService.create(new Notification(origin, response, Type.START));
-            save(ApplicationMapper.up(origin, response));
-        }
-        if (!origin.getVersion().equals(response.getVersion())) {
-            LOG.info("Notification de changement de version de l'application {}", origin);
-            notificationService.create(new Notification(origin, response, Type.CHANGE_VERSION));
-            save(ApplicationMapper.up(origin, response));
-        }
-    }
-
-    private void saveAndNotifyDown(Application application) {
-        if (application.getStatus() == Status.UP) {
-            LOG.info("Notification d'arrêt sur l'application {}", application);
-            notificationService.create(new Notification(application));
-            save(ApplicationMapper.down(application));
-        }
-    }
-
     /**
      * Met à jour le statut des applications et créé les notifications associées si nécessaire
      */
@@ -174,5 +153,35 @@ public class ApplicationService {
                         a -> saveAndNotifyUp(app, a.getBody().getApp()),
                         a -> saveAndNotifyDown(app)
                 ));
+    }
+
+    private void saveAndNotifyUp(Application origin, Application response) {
+        if (hasStatusChanged(origin)) {
+            LOG.info("Notification de démarrage de l'application {}", origin);
+            notificationService.create(new Notification(origin, response, Type.START));
+        }
+        if (hasVersionChanged(origin, response)) {
+            LOG.info("Notification de changement de version de l'application {}", origin);
+            notificationService.create(new Notification(origin, response, Type.CHANGE_VERSION));
+        }
+        if (hasStatusChanged(origin) || hasVersionChanged(origin, response)) {
+            save(ApplicationMapper.up(origin, response));
+        }
+    }
+
+    private boolean hasVersionChanged(Application origin, Application response) {
+        return !origin.getVersion().equals(response.getVersion());
+    }
+
+    private boolean hasStatusChanged(Application origin) {
+        return origin.getStatus() != Status.UP;
+    }
+
+    private void saveAndNotifyDown(Application application) {
+        if (application.getStatus() == Status.UP) {
+            LOG.info("Notification d'arrêt sur l'application {}", application);
+            notificationService.create(new Notification(application));
+            save(ApplicationMapper.down(application));
+        }
     }
 }
