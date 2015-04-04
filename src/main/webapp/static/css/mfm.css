@@ -74,3 +74,9 @@
 .header .navbar-nav > li > a:focus {
     border-bottom: 2px solid #72c02c;
 }
+
+.profile .profile-body .panel .panel-body {
+    max-height: 500px;
+    overflow-y: hidden;
+    position: relative;
+}

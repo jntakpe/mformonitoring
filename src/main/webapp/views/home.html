@@ -9,44 +9,55 @@
 <div class="container content profile">
     <div class="row">
         <div class="profile-body">
-                <div class="panel panel-profile">
-                    <div class="panel-heading overflow-h">
-                        <h2 class="panel-title heading-sm pull-left"><i class="fa fa-send"></i> Notifications</h2>
-                    </div>
-                    <div class="panel-body no-padding">
-                        <div class="alert-blocks" ng-repeat="notif in home.notifications | orderBy:'createdAt':true"
-                             ng-class="notif.display.alert">
-                            <i class="icon-custom rounded-x icon fa" ng-class="notif.display.icon"></i>
-                            <div class="overflow-h" ng-switch="notif.type">
-                                <strong ng-class="notif.display.color">{{notif.display.title}} <small class="pull-right"><em>{{notif.display.time}}</em></small></strong>
-                                <p ng-switch-when="START">
-                                    L'application
-                                    <span class="label rounded-2x label-success linked margin-left-5 margin-right-5" ui-sref="applications.detail.dashboard({id: notif.appInfos.id})">{{notif.appInfos.name}}</span>
-                                    est à présent démarrée en
-                                    <span class="label rounded-2x label-success linked margin-left-5 margin-right-5" ui-sref="environment({name: notif.appInfos.environment})">{{notif.appInfos.environment}}</span>
-                                </p>
-                                <p ng-switch-when="STOP">
-                                    L'application {{notif.appInfos.name}} n'est plus accessible en
-                                    <span class="label rounded-2x label-danger linked margin-left-5 margin-right-5" ui-sref="environment({name: notif.appInfos.environment})">{{notif.appInfos.environment}}</span>
-                                </p>
-                                <p ng-switch-default="">
-                                    La version de l'application
-                                    <span class="label rounded-2x label-info linked margin-left-5 margin-right-5" ui-sref="applications.detail.dashboard({id: notif.appInfos.id})">
+            <div class="panel panel-profile">
+                <div class="panel-heading overflow-h">
+                    <h2 class="panel-title heading-sm pull-left"><i class="fa fa-send"></i> Notifications</h2>
+                </div>
+                <div class="panel-body no-padding" perfect-scrollbar refresh-on-change="home.notifications">
+                    <div class="alert-blocks" ng-repeat="notif in home.notifications | orderBy:'createdAt':true"
+                         ng-class="notif.display.alert">
+                        <i class="icon-custom rounded-x icon fa" ng-class="notif.display.icon"></i>
+
+                        <div class="overflow-h" ng-switch="notif.type">
+                            <strong ng-class="notif.display.color">{{notif.display.title}}
+                                <small class="pull-right"><em>{{notif.display.time}}</em></small>
+                            </strong>
+
+                            <p ng-switch-when="START">
+                                L'application
+                                    <span class="label rounded-2x label-success linked margin-left-5 margin-right-5"
+                                          ui-sref="applications.detail.dashboard({id: notif.appInfos.id})">{{notif.appInfos.name}}</span>
+                                est à présent démarrée en
+                                    <span class="label rounded-2x label-success linked margin-left-5 margin-right-5"
+                                          ui-sref="environment({name: notif.appInfos.environment})">{{notif.appInfos.environment}}</span>
+                            </p>
+
+                            <p ng-switch-when="STOP">
+                                L'application {{notif.appInfos.name}} n'est plus accessible en
+                                    <span class="label rounded-2x label-danger linked margin-left-5 margin-right-5"
+                                          ui-sref="environment({name: notif.appInfos.environment})">{{notif.appInfos.environment}}</span>
+                            </p>
+
+                            <p ng-switch-default="">
+                                La version de l'application
+                                    <span class="label rounded-2x label-info linked margin-left-5 margin-right-5"
+                                          ui-sref="applications.detail.dashboard({id: notif.appInfos.id})">
                                         {{notif.appInfos.name}}
                                     </span>
-                                    en
-                                    <span class="label rounded-2x label-info linked margin-left-5 margin-right-5" ui-sref="environment({name: notif.appInfos.environment})">
+                                en
+                                    <span class="label rounded-2x label-info linked margin-left-5 margin-right-5"
+                                          ui-sref="environment({name: notif.appInfos.environment})">
                                         {{notif.appInfos.environment}}
                                     </span>
-                                    a été modifiée de
-                                    <strong class="color-blue">{{notif.appInfos.originVersion}}</strong>
-                                    en
-                                    <strong class="color-blue">{{notif.appInfos.destVersion}}</strong>
-                                </p>
-                            </div>
+                                a été modifiée de
+                                <strong class="color-blue">{{notif.appInfos.originVersion}}</strong>
+                                en
+                                <strong class="color-blue">{{notif.appInfos.destVersion}}</strong>
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

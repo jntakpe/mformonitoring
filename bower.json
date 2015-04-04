@@ -12,6 +12,7 @@
     "angular-bootstrap": "latest",
     "angular-ui-utils": "latest",
     "swagger-ui": "latest",
+    "perfect-scrollbar": "latest",
     "moment": "latest"
   },
   "resolutions": {

@@ -46,7 +46,8 @@ module.exports = function (grunt) {
                     '<%= dirs.bowerRes %>/angular-ui-router/release/angular-ui-router.min.js',
                     '<%= dirs.bowerRes %>/angular-ui-utils/ui-utils.min.js',
                     '<%= dirs.bowerRes %>/angular-bootstrap/ui-bootstrap-tpls.min.js',
-                    '<%= dirs.bowerRes %>/moment/min/moment-with-locales.js'
+                    '<%= dirs.bowerRes %>/moment/min/moment-with-locales.js',
+                    '<%= dirs.bowerRes %>/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js'
                 ],
                 dest: '<%= dirs.target %>/js/third-party.min.js'
             },
@@ -136,7 +137,8 @@ module.exports = function (grunt) {
                 },
                 src: [
                     '<%= dirs.bowerRes %>/bootstrap/dist/css/bootstrap.min.css',
-                    '<%= dirs.bowerRes %>/font-awesome/css/font-awesome.min.css'
+                    '<%= dirs.bowerRes %>/font-awesome/css/font-awesome.min.css',
+                    '<%= dirs.bowerRes %>/perfect-scrollbar/css/perfect-scrollbar.min.css'
                 ],
                 dest: '<%= dirs.target %>/css/third-party.min.css'
             }
