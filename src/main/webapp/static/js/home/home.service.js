@@ -34,8 +34,12 @@ mfmApp.factory('HomeService', function ($http) {
         return display;
     }
 
+    function findAll() {
+        return $http.get('api/notification')
+    }
+
     return {
-        findAll: $http.get('api/notification'),
+        findAll: findAll,
         display: display
     }
 });
