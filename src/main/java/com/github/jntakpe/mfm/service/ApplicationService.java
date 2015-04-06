@@ -156,6 +156,7 @@ public class ApplicationService {
     }
 
     private void saveAndNotifyUp(Application origin, Application response) {
+        LOG.trace("Récupération des informations de l'application {} effectuée avec succès", origin);
         if (hasStatusChanged(origin)) {
             LOG.info("Notification de démarrage de l'application {}", origin);
             notificationService.create(new Notification(origin, response, Type.START));
@@ -178,6 +179,7 @@ public class ApplicationService {
     }
 
     private void saveAndNotifyDown(Application application) {
+        LOG.trace("Echec de la récupération des informations de l'application {}", application);
         if (application.getStatus() == Status.UP) {
             LOG.info("Notification d'arrêt sur l'application {}", application);
             notificationService.create(new Notification(application));

@@ -1,6 +1,28 @@
 mfmApp.factory('HomeService', function ($http) {
     "use strict";
 
+    function extractInfo(notif) {
+        var diplayInfos = {};
+        diplayInfos.time = moment(new Date(notif.createdAt)).locale('fr').fromNow();
+        if (notif.type === 'START') {
+            diplayInfos.icon = 'fa-thumbs-up icon-bg-green';
+            diplayInfos.alert = 'alert-blocks-success';
+            diplayInfos.color = 'color-green';
+            diplayInfos.title = 'Application démarrée';
+        } else if (notif.type === 'STOP') {
+            diplayInfos.icon = 'fa-thumbs-down icon-bg-red';
+            diplayInfos.alert = 'alert-blocks-error';
+            diplayInfos.color = 'color-red';
+            diplayInfos.title = 'Application arrêtée';
+        } else {
+            diplayInfos.icon = 'fa-history icon-bg-blue';
+            diplayInfos.alert = 'alert-blocks-info';
+            diplayInfos.color = 'color-blue';
+            diplayInfos.title = 'Nouvelle version';
+        }
+        return diplayInfos;
+    }
+
     function display(notifs) {
         var idx, notif;
         for (idx in notifs) {
@@ -12,34 +34,12 @@ mfmApp.factory('HomeService', function ($http) {
         return notifs;
     }
 
-    function extractInfo(notif) {
-        var display = {};
-        display.time = moment(new Date(notif.createdAt)).locale('fr').fromNow();
-        if (notif.type === 'START') {
-            display.icon = 'fa-thumbs-up icon-bg-green';
-            display.alert = 'alert-blocks-success';
-            display.color = 'color-green';
-            display.title = 'Application démarrée';
-        } else if (notif.type === 'STOP') {
-            display.icon = 'fa-thumbs-down icon-bg-red';
-            display.alert = 'alert-blocks-error';
-            display.color = 'color-red';
-            display.title = 'Application arrêtée';
-        } else {
-            display.icon = 'fa-history icon-bg-blue';
-            display.alert = 'alert-blocks-info';
-            display.color = 'color-blue';
-            display.title = 'Nouvelle version';
-        }
-        return display;
-    }
-
     function findAll() {
-        return $http.get('api/notification')
+        return $http.get('api/notification');
     }
 
     return {
         findAll: findAll,
         display: display
-    }
+    };
 });
