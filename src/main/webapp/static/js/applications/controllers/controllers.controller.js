@@ -11,11 +11,12 @@ mfmApp.controller('ControllersController', function (application, MetricsService
         column: 'count',
         reverse: true
     };
-    MetricsService.findExternal(application.id, 'http://localhost:8080/manage/metrics').success(function (response) {
-        vm.data = MetricsService.extractStats(response);
-        vm.props = PagingService.toListParams(vm.data, 12);
-        vm.refresh();
-    });
+    MetricsService.findExternal(application.id, MetricsService.toMetricsUrl(application.url))
+        .success(function (response) {
+            vm.data = MetricsService.extractStats(response);
+            vm.props = PagingService.toListParams(vm.data, 12);
+            vm.refresh();
+        });
     vm.sortColumn = function (column) {
         PagingService.sort(column, vm.sort);
         vm.refresh();

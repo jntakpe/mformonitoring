@@ -35,6 +35,9 @@ function MetricsService($http) {
         },
         extractStats: function (stats) {
             return resourceStats(stats);
+        },
+        toMetricsUrl: function (url) {
+            return url.replace('/info', '/metrics');
         }
     };
 }

@@ -4,9 +4,10 @@ mfmApp.controller('DashboardController', function (application, MetricsService) 
     var vm = this;
     vm.data = {};
     vm.refresh = function () {
-        MetricsService.findExternal(application.id, 'http://localhost:8080/manage/metrics').success(function (response) {
-            vm.data = response;
-        });
+        MetricsService.findExternal(application.id, MetricsService.toMetricsUrl(application.url))
+            .success(function (response) {
+                vm.data = response;
+            });
     };
     vm.refresh();
 });
