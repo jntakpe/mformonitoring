@@ -63,7 +63,6 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         eers.setName("Entrée en relation");
         eers.setUrl("https://fra.herokuapp.com/rest/manage/health");
         eers.setEnvironment(Environment.DEVELOPPEMENT);
-        eers.setGroupId("com.bforbank");
         eers.setArtifactId("eers");
         eers.setVersion("0.0.1-SNAPSHOT");
         eers.setPartners(new HashSet<>(partners));
@@ -72,7 +71,6 @@ public class ApplicationServiceTest extends AbstractTestNGSpringContextTests {
         ec.setName("Espace client");
         ec.setUrl("https://fra.herokuapp.com/rest/manage/health3");
         ec.setEnvironment(Environment.DEVELOPPEMENT);
-        ec.setGroupId("com.bforbank");
         ec.setArtifactId("ec");
         ec.setVersion("0.0.1-SNAPSHOT");
         ec.setPartners(new HashSet<>(partners));

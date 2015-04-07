@@ -91,7 +91,6 @@ function EditApplicationModalController(ApplicationService, $modalInstance, appl
     vm.check = function (form) {
         ApplicationService.check(vm.application).success(function (response) {
             vm.application.name = response.name;
-            vm.application.groupId = response.groupId;
             vm.application.artifactId = response.artifactId;
             vm.application.version = response.version;
             vm.urlChecked = true;

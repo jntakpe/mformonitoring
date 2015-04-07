@@ -23,8 +23,6 @@ public class Application extends GenericDomain {
     @NotNull
     private String name;
 
-    private String groupId;
-
     private String artifactId;
 
     private String version;
@@ -51,14 +49,6 @@ public class Application extends GenericDomain {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
     }
 
     public String getArtifactId() {
@@ -130,7 +120,7 @@ public class Application extends GenericDomain {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("name", name)
-                .append("groupId", groupId)
+
                 .append("artifactId", artifactId)
                 .append("version", version)
                 .append("environment", environment)

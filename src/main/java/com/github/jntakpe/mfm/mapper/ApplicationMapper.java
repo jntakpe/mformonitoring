@@ -20,7 +20,6 @@ public final class ApplicationMapper {
     public static Application up(Application origin, Application infos) {
         origin.setStatus(Status.UP);
         origin.setArtifactId(infos.getArtifactId());
-        origin.setGroupId(infos.getGroupId());
         origin.setVersion(infos.getVersion());
         return origin;
     }

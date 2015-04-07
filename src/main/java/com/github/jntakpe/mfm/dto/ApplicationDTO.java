@@ -19,8 +19,6 @@ public class ApplicationDTO {
 
     private String name;
 
-    private String groupId;
-
     private String artifactId;
 
     private String version;
@@ -36,7 +34,6 @@ public class ApplicationDTO {
     public ApplicationDTO(Application application) {
         id = application.getId();
         name = application.getName();
-        groupId = application.getGroupId();
         artifactId = application.getArtifactId();
         version = application.getVersion();
         environment = application.getEnvironment();
@@ -59,14 +56,6 @@ public class ApplicationDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
     }
 
     public String getArtifactId() {
