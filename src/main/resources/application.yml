@@ -5,6 +5,17 @@ app:
   contact: http://www.github.com/jntakpe/mformonitoring
   license: MIT
   licenseUrl: http://opensource.org/licenses/MIT
+proxy:
+  url: proxy.bforbank.gca
+  port: 8080
+  user: ntakpe_j
+  password: thispasspolicysucks31*
+  workstation: SEL0000613426
+  domain: sel.local
+  byPassProxy:
+  - "https://assemblage-lemon.dev.bforbank.gca/"
+  - "localhost"
+  - "127.0.0.1"
 management:
   context-path: /manage
 web:

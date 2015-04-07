@@ -3,10 +3,24 @@ package com.github.jntakpe.mfm.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
+import com.github.jntakpe.mfm.config.properties.ProxyProperties;
 import com.github.jntakpe.mfm.config.properties.WebProperties;
+import org.apache.http.HttpException;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.NTCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.conn.routing.HttpRoute;
+import org.apache.http.conn.routing.HttpRoutePlanner;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.apache.http.protocol.HttpContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +58,9 @@ public class WebConfig implements ServletContextInitializer {
     @Autowired
     private WebProperties webProperties;
 
+    @Autowired
+    private ProxyProperties proxyProperties;
+
     /**
      * Template permettant d'accéder aux ressources REST
      *
@@ -54,7 +71,12 @@ public class WebConfig implements ServletContextInitializer {
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
         factory.setConnectTimeout(webProperties.getTimeout());
         factory.setReadTimeout(webProperties.getTimeout());
-        factory.setHttpClient(HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build());
+        HttpClientBuilder httpClientBuilder = HttpClients.custom();
+        httpClientBuilder.setSSLHostnameVerifier(new NoopHostnameVerifier());
+        httpClientBuilder.setProxy(proxy());
+        httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider());
+        httpClientBuilder.setRoutePlanner(httpRoutePlanner());
+        factory.setHttpClient(httpClientBuilder.build());
         RestTemplate restTemplate = new RestTemplate(factory);
         restTemplate.setErrorHandler(responseErrorHandler());
         return restTemplate;
@@ -70,7 +92,12 @@ public class WebConfig implements ServletContextInitializer {
         HttpComponentsAsyncClientHttpRequestFactory factory = new HttpComponentsAsyncClientHttpRequestFactory();
         factory.setConnectTimeout(webProperties.getTimeout());
         factory.setReadTimeout(webProperties.getTimeout());
-        factory.setHttpAsyncClient(HttpAsyncClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build());
+        HttpAsyncClientBuilder httpAsyncClientBuilder = HttpAsyncClients.custom();
+        httpAsyncClientBuilder.setSSLHostnameVerifier(new NoopHostnameVerifier());
+        httpAsyncClientBuilder.setProxy(proxy());
+        httpAsyncClientBuilder.setRoutePlanner(httpRoutePlanner());
+        httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider());
+        factory.setHttpAsyncClient(httpAsyncClientBuilder.build());
         AsyncRestTemplate asyncRestTemplate = new AsyncRestTemplate(factory);
         asyncRestTemplate.setErrorHandler(responseErrorHandler());
         return asyncRestTemplate;
@@ -99,15 +126,38 @@ public class WebConfig implements ServletContextInitializer {
     }
 
     private ResponseErrorHandler responseErrorHandler() {
-        return new DefaultResponseErrorHandler(){
+        return new DefaultResponseErrorHandler() {
             @Override
             protected boolean hasError(HttpStatus statusCode) {
-                if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
-                    return false;
-                }
-                return super.hasError(statusCode);
+                return statusCode != HttpStatus.SERVICE_UNAVAILABLE && super.hasError(statusCode);
             }
         };
+    }
+
+    private HttpHost proxy() {
+        return new HttpHost(proxyProperties.getUrl(), proxyProperties.getPort());
+    }
+
+    private HttpRoutePlanner httpRoutePlanner() {
+        return new DefaultProxyRoutePlanner(proxy()) {
+            @Override
+            public HttpRoute determineRoute(HttpHost host, HttpRequest request, HttpContext context) throws HttpException {
+                String hostname = host.getHostName();
+                if (proxyProperties.getByPassProxy().stream().filter(u -> u.contains(hostname)).findAny().isPresent()) {
+                    return new HttpRoute(host);
+                }
+                return super.determineRoute(host, request, context);
+            }
+        };
+    }
+
+    private CredentialsProvider credentialsProvider() {
+        BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(
+                new AuthScope(proxyProperties.getUrl(), proxyProperties.getPort()),
+                new NTCredentials(proxyProperties.getUser(), proxyProperties.getPassword(), "SEL0000613426", "sel.local")
+        );
+        return credentialsProvider;
     }
 
 }
