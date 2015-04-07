@@ -11,8 +11,8 @@ mfmApp.config(function ($stateProvider) {
             }
         },
         resolve: {
-            properties: function (PropertiesService) {
-                return PropertiesService.extract();
+            properties: function (PropertiesService, application) {
+                return PropertiesService.extract(application);
             }
         }
 

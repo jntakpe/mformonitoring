@@ -1,8 +1,12 @@
 mfmApp.factory('PropertiesService', function PropertiesService(PagingService, $http) {
     "use strict";
 
-    function find() {
-        return $http.get('manage/env');
+    function toPropsUrl(url) {
+        return url.replace('/info', '/env');
+    }
+
+    function find(id, url) {
+        return $http.get('api/application/' + id + '/params', {params: {url: url}});
     }
 
     function literalToArray(literal) {
@@ -15,8 +19,8 @@ mfmApp.factory('PropertiesService', function PropertiesService(PagingService, $h
         return array;
     }
 
-    function extract() {
-        return find().then(function (response) {
+    function extract(application) {
+        return find(application.id, toPropsUrl(application.url)).then(function (response) {
             var properties = {}, data = response.data, key;
             properties.sys = {
                 app: literalToArray(data.systemProperties),
