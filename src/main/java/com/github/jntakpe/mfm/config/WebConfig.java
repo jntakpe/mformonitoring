@@ -13,9 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.AsyncRestTemplate;
+import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.DispatcherType;
@@ -52,7 +55,9 @@ public class WebConfig implements ServletContextInitializer {
         factory.setConnectTimeout(webProperties.getTimeout());
         factory.setReadTimeout(webProperties.getTimeout());
         factory.setHttpClient(HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build());
-        return new RestTemplate(factory);
+        RestTemplate restTemplate = new RestTemplate(factory);
+        restTemplate.setErrorHandler(responseErrorHandler());
+        return restTemplate;
     }
 
     /**
@@ -66,7 +71,9 @@ public class WebConfig implements ServletContextInitializer {
         factory.setConnectTimeout(webProperties.getTimeout());
         factory.setReadTimeout(webProperties.getTimeout());
         factory.setHttpAsyncClient(HttpAsyncClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build());
-        return new AsyncRestTemplate(factory);
+        AsyncRestTemplate asyncRestTemplate = new AsyncRestTemplate(factory);
+        asyncRestTemplate.setErrorHandler(responseErrorHandler());
+        return asyncRestTemplate;
     }
 
     @Override
@@ -89,6 +96,18 @@ public class WebConfig implements ServletContextInitializer {
         metricsAdminServlet.addMapping("/manage/metrics/*");
         metricsAdminServlet.setAsyncSupported(true);
         metricsAdminServlet.setLoadOnStartup(2);
+    }
+
+    private ResponseErrorHandler responseErrorHandler() {
+        return new DefaultResponseErrorHandler(){
+            @Override
+            protected boolean hasError(HttpStatus statusCode) {
+                if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
+                    return false;
+                }
+                return super.hasError(statusCode);
+            }
+        };
     }
 
 }
