@@ -266,7 +266,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" ng-if="dashboard.data.gauges['jvm.garbage.PS-MarkSweep.count'].value">
         <b>Garbage collections</b>
 
         <div class="row">
@@ -284,6 +284,26 @@
         <div class="row">
             <div class="col-md-9">Scavenge time</div>
             <div class="col-md-3 text-right">{{dashboard.data.gauges['jvm.garbage.PS-Scavenge.time'].value}}ms</div>
+        </div>
+    </div>
+    <div class="col-md-4" ng-if="dashboard.data.gauges['jvm.garbage.ConcurrentMarkSweep.count'].value">
+        <b>Concurrent garbage collections</b>
+
+        <div class="row">
+            <div class="col-md-9">Concurrent Mark Sweep count</div>
+            <div class="col-md-3 text-right">{{dashboard.data.gauges['jvm.garbage.ConcurrentMarkSweep.count'].value}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">Concurrent Mark Sweep time</div>
+            <div class="col-md-3 text-right">{{dashboard.data.gauges['jvm.garbage.ConcurrentMarkSweep.time'].value}}ms</div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">Concurrent Par New count</div>
+            <div class="col-md-3 text-right">{{dashboard.data.gauges['jvm.garbage.ParNew.count'].value}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">Concurrent Par New time</div>
+            <div class="col-md-3 text-right">{{dashboard.data.gauges['jvm.garbage.ParNew.time'].value}}ms</div>
         </div>
     </div>
 </div>
