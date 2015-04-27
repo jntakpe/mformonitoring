@@ -9,7 +9,7 @@ proxy:
   url: proxy.bforbank.gca
   port: 8080
   user: ntakpe_j
-  password: thispasspolicysucks31*
+  password: juststfu31*
   workstation: SEL0000613426
   domain: sel.local
   byPassProxy:
@@ -19,7 +19,7 @@ proxy:
 management:
   context-path: /manage
 web:
-  timeout: 2000
+  timeout: 5000
 ---
 spring:
   profiles: dev
@@ -27,4 +27,4 @@ spring:
     mongodb:
       database: mfm
 server:
-  port: 8080
+  port: 7080

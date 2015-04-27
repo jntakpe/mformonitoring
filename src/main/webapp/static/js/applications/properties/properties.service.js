@@ -30,6 +30,7 @@ mfmApp.factory('PropertiesService', function PropertiesService(PagingService, $h
                 if (data.hasOwnProperty(key)) {
                     if (key.indexOf('applicationConfig') !== -1 && key.indexOf('#') === -1) {
                         properties.app = literalToArray(data[key]);
+                        break;
                     }
                 }
             }

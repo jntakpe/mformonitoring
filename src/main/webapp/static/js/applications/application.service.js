@@ -19,7 +19,7 @@ mfmApp.factory('ApplicationService', function ($resource, $http) {
     }
 
     function readableName(application) {
-        return application.artifactId === 'bss' ? application.name : 'l\'' + application.name;
+        return application.artifactId.indexOf('bss') !== -1 ? application.name : 'l\'' + application.name;
     }
 
     function icon(status) {

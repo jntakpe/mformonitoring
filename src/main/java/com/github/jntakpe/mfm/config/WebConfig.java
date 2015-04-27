@@ -155,7 +155,8 @@ public class WebConfig implements ServletContextInitializer {
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(
                 new AuthScope(proxyProperties.getUrl(), proxyProperties.getPort()),
-                new NTCredentials(proxyProperties.getUser(), proxyProperties.getPassword(), "SEL0000613426", "sel.local")
+                new NTCredentials(proxyProperties.getUser(), proxyProperties.getPassword(),
+                        proxyProperties.getWorkstation(), proxyProperties.getDomain())
         );
         return credentialsProvider;
     }
