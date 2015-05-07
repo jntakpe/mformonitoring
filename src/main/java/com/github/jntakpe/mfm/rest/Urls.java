@@ -19,6 +19,8 @@ public final class Urls {
 
     public static final String PARAM = APPLICATION + "/{id}/params";
 
+    public static final String LOGS = APPLICATION + "/{id}/logs";
+
     private Urls() {
     }
 
