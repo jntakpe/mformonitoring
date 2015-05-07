@@ -1,0 +1,75 @@
+<h3>Logs</h3>
+<div class="row">
+    <form class="sky-form no-border" role="form">
+        <div class="col col-5">
+            <label class="input">
+                <input type="text" class="form-control input-block-level" id="search-name"
+                       placeholder="Name" ng-change="logs.refresh()" ng-model="logs.search.name">
+            </label>
+        </div>
+        <div class="col col-3">
+            <label class="checkbox">
+                <input type="checkbox" ng-model="logs.onlyBfb" ng-change="logs.refresh()"><i></i> BforBank loggers
+            </label>
+        </div>
+        <div class="col col-3">
+            <label class="select">
+                <select ng-model="logs.search.level" ng-change="logs.refresh()">
+                    <option value="">Niveau</option>
+                    <option value="TRACE">Trace</option>
+                    <option value="DEBUG">Debug</option>
+                    <option value="INFO">Info</option>
+                    <option value="WARN">Warn</option>
+                    <option value="ERROR">Error</option>
+                </select>
+                <i></i>
+            </label>
+        </div>
+        <button class="btn btn-warning pull-right" ng-click="logs.resetFilter()"><i class="fa fa-times"></i> Reset
+        </button>
+    </form>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th ng-click="logs.sortColumn('name')" class="col-md-6">Nom
+                <i class="pull-right fa" ng-class="logs.sort.class.name || 'fa-sort'"></i></th>
+            <th ng-click="logs.sortColumn('level')" class="col-md-4">Niveau
+                <i class="pull-right fa" ng-class="logs.sort.class.level || 'fa-sort'"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="logger in logs.loggers">
+            <td>
+                <small>{{logger.name}}</small>
+            </td>
+            <td>
+                <button ng-click="logs.changeLevel(logger.name, 'TRACE')"
+                        ng-class="(logger.level=='TRACE') ? 'btn-danger' : 'btn-default'"
+                        class="btn btn-default btn-xs">TRACE
+                </button>
+                <button ng-click="logs.changeLevel(logger.name, 'DEBUG')"
+                        ng-class="(logger.level=='DEBUG') ? 'btn-warning' : 'btn-default'"
+                        class="btn btn-default btn-xs">DEBUG
+                </button>
+                <button ng-click="logs.changeLevel(logger.name, 'INFO')"
+                        ng-class="(logger.level=='INFO') ? 'btn-info' : 'btn-default'" class="btn btn-default btn-xs">
+                    INFO
+                </button>
+                <button ng-click="logs.changeLevel(logger.name, 'WARN')"
+                        ng-class="(logger.level=='WARN') ? 'btn-success' : 'btn-default'"
+                        class="btn btn-default btn-xs">WARN
+                </button>
+                <button ng-click="logs.changeLevel(logger.name, 'ERROR')"
+                        ng-class="(logger.level=='ERROR') ? 'btn-primary' : 'btn-default'"
+                        class="btn btn-default btn-xs">ERROR
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <pagination total-items="logs.props.total" ng-model="logs.props.current" boundary-links="true"
+                ng-change="logs.refresh()" max-size="5" items-per-page="logs.props.numberPerPage" class="pull-right">
+    </pagination>
+</div>
