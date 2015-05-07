@@ -6,7 +6,7 @@ mfmApp.factory('LogsService', function ($http) {
     }
 
     function update(id, logger) {
-        return $http.put('api/application/' + id + ' /logs', {logger: logger});
+        return $http.put('api/application/' + id + ' /logs', logger);
     }
 
     return {

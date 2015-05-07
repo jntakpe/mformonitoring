@@ -45,23 +45,23 @@
                 <small>{{logger.name}}</small>
             </td>
             <td>
-                <button ng-click="logs.changeLevel(logger.name, 'TRACE')"
+                <button ng-click="logs.changeLevel(logger, 'TRACE')"
                         ng-class="(logger.level=='TRACE') ? 'btn-danger' : 'btn-default'"
                         class="btn btn-default btn-xs">TRACE
                 </button>
-                <button ng-click="logs.changeLevel(logger.name, 'DEBUG')"
+                <button ng-click="logs.changeLevel(logger, 'DEBUG')"
                         ng-class="(logger.level=='DEBUG') ? 'btn-warning' : 'btn-default'"
                         class="btn btn-default btn-xs">DEBUG
                 </button>
-                <button ng-click="logs.changeLevel(logger.name, 'INFO')"
-                        ng-class="(logger.level=='INFO') ? 'btn-info' : 'btn-default'" class="btn btn-default btn-xs">
-                    INFO
+                <button ng-click="logs.changeLevel(logger, 'INFO')"
+                        ng-class="(logger.level=='INFO') ? 'btn-info' : 'btn-default'"
+                        class="btn btn-default btn-xs">INFO
                 </button>
-                <button ng-click="logs.changeLevel(logger.name, 'WARN')"
+                <button ng-click="logs.changeLevel(logger, 'WARN')"
                         ng-class="(logger.level=='WARN') ? 'btn-success' : 'btn-default'"
                         class="btn btn-default btn-xs">WARN
                 </button>
-                <button ng-click="logs.changeLevel(logger.name, 'ERROR')"
+                <button ng-click="logs.changeLevel(logger, 'ERROR')"
                         ng-class="(logger.level=='ERROR') ? 'btn-primary' : 'btn-default'"
                         class="btn btn-default btn-xs">ERROR
                 </button>

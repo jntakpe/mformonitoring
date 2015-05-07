@@ -23,20 +23,30 @@ mfmApp.controller('LogsController', function (application, LogsService, PagingSe
         reverse: true
     };
 
-    LogsService.findAll(application.id).success(function (response) {
-        vm.data = response;
-        vm.props = PagingService.toListParams(vm.data, 12);
-        vm.refresh();
-    });
+    function reInit() {
+        LogsService.findAll(application.id).success(function (response) {
+            vm.data = response;
+            vm.props = PagingService.toListParams(vm.data, 12);
+            vm.refresh();
+        });
+    }
+
+    vm.changeLevel = function (logger, level) {
+        LogsService.update(application.id, {name: logger.name, level: level}).success(function () {
+            reInit();
+        });
+    };
 
     vm.sortColumn = function (column) {
         PagingService.sort(column, vm.sort);
         vm.refresh();
     };
 
+
     vm.resetFilter = function () {
         vm.search = {};
         vm.refresh();
     };
 
+    reInit();
 });
