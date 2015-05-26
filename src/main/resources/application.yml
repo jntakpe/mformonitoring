@@ -37,6 +37,6 @@ spring:
     show_sql: true
     generate-ddl: true
     hibernate:
-        ddl-auto: validate
+        ddl-auto: create
 server:
   port: 7080
