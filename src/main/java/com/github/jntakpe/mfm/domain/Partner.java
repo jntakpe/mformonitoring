@@ -1,10 +1,9 @@
 package com.github.jntakpe.mfm.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +12,7 @@ import java.util.Set;
  *
  * @author jntakpe
  */
-@Document
+@Entity
 public class Partner extends GenericDomain {
 
     private String name;
@@ -22,8 +21,7 @@ public class Partner extends GenericDomain {
 
     private String status;
 
-    @DBRef(lazy = true)
-    @JsonIgnoreProperties("partners")
+    @ManyToMany(mappedBy = "partners")
     private Set<Application> applications = new HashSet<>();
 
     /**

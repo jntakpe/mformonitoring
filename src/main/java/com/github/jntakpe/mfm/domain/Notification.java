@@ -1,20 +1,23 @@
 package com.github.jntakpe.mfm.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 /**
  * Bean représentant une notification
  *
  * @author jntakpe
  */
-@Document
+@Entity
 public class Notification extends GenericDomain {
 
     private String target;
 
     private String type;
 
+    @Transient
     private ApplicationInfos appInfos;
 
     public Notification() {

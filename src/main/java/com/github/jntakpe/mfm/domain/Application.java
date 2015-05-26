@@ -3,10 +3,8 @@ package com.github.jntakpe.mfm.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,7 +15,7 @@ import java.util.Set;
  *
  * @author jntakpe
  */
-@Document
+@Entity
 public class Application extends GenericDomain {
 
     @NotNull
@@ -30,13 +28,16 @@ public class Application extends GenericDomain {
     private String environment = Environment.UNKNOWN.name();
 
     @NotNull
-    @Indexed(unique = true)
+    @Column(unique = true)
     private String url;
 
     private String status = Status.UNKNOWN.name();
 
     @JsonIgnore
-    @DBRef(lazy = true)
+    @ManyToMany
+    @JoinTable(name = "app_partners",
+            joinColumns = {@JoinColumn(name = "app_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "partner_id", referencedColumnName = "id")})
     private Set<Partner> partners = new HashSet<>();
 
     public String healthUrl() {
@@ -120,7 +121,6 @@ public class Application extends GenericDomain {
     public String toString() {
         return new ToStringBuilder(this)
                 .append("name", name)
-
                 .append("artifactId", artifactId)
                 .append("version", version)
                 .append("environment", environment)

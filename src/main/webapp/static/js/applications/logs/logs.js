@@ -1,5 +1,6 @@
 mfmApp.config(function ($stateProvider) {
     'use strict';
+
     $stateProvider.state('applications.detail.logs', {
         url: '/logs',
         views: {

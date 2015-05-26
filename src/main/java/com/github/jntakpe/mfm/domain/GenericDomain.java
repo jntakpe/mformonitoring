@@ -1,10 +1,12 @@
 package com.github.jntakpe.mfm.domain;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,9 +15,11 @@ import java.util.Date;
  *
  * @author jntakpe
  */
+@MappedSuperclass
 public abstract class GenericDomain implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @CreatedDate
