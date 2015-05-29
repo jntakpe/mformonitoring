@@ -14,8 +14,8 @@ generated-java/
 build/
 node/
 node_modules/
-bower_components/
-public/dist/
+**/bower_components/
+src/main/webapp/dist/
 out/
 ######################
 # Eclipse

@@ -13,8 +13,8 @@ module.exports = function (grunt) {
         bowerrc: grunt.file.readJSON('.bowerrc'),
         dirs: {
             bowerRes: '<%= bowerrc.directory %>',
-            source: 'public/static',
-            target: 'public/dist'
+            source: 'src/main/webapp/static',
+            target: 'src/main/webapp/dist'
         },
         bower: {
             install: {

@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>MforMonitoring</name>
     <description>Application de monitoring via Metrics</description>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
