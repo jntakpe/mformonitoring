@@ -8,9 +8,9 @@ app:
 proxy:
   url: proxy.bforbank.gca
   port: 8080
-  user: ntakpe_j
-  password: juststfu31*
-  workstation: SEL0000613426
+  user: user_windows
+  password: pass_windows
+  workstation: nom_poste_travail_SEL_qqchose
   domain: sel.local
   byPassProxy:
   - "https://assemblage-lemon.dev.bforbank.gca/"
@@ -37,6 +37,6 @@ spring:
     show_sql: true
     generate-ddl: true
     hibernate:
-        ddl-auto: validate
+        ddl-auto: update
 server:
   port: 7080
