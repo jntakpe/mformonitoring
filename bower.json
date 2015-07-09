@@ -3,19 +3,19 @@
   "version": "0.0.1",
   "dependencies": {
     "jquery": "~2.1.4",
-    "bootstrap": "latest",
-    "font-awesome": "latest",
+    "bootstrap": "~3.3.4",
+    "font-awesome": "~4.3.0",
     "angular": "~1.4.0",
     "angular-messages": "~1.4.0",
     "angular-resource": "~1.4.0",
     "angular-ui-router": "~0.2.15",
-    "angular-bootstrap": "~0.13.O",
+    "angular-bootstrap": "0.12.1",
     "angular-ui-utils": "~0.2.3",
     "swagger-ui": "~2.0.24",
     "perfect-scrollbar": "~0.6.3",
     "moment": "~2.10.3"
   },
   "resolutions": {
-    "angular": "1.4.0"
+    "angular": "~1.4.0"
   }
 }
