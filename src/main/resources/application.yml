@@ -6,14 +6,14 @@ app:
   license: MIT
   licenseUrl: http://opensource.org/licenses/MIT
 proxy:
-  url: proxy.bforbank.gca
+  url: proxy
   port: 8080
   user: user_windows
   password: pass_windows
-  workstation: nom_poste_travail_SEL_qqchose
-  domain: sel.local
+  workstation: nom_poste_travail
+  domain: emeaad
   byPassProxy:
-  - "https://assemblage-lemon.dev.bforbank.gca/"
+  - "https://proxy.corp.../"
   - "localhost"
   - "127.0.0.1"
 management:
